@@ -1,0 +1,51 @@
+<dataConfig>
+  <dataSource name="db" type="JdbcDataSource" driver="com.mysql.jdbc.Driver"
+    url="${mds.db.url}" user="${mds.db.user}" password="${mds.db.password}" readonly="true"
+    batchSize="-1" />
+    <!-- for batchSize=-1 see DIH FAQ -->
+  <dataSource name="field" type="FieldReaderDataSource" />
+  <document>
+    <!-- SOLR-2104 -->
+    <entity name="metadata" dataSource="db"
+      query="SELECT d.doi AS id,
+                    dc.symbol,
+                    cast(xml as char) AS xml,
+                    m.created,
+                    if(d.is_active,null,'true') AS $skipDoc,
+                    if(d.is_active,null,d.doi) AS $deleteDocById
+             FROM metadata AS m 
+             JOIN dataset AS d ON m.dataset = d.id
+             JOIN datacentre AS dc ON d.datacentre = dc.id
+             WHERE d.doi not like '${mds.testprefix}/%'
+               AND ( '${dataimporter.request.clean}' != 'false'
+                     OR m.created > '${dataimporter.last_index_time}'
+                     OR d.updated > '${dataimporter.last_index_time}' )
+             ORDER BY m.created
+            ">
+      <!-- 
+        using delta import as proposed in
+        http://wiki.apache.org/solr/DataImportHandlerDeltaQueryViaFullImport
+       -->
+      <entity name="xml" dataSource="field" dataField="metadata.xml"
+        forEach="/resource" processor="XPathEntityProcessor">
+        <field column="id" xpath="//identifier" />
+        <field column="title" xpath="//title" />
+        <field column="creator" xpath="//creatorName" />
+        <field column="publisher" xpath="//publisher" />
+        <field column="publicationYear" xpath="//publicationYear" />
+        <field column="subject" xpath="//subject" />
+        <field column="contributor" xpath="//contributorName" />
+        <field column="date" xpath="//date" />
+        <field column="language" xpath="//language" />
+        <field column="resourceType" xpath="//resourceType" />
+        <field column="alternateIdentifier" xpath="//alternateIdentifier" />
+        <field column="relatedIdentifier" xpath="//relatedIdentifier" />
+        <field column="size" xpath="//size" />
+        <field column="format" xpath="//format" />
+        <field column="version" xpath="//version" />
+        <field column="rights" xpath="//right" />
+        <field column="description" xpath="//description" />
+      </entity>
+    </entity>
+  </document>
+</dataConfig>
