@@ -1,0 +1,4 @@
+mds.db.url=jdbc:mysql://<url>
+mds.db.user=<user>
+mds.db.password=<password>
+mds.testprefix=10.5072

@@ -1,6 +1,6 @@
 <dataConfig>
   <dataSource name="db" type="JdbcDataSource" driver="com.mysql.jdbc.Driver"
-    url="${mds.db.url}" user="${mds.db.user}" password="${mds.db.password}" readonly="true"
+    url="${dataimporter.request.db.url}" user="${dataimporter.request.db.user}" password="${dataimporter.request.db.password}" readonly="true"
     batchSize="-1" />
     <!-- for batchSize=-1 see DIH FAQ -->
   <dataSource name="field" type="FieldReaderDataSource" />
@@ -16,7 +16,7 @@
              FROM metadata AS m 
              JOIN dataset AS d ON m.dataset = d.id
              JOIN datacentre AS dc ON d.datacentre = dc.id
-             WHERE d.doi not like '${mds.testprefix}/%'
+             WHERE d.doi not like '${dataimporter.request.testprefix}/%'
                AND ( '${dataimporter.request.clean}' != 'false'
                      OR m.created > '${dataimporter.last_index_time}'
                      OR d.updated > '${dataimporter.last_index_time}' )

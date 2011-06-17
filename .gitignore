@@ -3,3 +3,4 @@ target/
 .classpath
 .settings
 src/main/webapp/META-INF/context.xml
+solr_home/conf/solrcore.properties

@@ -702,6 +702,12 @@
     <lst name="defaults">
       <str name="config">data-config.xml</str>
     </lst>
+    <lst name="invariants"> 
+      <str name="db.url">${mds.db.url}</str>
+      <str name="db.user">${mds.db.user}</str>
+      <str name="db.password">${mds.db.password}</str>
+      <str name="testprefix">${mds.testprefix}</str>
+    </lst> 
   </requestHandler>
 
   <!-- Legacy config for the admin interface -->
