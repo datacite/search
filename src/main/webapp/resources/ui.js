@@ -15,7 +15,7 @@ function load_results() {
 	$("#results").fadeTo(0,0.5);
 	$("#results").load("search", {
 		wt : "velocity",
-		"v.template" : "results",
+		"v.template" : "ui/results",
 		q : solr.q,
 		fq : filter_to_fq(solr.filter),
 	}, function() {
@@ -31,7 +31,7 @@ function load_full_facet(facet_name) {
 	var div = $("div",facet).hide();
 	div.load("search ul", {
 		wt : "velocity",
-		"v.template" : "facet_fields",
+		"v.template" : "ui/facet_fields",
 		q : solr.q,
 		fq : filter_to_fq(solr.filter),
 		"facet.field" : facet_name,
@@ -89,7 +89,7 @@ function load_next_page() {
 		url : "search",
 		data :  {
 			wt : "velocity",
-			"v.template" : "docs",
+			"v.template" : "ui/docs",
 			qt : "simple",
 			q : solr.q,
 			fq : filter_to_fq(solr.filter),

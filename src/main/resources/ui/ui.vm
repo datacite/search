@@ -1,10 +1,10 @@
 <html>
 <head>
-  #parse("head.vm")
+  #parse("ui/head.vm")
 </head>
   <body>
     <div id="query">
-      #parse("query.vm")
+      #parse("ui/query.vm")
     </div>
     <div id="filters">
     </div>

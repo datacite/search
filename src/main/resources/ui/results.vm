@@ -1,17 +1,17 @@
 <div id="sidebar">
   <div id="facets">
-    #parse("facets.vm")
+    #parse("ui/facets.vm")
   </div>
 </div>
 
 <div id="main">
   <div id="stats">
-    #parse("stats.vm")
+    #parse("ui/stats.vm")
   </div>
 
   
   <div id="docs">
-    #parse("docs.vm")
+    #parse("ui/docs.vm")
   </div>
 
 

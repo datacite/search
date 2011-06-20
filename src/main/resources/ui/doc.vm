@@ -27,6 +27,6 @@
     #field_br("description")
   </div>
   <div class="full">
-    #parse("doc_full.vm")
+    #parse("ui/doc_full.vm")
   </div>
 </div>
