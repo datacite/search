@@ -674,7 +674,25 @@
   <requestHandler name="/search" class="solr.SearchHandler" default="true">
      <lst name="defaults">
        <str name="echoParams">explicit</str>
+       <str name="debugQuery">on</str>
        <int name="rows">10</int>
+       <str name="fl">*,score</str>
+       
+       <str name="wt">velocity</str>
+       <str name="v.template">ui</str>
+       <str name="v.properties">velocity.properties</str>
+       <str name="v.contentType">text/html;charset=UTF-8</str>
+       
+       <str name="facet">on</str>
+       <int name="facet.mincount">1</int>
+       <int name="facet.limit">20</int>
+       <str name="facet.field">subject</str>
+       <str name="facet.field">contributor</str>
+       <str name="facet.field">creator</str>
+       <str name="facet.field">publicationYear</str>
+       <str name="facet.field">publisher</str>
+       <str name="facet.field">language</str>
+       
      </lst>
     </requestHandler>
 

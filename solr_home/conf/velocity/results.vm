@@ -1,0 +1,23 @@
+<div id="sidebar">
+  <div id="facets">
+    #parse("facets.vm")
+  </div>
+</div>
+
+<div id="main">
+  <div id="stats">
+    #parse("stats.vm")
+  </div>
+
+  
+  <div id="docs">
+    #parse("docs.vm")
+  </div>
+
+
+  #if($page.results_found > $page.results_per_page)
+    <div id="next_page">
+      <a href="#">next page</a>
+    </div>
+  #end
+</div>

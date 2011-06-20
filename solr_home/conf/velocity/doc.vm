@@ -1,0 +1,32 @@
+#set($docId = $doc.getFieldValue('id'))
+<div id="#result_id($doc)" class="doc">
+  <div class="stats">
+    <div class="count">
+      #set($count = $response.results.indexOf($doc) + $page.start + 1)
+      # $count
+    </div>
+    <div class="score">
+      <a href="#">
+        #field("score")
+      </a>
+      <div class="exp">
+        $response.getExplainMap().get($docId)
+      </div>
+    </div>
+  </div>
+  <div class="title">
+    <a href="#">
+      #field("title")
+    </a>
+  </div>
+  <div class="info">  
+    #field("id"), #field("resourceType")
+  </div>
+  <div class="short">
+    #field_br("publisher")
+    #field_br("description")
+  </div>
+  <div class="full">
+    #parse("doc_full.vm")
+  </div>
+</div>

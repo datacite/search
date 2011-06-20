@@ -1,0 +1,4 @@
+<form id="query_form">
+  <input id="query_input" />
+  <input type="submit" value="Search"/>
+</form> 

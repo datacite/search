@@ -1,0 +1,2 @@
+$page.results_found documents found in ${response.header.QTime}ms
+ 

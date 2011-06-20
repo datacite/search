@@ -1,0 +1,15 @@
+<html>
+<head>
+  #parse("head.vm")
+</head>
+  <body>
+    <div id="query">
+      #parse("query.vm")
+    </div>
+    <div id="filters">
+    </div>
+    <div id="results">
+      #if($content)$content#end
+    </div>
+  </body>
+</html>

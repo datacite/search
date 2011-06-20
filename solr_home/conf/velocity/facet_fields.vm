@@ -1,0 +1,13 @@
+#if($response.facetFields)
+  #foreach($field in $response.facetFields)
+    <div class="facet" id="facet-$field.name">     
+      <h3>$field.name</h3>
+      <ul>
+        #foreach($facet in $field.values)
+            <li><span class="value">$facet.name</span> <span class="count">($facet.count)</span></li>
+        #end
+      </ul>
+      <a href="#">load more</a>
+    </div>
+  #end
+#end

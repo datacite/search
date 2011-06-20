@@ -1,0 +1,26 @@
+#macro(result_id $doc)result-$doc.getFieldValue('id')#end
+
+#macro(field $f)
+  #foreach($v in $doc.getFieldValues($f))
+    $v
+  #end
+#end  
+
+#macro(field_br $f)
+  #foreach($v in $doc.getFieldValues($f))
+    $v<br/>
+  #end
+#end  
+
+#macro(field_ul $field)
+  #set($values = $doc.getFieldValues($field))
+  #if($values.size() > 1)
+    <ul>
+      #foreach($value in $values)
+        <li>$value</li>
+      #end
+    </ul>
+  #else
+    $values.get(0)
+  #end
+#end

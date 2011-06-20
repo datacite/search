@@ -1,0 +1,137 @@
+body {
+  font-family: sans-serif;
+  font-size: 10pt;
+}
+
+#main {
+  margin-right: 20em;
+  clear: none;
+}
+
+#sidebar {
+  position: absolute;
+  width: 20em;
+  right: 0px;
+}
+
+#stats {
+}
+
+.doc {
+  margin: 0.5em;
+  padding: 2px;
+  clear: both;
+}
+
+.doc .info {
+  font-size: small;
+}
+
+.doc .stats {
+  text-align: right;
+  float: right;
+}
+
+.doc .exp {
+  display: none;
+  font-family: monospace;
+  white-space: pre;
+  text-align: left;
+  margin-bottom: 1em;
+}
+
+.doc .full {
+  display: none;
+}
+
+td {
+  vertical-align: top;
+}
+
+td.field_name {
+  font-style: italic;
+  font-size: small;
+  width: 100px;
+}
+
+ul {
+  margin: 0px;
+  margin-left: 1em;
+  padding: 0px;
+}
+
+#sidebar h2 {
+  margin-top: 0px;
+  margin-bottom: 5px;
+  font-size: large;
+}
+
+#sidebar h3 {
+  font-weight: normal;
+  font-size: medium;
+  font-style: italic;
+  margin: 5px 0px;
+}
+
+#debug {
+  position: fixed;
+  right: 0px;
+  width: 30%;
+  margin: 5px;
+  padding: 2px;
+  background: #CCCCCC;
+  font-size: small;
+}
+
+#filters {
+  line-height: 150%;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.filter {
+  background: #FFCCCC;
+  padding: 2px;
+  cursor: crosshair;
+  white-space:nowrap;
+}
+
+.filter .name {
+  font-size: small;
+  padding-right: 5px;
+}
+
+#facets {
+  margin-right: 5px;
+}
+
+.facet {
+  background: #CCFFCC;
+  margin-bottom: 5px;
+}
+
+.facet h3 {
+  padding: 2px;
+  background: #55FF55;
+}
+
+.facet ul {
+  list-style: none;
+  margin-left: 0px;
+}
+
+.facet li {
+  cursor: pointer;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 3px;
+}
+
+.facet li:hover {
+  background: #EEFFEE;
+}
+
+.facet span.count {
+  color: gray;
+  font-size: small;
+}
