@@ -145,4 +145,29 @@
     <mime-type>application/xslt+xml</mime-type>
   </mime-mapping>
 
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>admin</web-resource-name>
+      <url-pattern>/admin/*</url-pattern>
+      <url-pattern>/select/*</url-pattern>
+      <url-pattern>/update/*</url-pattern>
+      <url-pattern>/dataimport/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>solradmin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <login-config>
+    <auth-method>BASIC</auth-method>
+    <realm-name>search.datacite.org</realm-name>
+  </login-config>
+
+  <security-role>
+    <description>
+      The role that is required to admin the solr server
+    </description>
+    <role-name>solradmin</role-name>
+  </security-role>
+
 </web-app>
