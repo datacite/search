@@ -112,7 +112,7 @@
         both match, the first appearing in the schema will be used.  -->
 
    <dynamicField name="ignored_*" type="ignored" multiValued="true"/>
-   <dynamicField name="attr_*" type="textgen" indexed="true" stored="true" multiValued="true"/>
+   <dynamicField name="*_facet" type="string" indexed="true" stored="true" multiValued="true"/>
 
    <!-- uncomment the following to ignore any fields that don't already match an existing 
         field name or dynamic field, rather than reporting them as an error. 
@@ -136,12 +136,9 @@
   <!-- copyField commands copy one field to another at the time a document
         is added to the index.  It's used either to index the same field differently,
         or to add multiple fields to the same field for easier/faster searching.  -->
-<!---->
-<!--   <copyField source="cat" dest="text"/>-->
-<!--   <copyField source="name" dest="text"/>-->
-<!--   <copyField source="manu" dest="text"/>-->
-<!--   <copyField source="features" dest="text"/>-->
-<!--   <copyField source="includes" dest="text"/>-->
-<!--   <copyField source="manu" dest="manu_exact"/>-->
+ <copyField source="creator" dest="creator_facet"/>
+ <copyField source="publisher" dest="publisher_facet"/>
+ <copyField source="contributor" dest="contributor_facet"/>
+ <copyField source="subject" dest="subject_facet"/>
 
 </schema>

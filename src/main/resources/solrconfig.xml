@@ -686,11 +686,11 @@
        <str name="facet">on</str>
        <int name="facet.mincount">1</int>
        <int name="facet.limit">20</int>
-       <str name="facet.field">subject</str>
-       <str name="facet.field">contributor</str>
-       <str name="facet.field">creator</str>
+       <str name="facet.field">subject_facet</str>
+       <str name="facet.field">contributor_facet</str>
+       <str name="facet.field">creator_facet</str>
        <str name="facet.field">publicationYear</str>
-       <str name="facet.field">publisher</str>
+       <str name="facet.field">publisher_facet</str>
        <str name="facet.field">language</str>
        
      </lst>
