@@ -679,9 +679,8 @@
        <str name="fl">*,score</str>
        <str name="q">-*:*</str>
        
-       <str name="defType">dismax</str>
+       <str name="defType">edismax</str>
        <str name="qf">title id creator publisher subject contributor</str>
-       <str name="q.alt">*:*</str>
        
        <str name="wt">velocity</str>
        <str name="v.template">ui/index</str>
