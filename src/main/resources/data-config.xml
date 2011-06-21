@@ -8,9 +8,9 @@
     <!-- SOLR-2104 -->
     <entity name="metadata" dataSource="db"
       query="SELECT d.doi AS id,
-                    dc.symbol,
+                    dc.symbol AS datacentre,
                     cast(xml as char) AS xml,
-                    m.created,
+                    m.created AS uploaded,
                     if(d.is_active,null,'true') AS $skipDoc,
                     if(d.is_active,null,d.doi) AS $deleteDocById
              FROM metadata AS m 
@@ -21,11 +21,15 @@
                      OR m.created > '${dataimporter.last_index_time}'
                      OR d.updated > '${dataimporter.last_index_time}' )
              ORDER BY m.created
-            ">
+            "
+      transformer="RegexTransformer">
       <!-- 
         using delta import as proposed in
         http://wiki.apache.org/solr/DataImportHandlerDeltaQueryViaFullImport
        -->
+      <field column="allocator" regex="([^.]*)\." sourceColName="datacentre"/>
+      <field column="prefix" regex="([^/]*)/" sourceColName="id"/>
+       
       <entity name="xml" dataSource="field" dataField="metadata.xml"
         forEach="/resource" processor="XPathEntityProcessor">
         <field column="id" xpath="//identifier" />

@@ -691,7 +691,9 @@
        <str name="facet">on</str>
        <int name="facet.mincount">1</int>
        <int name="facet.limit">20</int>
-       <str name="facet.field">subject_facet</str>
+       <str name="facet.field">allocator</str>
+       <str name="facet.field">datacentre</str>
+       <str name="facet.field">prefix</str>
        <str name="facet.field">contributor_facet</str>
        <str name="facet.field">creator_facet</str>
        <str name="facet.field">publicationYear</str>

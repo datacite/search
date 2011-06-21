@@ -84,12 +84,14 @@
        when adding a document.
    -->
    
+   <!-- DataCite mandatory fields -->
    <field name="id" type="string" indexed="true" stored="true" required="true" /> 
    <field name="creator" type="textgen" indexed="true" stored="true" multiValued="true"/> 
    <field name="title" type="textgen" indexed="true" stored="true" multiValued="true"/> 
    <field name="publisher" type="textgen" indexed="true" stored="true"/> 
-   <field name="publicationYear" type="int" indexed="true" stored="true"/> 
+   <field name="publicationYear" type="string" indexed="true" stored="true"/> 
 
+   <!-- DataCite optional fields -->
    <field name="subject" type="textgen" indexed="true" stored="true" multiValued="true"/> 
    <field name="contributor" type="textgen" indexed="true" stored="true" multiValued="true"/>
    <field name="date" type="string" indexed="true" stored="true" multiValued="true"/>
@@ -102,6 +104,16 @@
    <field name="rights" type="text" indexed="true" stored="true"/>
    <field name="version" type="string" indexed="true" stored="true"/>
    <field name="description" type="textgen" indexed="true" stored="true" multiValued="true"/>
+   
+   <!-- MDS fields -->
+   <field name="allocator" type="string" indexed="true" stored="true"/>
+   <field name="datacentre" type="string" indexed="true" stored="true"/>
+   <field name="prefix" type="string" indexed="true" stored="true"/>
+   
+   <field name="uploaded" type="date" indexed="true" stored="true"/>
+   
+   <!-- Solr fields -->
+   <field name="indexed" type="date" indexed="true" stored="true" default="NOW"/>
 
    <!-- Dynamic field definitions.  If a field name is not found, dynamicFields
         will be used if the name matches any of the patterns.
