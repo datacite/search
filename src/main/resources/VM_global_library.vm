@@ -1,5 +1,7 @@
 #macro(result_id $doc)result-$doc.getFieldValue('id')#end
 
+#macro(f $f)$doc.getFieldValue($f)#end
+
 #macro(field $f)
   #foreach($v in $doc.getFieldValues($f))
     $v

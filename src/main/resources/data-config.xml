@@ -8,6 +8,7 @@
     <!-- SOLR-2104 -->
     <entity name="metadata" dataSource="db"
       query="SELECT d.doi AS id,
+                    d.id AS dataset_id,
                     dc.symbol AS datacentre,
                     cast(xml as char) AS xml,
                     m.created AS uploaded,

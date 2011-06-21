@@ -109,7 +109,7 @@
    <field name="allocator" type="string" indexed="true" stored="true"/>
    <field name="datacentre" type="string" indexed="true" stored="true"/>
    <field name="prefix" type="string" indexed="true" stored="true"/>
-   
+   <field name="dataset_id" type="string" indexed="false" stored="true"/>
    <field name="uploaded" type="date" indexed="true" stored="true"/>
    
    <!-- Solr fields -->

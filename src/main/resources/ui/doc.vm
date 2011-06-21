@@ -20,7 +20,9 @@
     </a>
   </div>
   <div class="info">  
-    #field("id"), #field("resourceType")
+    <a href="http://dx.doi.org/#f("id")">#f("id")</a>
+    (<a href="http://oai.datacite.org/oai?verb=GetRecord&metadataPrefix=oai_datacite&identifier=oai:oai.datacite.org:#f("dataset_id")">metadata</a>),
+    #field("resourceType")
   </div>
   <div class="short">
     #field_br("publisher")
