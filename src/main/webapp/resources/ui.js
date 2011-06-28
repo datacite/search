@@ -12,7 +12,7 @@ function filter_to_fq(filters) {
 }
 
 function load_results() {
-//	debug(solr.toSource() + filter_to_fq(solr.filter).toSource());
+// debug(solr.toSource() + filter_to_fq(solr.filter).toSource());
 	$("#results").fadeTo(0,0.5);
 	$("#results").load(solr.url, {
 		wt : "velocity",
@@ -142,11 +142,24 @@ function process_results() {
 	process_facets();
 	setup_next_page_link();
 }
+
+function load_detail(doc) {
+	var doi = $(".info .doi", doc).text();
+	var detail = $(".full",doc);
+	if (detail.text().length == 0) { // not already loaded
+		detail.load(solr.url + "-detail", {
+			q : "id:" + doi
+		});
+	};
+	
+}
 	
 function process_docs() {
 	$(".doc a").unbind();
 	$(".doc .title a").click(function() {
 		var doc = this.parentNode.parentNode;
+		var detail = $(".full", doc);
+		load_detail(doc);
 		$(".short", doc).slideToggle();
 		$(".full", doc).slideToggle();
 		return false;
@@ -275,7 +288,8 @@ function show_filters() {
 
 $(document).ready(function() {
 	$("#js_warning").hide();
-	jQuery.ajaxSettings.traditional = true; //use correct array serialization for solr
+	jQuery.ajaxSettings.traditional = true; // use correct array serialization
+											// for solr
 	setup_debug_box();
 	setup_next_page_link();
 	setup_continous_scrolling();

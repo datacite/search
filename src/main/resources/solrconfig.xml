@@ -704,6 +704,21 @@
        <str name="facet.field">language</str>
      </lst>
     </requestHandler>
+    
+  <requestHandler name="/ui-detail" class="solr.SearchHandler">
+     <lst name="defaults">
+     </lst>
+     <lst name="invariants">
+       <int name="rows">1</int>
+       <str name="fl">*,score</str>
+       <str name="wt">velocity</str>
+       <str name="v.template">ui/details</str>
+       <str name="v.properties">velocity.properties</str>
+       <str name="v.contentType">text/html;charset=UTF-8</str>
+     </lst>
+  </requestHandler>
+     
+    
 
   <!-- Admin Handlers
 
