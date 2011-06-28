@@ -140,6 +140,10 @@ ul {
   font-size: small;
 }
 
+.facet .more {
+    text-align: center;
+}
+
 #js_warning {
     color: red;
     margin: 5pt;

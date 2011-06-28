@@ -45,7 +45,7 @@ function load_full_facet(facet_name) {
 		$("ul",div).unwrap();
 		var new_count = $("li",facet).length;
 		if (new_count == count) {
-			$("a",facet).fadeOut();
+			$("a.more",facet).fadeOut();
 		}
 
 	});
@@ -168,7 +168,8 @@ function process_facets() {
 		$("h3",this).unbind().click(function() {
 			ul.slideToggle();
 		});
-		$("a",this).unbind().click(function() {
+		$("a.more",this).unbind().click(function() {
+			alert("load more");
 			load_full_facet(facet);
 			return false;
 		});

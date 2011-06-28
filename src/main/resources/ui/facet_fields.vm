@@ -9,7 +9,7 @@
             <li><a href='?$query'><span class="value">$facet.name</span> <span class="count">($facet.count)</span></a></li>
         #end
       </ul>
-      <a href="#">load more</a>
+      <a class="more" href="#">load more</a>
     </div>
   #end
 #end
