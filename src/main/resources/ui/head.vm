@@ -1,5 +1,5 @@
 <title>Solr Search UI (Velocity)</title>
-<script type="text/javascript" src="resources/jquery-1.5.2.min.js"></script>
+<!--<script type="text/javascript" src="resources/jquery-1.5.2.min.js"></script>-->
 <script type="text/javascript" src="resources/ui.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/ui.css"/>
   

@@ -26,3 +26,6 @@
     $values.get(0)
   #end
 #end
+
+## return q param if defined
+#macro(q)#if($request.originalParams.q)$request.originalParams.q#end#end

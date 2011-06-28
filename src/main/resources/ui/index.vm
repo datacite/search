@@ -1,7 +1,7 @@
 <html>
-<head>
-  #parse("ui/head.vm")
-</head>
+  <head>
+    #parse("ui/head.vm")
+  </head>
   <body>
     <div id="query">
       #parse("ui/query.vm")
@@ -9,7 +9,7 @@
     <div id="filters">
     </div>
     <div id="results">
-      #if($content)$content#end
+      #parse("ui/results.vm")
     </div>
   </body>
 </html>
