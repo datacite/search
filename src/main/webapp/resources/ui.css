@@ -131,6 +131,10 @@ ul {
   background: #EEFFEE;
 }
 
+.facet a {
+    display: block;
+}
+
 .facet span.count {
   color: gray;
   font-size: small;

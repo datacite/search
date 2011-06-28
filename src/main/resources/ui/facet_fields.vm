@@ -4,7 +4,9 @@
       <h3>$field.name</h3>
       <ul>
         #foreach($facet in $field.values)
-            <li><span class="value">$facet.name</span> <span class="count">($facet.count)</span></li>
+           #set($fq = "$field.name:$esc.getQ()$esc.url($facet.name)$esc.getQ()")
+           #set($query = "$request.originalParams&fq=$fq")
+            <li><a href='?$query'><span class="value">$facet.name</span> <span class="count">($facet.count)</span></a></li>
         #end
       </ul>
       <a href="#">load more</a>
