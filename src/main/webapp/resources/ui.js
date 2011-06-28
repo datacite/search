@@ -189,7 +189,7 @@ function process_facets() {
 				$(".doc").fadeTo(0,1);
 			});
 			if (has_filter(facet, value)) {
-				var li = this.parentNode;
+				var li = this;
 				$(li).hide();
 			}
 		});
