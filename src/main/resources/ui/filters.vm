@@ -1,0 +1,13 @@
+#macro(filter $filter)
+  <span class="filter">$filter</span>
+#end
+
+#set($filters = $request.originalParams.toNamedList().get("fq"))
+
+#if($list.isArray($filters))
+  #foreach($filter in $filters)
+    #filter($filter)
+  #end
+#elseif($filters)
+  #filter($filters)
+#end

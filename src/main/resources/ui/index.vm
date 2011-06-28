@@ -7,6 +7,7 @@
       #parse("ui/query.vm")
     </div>
     <div id="filters">
+      #parse("ui/filters.vm")
     </div>
     <div id="results">
       #parse("ui/results.vm")
