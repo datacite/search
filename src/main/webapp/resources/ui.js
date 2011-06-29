@@ -190,6 +190,7 @@ function process_facets() {
 			var value = $("span.value",this).text();
 			$(this).click(function() {
 				add_filter(facet, value);
+				$(window).scrollTop(0);
 				return false;
 			});
 			$(this).hover(function() {
