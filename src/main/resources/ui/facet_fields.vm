@@ -2,6 +2,7 @@
   #foreach($field in $response.facetFields)
     <div class="facet" id="facet-$field.name">     
       <h3>$field.name</h3>
+      <div class="facet_data">
       <ul>
         #foreach($facet in $field.values)
            #set($fq = "$field.name:$esc.getQ()$esc.url($facet.name)$esc.getQ()")
@@ -10,6 +11,7 @@
         #end
       </ul>
       <a class="more" href="#">more</a>
+      </div>
     </div>
   #end
 #end

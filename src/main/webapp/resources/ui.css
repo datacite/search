@@ -114,8 +114,7 @@ ul {
 }
 
 #sidebar h2 {
-  margin-top: 0px;
-  margin-bottom: 5px;
+  margin: 0px;
   font-size: large;
 }
 
@@ -123,7 +122,9 @@ ul {
   font-weight: normal;
   font-size: medium;
   font-style: normal;
-  margin: 5px 0px;
+  margin: 0px;
+  padding: 0px;
+  cursor: pointer;
 }
 
 #debug {
@@ -160,6 +161,8 @@ ul {
 
 .facet {
   margin-bottom: 5px;
+  background: #EEEEEE;
+  padding: 5px;
 }
 
 .facet h3 {
@@ -174,8 +177,6 @@ ul {
 
 .facet li {
   cursor: pointer;
-  padding-left: 5px;
-  padding-right: 5px;
   margin-bottom: 3px;
   color: #77C9EA;
 }
@@ -196,6 +197,10 @@ ul {
 
 .facet .more {
     font-size: small;
+}
+
+.facet_data {
+    margin-top: 5px;
 }
 
 #js_warning {

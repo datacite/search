@@ -28,8 +28,8 @@ function load_results() {
 function load_full_facet(facet_name) {
 	var facet = $("#facet-" + facet_name);
 	var count = $("li",facet).length;
-	$(".more",facet).before($("<div>"));
-	var div = $("div",facet).hide();
+	$(".more",facet).before($("<div class='tmp'>"));
+	var div = $("div.tmp",facet).hide();
 	div.load(solr.url + " ul", {
 		wt : "velocity",
 		"v.template" : "ui/facet_fields",
@@ -177,9 +177,9 @@ var timeout_preview_filter;
 function process_facets() {
 	$(".facet").each(function() {
 		var facet = ($("h3",this).text());
-		var ul = $("ul", this);
+		var data = $(".facet_data", this);
 		$("h3",this).unbind().click(function() {
-			ul.slideToggle();
+			data.slideToggle();
 		});
 		$("a.more",this).unbind().click(function() {
 			load_full_facet(facet);
