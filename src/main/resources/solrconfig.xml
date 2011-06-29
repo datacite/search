@@ -693,7 +693,7 @@
        
        <str name="facet">on</str>
        <int name="facet.mincount">1</int>
-       <int name="facet.limit">20</int>
+       <int name="facet.limit">5</int>
        <str name="facet.field">allocator</str>
        <str name="facet.field">datacentre</str>
        <str name="facet.field">prefix</str>
