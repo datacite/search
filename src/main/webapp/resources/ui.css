@@ -1,17 +1,70 @@
+/* DataCite color:
+  dark blue:  #0084B9
+  light blue: #77C9EA
+*/
+
 body {
   font-family: sans-serif;
   font-size: 10pt;
+  color: #666;
+}
+
+a img {
+	border: 0 none;
+	vertical-align: middle;
+}
+
+a {
+    color: #0084B9;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* header elements */
+
+#title {
+    margin-right: 2em;
+}
+
+#title a {
+    font-size: 50px;
+    color: #0084B9;
+    text-decoration: none;
+}
+
+#title small {
+    color: #77C9EA;
+}
+
+#title img
+{
+    vertical-align: middle;
+}
+
+#query,#query_form,#filters {
+    display:inline;
+}
+
+#results {
+    position: absolute;
+    top: 90px; 
 }
 
 #main {
-  margin-right: 20em;
-  clear: none;
+  margin-left: 20em;
+  position: relative;
+  
 }
 
 #sidebar {
-  position: absolute;
   width: 20em;
-  right: 0px;
+  position: absolute;
+
 }
 
 #stats {
@@ -69,7 +122,7 @@ ul {
 #sidebar h3 {
   font-weight: normal;
   font-size: medium;
-  font-style: italic;
+  font-style: normal;
   margin: 5px 0px;
 }
 
@@ -106,13 +159,12 @@ ul {
 }
 
 .facet {
-  background: #CCFFCC;
   margin-bottom: 5px;
 }
 
 .facet h3 {
   padding: 2px;
-  background: #55FF55;
+  color: #0084B9;
 }
 
 .facet ul {
@@ -125,14 +177,16 @@ ul {
   padding-left: 5px;
   padding-right: 5px;
   margin-bottom: 3px;
+  color: #77C9EA;
 }
 
 .facet li:hover {
-  background: #EEFFEE;
+  background: #77C9EA;
 }
 
 .facet a {
     display: block;
+    text-decoration: none;
 }
 
 .facet span.count {

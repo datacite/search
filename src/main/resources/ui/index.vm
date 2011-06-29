@@ -3,12 +3,18 @@
     #parse("ui/head.vm")
   </head>
   <body>
-    <div id="js_warning">You have disabled javascript. Search functionality is very limited. Enable javascript is highly recommended.</div>   
-    <div id="query">
-      #parse("ui/query.vm")
-    </div>
-    <div id="filters">
-      #parse("ui/filters.vm")
+    <div id="js_warning">You have disabled javascript. Search functionality is very limited. Enable javascript is highly recommended.</div>
+    <div id="title">
+      <a href="ui">
+        <img src="resources/dc-logo.gif" />
+        Search <small>alpha</small>
+      </a>
+      <div id="query">
+        #parse("ui/query.vm")
+      </div>
+      <div id="filters">
+        #parse("ui/filters.vm")
+      </div>
     </div>
     <div id="results">
       #parse("ui/results.vm")
