@@ -26,7 +26,7 @@
   </div>
   <div class="short">
     #field_br("publisher")
-    #field_br("description")
+##    #field_br("description")
   </div>
   <div class="full"/>
 </div>
