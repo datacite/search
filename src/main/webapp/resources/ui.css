@@ -53,12 +53,12 @@ a:hover {
 #results {
     position: absolute;
     top: 90px; 
+    width: 99%;
 }
 
 #main {
   margin-left: 20em;
   position: relative;
-  
 }
 
 #sidebar {
@@ -95,6 +95,10 @@ a:hover {
 
 .doc .full {
   display: none;
+}
+
+div.doc:hover {
+    background: #F0F0F0;
 }
 
 td {
