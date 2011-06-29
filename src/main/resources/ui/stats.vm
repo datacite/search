@@ -1,2 +1,4 @@
-$page.results_found documents found in ${response.header.QTime}ms
+#if ($request.originalParams.q)
+  $page.results_found documents found in ${response.header.QTime}ms
+#end
  
