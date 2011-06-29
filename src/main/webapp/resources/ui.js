@@ -84,7 +84,16 @@ function setup_query_form() {
 	$("#query_input").focus();
 }
 
+var loading_next_page = false;
+
 function load_next_page() {
+	if (!loading_next_page) {
+		loading_next_page = true;
+		really_load_next_page();
+	}
+}
+
+function really_load_next_page() {
 	$.ajax({
 		type  : "GET",
 		url : solr.url,
@@ -97,7 +106,7 @@ function load_next_page() {
 			start : $(".doc").length,
 		}, 
 		cache: false,
-		async: false,
+		async: true,
 		success: function(data) {
 			if (data.length == 0) {
 				$("#next_page").hide();
@@ -105,6 +114,7 @@ function load_next_page() {
 				$("#docs").append(data);
 				process_docs();
 			}
+			loading_next_page = false;
 		},
 	});
 }
@@ -115,6 +125,7 @@ function setup_next_page_link() {
 		return false;
 	});
 }
+
 
 function setup_continous_scrolling() {
 	$(window).scroll(function(data) {
