@@ -33,7 +33,6 @@
        
       <entity name="xml" dataSource="field" dataField="metadata.xml"
         forEach="/resource" processor="XPathEntityProcessor">
-        <field column="id" xpath="//identifier" />
         <field column="title" xpath="//title" />
         <field column="creator" xpath="//creatorName" />
         <field column="publisher" xpath="//publisher" />
