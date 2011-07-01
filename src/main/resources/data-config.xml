@@ -41,6 +41,7 @@
         <field column="contributor" xpath="//contributorName" />
         <field column="date" xpath="//date" />
         <field column="language" xpath="//language" />
+        <field column="resourceTypeGeneral" xpath="//resourceType/@resourceTypeGeneral" />
         <field column="resourceType" xpath="//resourceType" />
         <field column="alternateIdentifier" xpath="//alternateIdentifier" />
         <field column="relatedIdentifier" xpath="//relatedIdentifier" />
