@@ -187,7 +187,9 @@ var timeout_preview_filter;
 
 function process_facets() {
 	$(".facet").each(function() {
-		var facet = ($("h3",this).text());
+		var id = $(this).attr("id");
+		var facet = id.replace(/facet-/,"");
+		
 		var data = $(".facet_data", this);
 		$("h3",this).unbind().click(function() {
 			data.slideToggle();
@@ -281,7 +283,7 @@ function show_filters() {
 	solr.filter.forEach(function (elem) {
 		var i = solr.filter.indexOf(elem);
 		var filter = $("<span>").addClass("filter");
-		var name = $("<span>").addClass("name").text(elem.facet);
+		var name = $("<span>").addClass("name").text(elem.facet.replace(/_facet/,""));
 		var value = $("<span>").addClass("value").text(elem.value);
 		filter.append(name);
 		filter.append(value);

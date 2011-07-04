@@ -1,7 +1,7 @@
 #if($response.facetFields)
   #foreach($field in $response.facetFields)
     <div class="facet" id="facet-$field.name">     
-      <h3>$field.name</h3>
+      <h3>$field.name.replaceAll("_facet","")</h3>
       <div class="facet_data">
       <ul>
         #foreach($facet in $field.values)
