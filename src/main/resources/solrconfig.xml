@@ -703,6 +703,7 @@
        <str name="facet.field">publicationYear</str>
        <str name="facet.field">publisher_facet</str>
        <str name="facet.field">language</str>
+       <str name="facet.field">refQuality</str>
      </lst>
     </requestHandler>
     

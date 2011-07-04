@@ -12,6 +12,7 @@
                     dc.symbol AS datacentre,
                     cast(xml as char) AS xml,
                     m.created AS uploaded,
+                    d.is_ref_quality AS refQuality,
                     if(d.is_active,null,'true') AS $skipDoc,
                     if(d.is_active,null,d.doi) AS $deleteDocById
              FROM metadata AS m 
