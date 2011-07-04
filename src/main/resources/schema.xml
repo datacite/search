@@ -52,6 +52,14 @@
         <filter class="solr.LowerCaseFilterFactory"/>
       </analyzer>
     </fieldType>
+    
+    <fieldType name="lang" class="solr.TextField" positionIncrementGap="100" autoGeneratePhraseQueries="true">
+      <analyzer>
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="org.datacite.search.filter.LanguageCodeFilterFactory"/>
+      </analyzer>
+    </fieldType>
+    
 
     <!-- since fields of this type are by default not stored or indexed,
          any data added to them will be ignored outright.  --> 
@@ -95,7 +103,7 @@
    <field name="subject" type="textgen" indexed="true" stored="true" multiValued="true"/> 
    <field name="contributor" type="textgen" indexed="true" stored="true" multiValued="true"/>
    <field name="date" type="string" indexed="true" stored="true" multiValued="true"/>
-   <field name="language" type="string" indexed="true" stored="true"/>
+   <field name="language" type="lang" indexed="true" stored="true"/>
    <field name="resourceType" type="textgen" indexed="true" stored="true"/>
    <field name="resourceTypeGeneral" type="string" indexed="true" stored="true"/>
    <field name="alternateIdentifier" type="string" indexed="true" stored="true" multiValued="true"/>
