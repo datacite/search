@@ -1,8 +1,8 @@
 function main {
-  check_env
   cmd=$1;shift
   fmt="wt=json&indent=true"
   case "$cmd" in
+    "help" ) help;;
     "status" ) get "admin/cores?action=status&$fmt";echo;;
     "select" ) get "select?$1";;
     "query" ) get "select?q=$1&indent=true$2";;
@@ -11,17 +11,24 @@ function main {
     "commit" ) post 'update' '<commit/>';echo;;
     "optimize" ) post 'update' '<optimize/>';echo;;
     "purge" ) post 'update' '<delete><query>*:*</query></delete>';echo;;
-    "import" ) 
+    "import" )
       sub=$1;shift
       case "$sub" in
         "status" ) get "dataimport?$fmt";echo;; 
         "full" ) get "dataimport?command=full-import&clean=true&commit=true&$fmt";echo;; 
         "delta" ) get "dataimport?command=full-import&clean=false&commit=true&$fmt";echo;; 
+        * )
+          echo unknown command \"$cmd $sub\"
+          help;;
       esac;;
+    * )
+      echo unknown command \"$cmd\"
+      help;;
   esac
 }
 
 function post {
+  check_env
   url=$SOLR_URL/$1
   echo $url 1>&2
   if [ -z "$2" ]; then
@@ -33,6 +40,7 @@ function post {
 }
 
 function get {
+  check_env
   url=$SOLR_URL/$1
   echo $url 1>&2
   curl -u $SOLR_ADMIN:$SOLR_PASS $url
@@ -51,6 +59,45 @@ function check_env {
     echo env var SOLR_PASS is undefined 1>&2
     exit 1
   fi
+}
+
+function help {
+  cat <<EOF
+  
+  solr-client - simple command client for interacting with solr
+  
+  usage:
+  
+  solr-client <command>
+  
+  commands:
+  
+    help                 - prints this help
+    status               - solr status
+    
+    count                - get number of results for q=*:*
+    select <params>      - generic select method (/select?<params>)
+    query <q> [<params>] - simple query (/select?q=<q><params>)
+
+    commit               - commit
+    optimize             - optimize
+    purge                - purge whole index
+    update [<body>]      - generic update method (/update);
+                             post <body> or read from stdin if <body> is missing
+
+    import status        - status of DataImportHandler
+    import full          - do full backup
+    import delta         - do delta backup
+    
+  environment variables:
+  
+    The following env vars have to be set:
+  
+    SOLR_URL             - url of solr instance
+    SOLR_ADMIN           - username to access admin realm
+    SOLR_PASS            - password of admin user
+    
+EOF
 }
 
 main $@
