@@ -1,0 +1,56 @@
+function main {
+  check_env
+  cmd=$1;shift
+  fmt="wt=json&indent=true"
+  case "$cmd" in
+    "status" ) get "admin/cores?action=status&$fmt";echo;;
+    "select" ) get "select?$1";;
+    "query" ) get "select?q=$1&indent=true$2";;
+    "count" ) get 'select?q=*:*&rows=0&indent=true';;
+    "update" ) post 'update';;
+    "commit" ) post 'update' '<commit/>';echo;;
+    "optimize" ) post 'update' '<optimize/>';echo;;
+    "purge" ) post 'update' '<delete><query>*:*</query></delete>';echo;;
+    "import" ) 
+      sub=$1;shift
+      case "$sub" in
+        "status" ) get "dataimport?$fmt";echo;; 
+        "full" ) get "dataimport?command=full-import&clean=true&commit=true&$fmt";echo;; 
+        "delta" ) get "dataimport?command=full-import&clean=false&commit=true&$fmt";echo;; 
+      esac;;
+  esac
+}
+
+function post {
+  url=$SOLR_URL/$1
+  echo $url 1>&2
+  if [ -z "$2" ]; then
+    curl -u $SOLR_ADMIN:$SOLR_PASS -H "Content-Type: text/xml" --data-binary @- $url < /dev/stdin
+  else
+    curl -u $SOLR_ADMIN:$SOLR_PASS -H "Content-Type: text/xml" --data-binary $2 $url
+  fi
+
+}
+
+function get {
+  url=$SOLR_URL/$1
+  echo $url 1>&2
+  curl -u $SOLR_ADMIN:$SOLR_PASS $url
+}
+
+function check_env {
+  if [ -z "$SOLR_URL" ]; then
+    echo env var SOLR_URL is undefined 1>&2
+    exit 1
+  fi
+  if [ -z "$SOLR_ADMIN" ]; then
+    echo env var SOLR_ADMIN is undefined 1>&2
+    exit 1
+  fi
+  if [ -z "$SOLR_PASS" ]; then
+    echo env var SOLR_PASS is undefined 1>&2
+    exit 1
+  fi
+}
+
+main $@
