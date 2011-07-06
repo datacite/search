@@ -31,6 +31,8 @@
   </div>
   <div class="full"></div>
   <div class="hl">
-    #parse("ui/hl.vm")
+    #if($request.params.q != "*")
+      #parse("ui/hl.vm")
+    #end
   </div>
 </div>
