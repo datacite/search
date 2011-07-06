@@ -221,5 +221,6 @@ ul {
 
 .hl em {
     font-style: normal;
-    font-weight: bold;
+    font-weight: normal;
+    background: #FF0;
 }
