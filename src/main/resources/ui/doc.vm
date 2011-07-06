@@ -29,8 +29,7 @@
     #field_br("publisher")
 ##    #field_br("description")
   </div>
-  <div class="full">
-  </div>
+  <div class="full"></div>
   <div class="hl">
     #parse("ui/hl.vm")
   </div>
