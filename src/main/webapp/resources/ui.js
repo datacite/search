@@ -159,7 +159,7 @@ function load_detail(doc) {
 	var detail = $(".full",doc);
 	if (detail.text().length == 0) { // not already loaded
 		detail.load(solr.url + "-detail", {
-			q : "id:" + doi
+			q : "doi:" + doi
 		});
 	};
 	

@@ -684,7 +684,7 @@
        <str name="q">-*:*</str>
        
        <str name="defType">edismax</str>
-       <str name="qf">title id creator publisher subject contributor</str>
+       <str name="qf">title doi creator publisher subject contributor</str>
        
        <str name="wt">velocity</str>
        <str name="v.template">ui/index</str>
