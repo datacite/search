@@ -46,7 +46,7 @@ a:hover {
     vertical-align: middle;
 }
 
-#query,#query_form,#filters {
+#query,#query_form,#filters,#query_form p {
     display:inline;
 }
 

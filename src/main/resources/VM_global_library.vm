@@ -27,5 +27,8 @@
   #end
 #end
 
+## escape method especially for href attribute
+#macro(esc $txt)$txt.replaceAll("&", "&amp;").replaceAll("\"", "&quot;")#end
+
 ## return q param if defined
 #macro(q)#if($request.originalParams.q)$request.originalParams.q#end#end

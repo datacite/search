@@ -1,4 +1,6 @@
-<form id="query_form">
-  <input id="query_input" name="q" value="#q()" />
-  <input type="submit" value="Search"/>
+<form id="query_form" action="">
+  <p>
+    <input id="query_input" name="q" value="#q()" />
+    <input type="submit" value="Search"/>
+  </p>
 </form>

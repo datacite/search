@@ -3,15 +3,17 @@
     <div class="facet" id="facet-$field.name">     
       <h3>$field.name.replaceAll("_facet","")</h3>
       <div class="facet_data">
-      <ul>
+      #set($count = $field.values.size())
+      #if($count > 0)
+        <ul>
         #foreach($facet in $field.values)
            #set($fq = "$field.name:$esc.getQ()$esc.url($facet.name)$esc.getQ()")
            #set($query = "$request.originalParams&fq=$fq")
-            <li><a href='?$query'><span class="value">$facet.name</span> <span class="count">($facet.count)</span></a></li>
+            <li><a href="?#esc($query)"><span class="value">$facet.name</span> <span class="count">($facet.count)</span></a></li>
         #end
-      </ul>
+        </ul>
+      #end
 
-      #set($count = $field.values.size())
       #set($limit = $request.params.toNamedList().get("facet.limit"))
       #if($count == $limit)
         <a class="more" href="#">more</a>

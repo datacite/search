@@ -1,4 +1,7 @@
-<html>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     #parse("ui/head.vm")
   </head>
@@ -6,7 +9,7 @@
     <div id="js_warning">You have disabled javascript. Search functionality is very limited. Enable javascript is highly recommended.</div>
     <div id="title">
       <a href="ui">
-        <img src="resources/dc-logo.gif" />
+        <img src="resources/dc-logo.gif" alt="DataCite Logo"/>
         Search <small>alpha</small>
       </a>
       <div id="query">
