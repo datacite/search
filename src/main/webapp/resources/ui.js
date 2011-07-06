@@ -256,7 +256,7 @@ function preview_filter(facet, value) {
 			qt : "simple",
 			q : solr.q,
 			fq : filter_to_fq(filters),
-			fl : "id",
+			fl : "dataset_id",
 			rows : $(".doc").length,
 		}, 
 		dataType : "json",
@@ -264,7 +264,7 @@ function preview_filter(facet, value) {
 		async: false,
 		success: function(data) {
 			var ids = data.response.docs.map(function(elem){
-				return elem.id;
+				return elem.dataset_id;
 			});
 			$(".doc").each(function() {
 				var id = $(this).attr("id");

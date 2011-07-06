@@ -1,4 +1,4 @@
-#macro(result_id $doc)result-$doc.getFieldValue('id')#end
+#macro(result_id $doc)result-$doc.getFieldValue('dataset_id')#end
 
 #macro(f $f)$doc.getFieldValue($f)#end
 
