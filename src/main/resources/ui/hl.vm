@@ -1,0 +1,6 @@
+#set($hl = $response.highlighting.get($doi))
+#foreach($field in $hl)
+  #foreach($str in $field) 
+    $str 
+  #end
+#end
