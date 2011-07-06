@@ -704,6 +704,8 @@
        <str name="facet.field">publisher_facet</str>
        <str name="facet.field">language</str>
        <str name="facet.field">refQuality</str>
+       
+       <str name="hl">true</str>
      </lst>
     </requestHandler>
     

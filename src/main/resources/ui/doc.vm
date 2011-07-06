@@ -1,4 +1,4 @@
-#set($docId = $doc.getFieldValue('id'))
+#set($doi = $doc.getFieldValue('doi'))
 <div id="#result_id($doc)" class="doc">
   <div class="stats">
     <div class="count">
@@ -10,7 +10,7 @@
         #field("score")
       </a>
       <div class="exp">
-        $response.getExplainMap().get($docId)
+        $response.getExplainMap().get($doi)
       </div>
     </div>
   </div>
@@ -29,5 +29,9 @@
     #field_br("publisher")
 ##    #field_br("description")
   </div>
-  <div class="full"/>
+  <div class="full">
+  </div>
+  <div class="hl">
+    #parse("ui/hl.vm")
+  </div>
 </div>

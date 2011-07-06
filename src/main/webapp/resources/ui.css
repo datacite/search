@@ -6,7 +6,6 @@
 body {
   font-family: sans-serif;
   font-size: 10pt;
-  color: #666;
 }
 
 a img {
@@ -210,4 +209,17 @@ ul {
 #js_warning {
     color: red;
     margin: 5pt;
+}
+
+.short, .info {
+    color: #666
+}
+
+.hl {
+    
+}
+
+.hl em {
+    font-style: normal;
+    font-weight: bold;
 }
