@@ -30,7 +30,7 @@ a:hover {
     margin-right: 2em;
 }
 
-#title a {
+#title a.title {
     font-size: 50px;
     color: #0084B9;
     text-decoration: none;

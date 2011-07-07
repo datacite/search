@@ -8,13 +8,16 @@
   <body>
     <div id="js_warning">You have disabled javascript. Search functionality is very limited. Enabling javascript is highly recommended.</div>
     <div id="title">
-      <a href="ui">
+      <a href="ui" class="title">
         <img src="resources/dc-logo.gif" alt="DataCite Logo"/>
         Search <small>alpha</small>
       </a>
       <div id="query">
         #parse("ui/query.vm")
       </div>
+      <span id="links">
+        <a href="help.html">help</a>
+      </span>
       <div id="filters">
         #parse("ui/filters.vm")
       </div>
