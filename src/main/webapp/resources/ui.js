@@ -181,6 +181,7 @@ function process_docs() {
 		$(".exp", score).slideToggle();
 		return false;
 	});
+	$("a").attr("target", "_blank");
 }
 
 var timeout_preview_filter;
@@ -194,6 +195,7 @@ function process_facets() {
 		$("h3",this).unbind().click(function() {
 			data.slideToggle();
 		});
+		$("a",this).attr("href","#");
 		$("a.more",this).unbind().click(function() {
 			load_full_facet(facet);
 			return false;
