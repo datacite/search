@@ -15,7 +15,6 @@ function load_results() {
 // debug(solr.toSource() + filter_to_fq(solr.filter).toSource());
 	$("#results").fadeTo(0,0.5);
 	$("#results").load(solr.url, {
-		wt : "velocity",
 		"v.template" : "ui/results",
 		q : solr.q,
 		fq : filter_to_fq(solr.filter),
@@ -31,7 +30,6 @@ function load_full_facet(facet_name) {
 	$(".more",facet).before($("<div class='tmp'>"));
 	var div = $("div.tmp",facet).hide();
 	div.load(solr.url + " ul", {
-		wt : "velocity",
 		"v.template" : "ui/facet_fields",
 		q : solr.q,
 		fq : filter_to_fq(solr.filter),
@@ -98,11 +96,10 @@ function really_load_next_page() {
 		type  : "GET",
 		url : solr.url,
 		data :  {
-			wt : "velocity",
 			"v.template" : "ui/docs",
-			qt : "simple",
 			q : solr.q,
 			fq : filter_to_fq(solr.filter),
+			facet: "off",
 			start : $(".doc").length,
 		}, 
 		cache: false,
@@ -252,13 +249,10 @@ function preview_filter(facet, value) {
 	
 	$.ajax({
 		type  : "GET",
-		url : solr.url,
+		url : solr.url + "-ids",
 		data :  {
-			wt : "json",
-			qt : "simple",
 			q : solr.q,
 			fq : filter_to_fq(filters),
-			fl : "dataset_id",
 			rows : $(".doc").length,
 		}, 
 		dataType : "json",
