@@ -9,9 +9,11 @@
       <a href="#">
         #field("score")
       </a>
+      #if($response.getExplainMap())
       <div class="exp">
         $response.getExplainMap().get($doi)
       </div>
+      #end
     </div>
   </div>
   <div class="title">
