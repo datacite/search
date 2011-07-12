@@ -45,6 +45,10 @@ MDS database specific properties.
 
 Specify the path to your preliminarily chosen solr home directory by replacing `<dir>`.
 
+### src/main/resources/log4j.xml
+
+Your usual log4j stuff.
+
 ## Compiling
 
     mvn clean compile war:war
