@@ -27,6 +27,19 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>org.apache.solr</groupId>
+      <artifactId>solr-core</artifactId>
+      <version>${solr.version}</version>
+      <type>jar</type>
+      <scope>compile</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-jdk14</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.16</version>
@@ -37,6 +50,13 @@
     	<groupId>com.ibm.icu</groupId>
     	<artifactId>icu4j</artifactId>
     	<version>4.8</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.slf4j</groupId>
+    	<artifactId>slf4j-log4j12</artifactId>
+    	<version>1.6.1</version>
     	<type>jar</type>
     	<scope>compile</scope>
     </dependency>
@@ -51,6 +71,15 @@
         <configuration>
           <source>${java.version}</source>
           <target>${java.version}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <!--  slf4j-jdk14 is direclty included in org.apache.solr:solr:war.
+                therefore dependency based excluding is not enough    -->
+          <packagingExcludes>WEB-INF/lib/slf4j-jdk14-*</packagingExcludes>
         </configuration>
       </plugin>
     </plugins>
