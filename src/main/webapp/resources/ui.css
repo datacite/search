@@ -228,3 +228,7 @@ ul {
     font-weight: normal;
     background: #FF0;
 }
+
+code {
+    background: #DDD;
+}

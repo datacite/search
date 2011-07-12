@@ -34,6 +34,7 @@ records where <em>all</em> keywords were present. If you wish to find
 the record which match <em>any</em> of the keywords you need to
 separate them with OR operator.
 </p>
+
 <p>
 Also please note that the search is case insensitive.
 </p>
@@ -79,9 +80,39 @@ are searchable. Have a look at the Schema documentation for non-self-explanatory
   <li>uploaded: datestamp of metadata uploading</li>
 </ul>
 
-<h2>Query syntax, operators, advanced search</h2>
-<p>Some basic info: oprators, exclusions, wildcards, soundex, link to lucene/solr docs http://wiki.apache.org/solr/SolrQuerySyntax </p>
-<h3>Examples</h3>
+<h2>Query syntax</h2>
+
+<p>Our search is Solr/Lucene based. For more help than provided below you could read 
+<a href="http://lucene.apache.org/java/2_9_1/queryparsersyntax.html">Lucene Syntax</a> and
+<a href="http://wiki.apache.org/solr/SolrQuerySyntax">Solr Syntax</a>.</p>
+
+<h3>Exclusion</h3>
+
+<p>If you only want to retrieve documents <em>not</em> containing a specific term add a minus sign (<code>-</code>) to the term,
+e.g. <code>laser -medical</code> would match documents containg <em>laser</em> but not <em>medical</em>.</p>
+
+<h3>Boolean queries</h3>
+
+<p>By default all search term are combined by <code>AND</code>. You could construct or-query by using <code>OR</code> between the terms. 
+Also grouping by phrases is possible, e.g. <code>laser AND (red OR blue)</code>.</p> 
+
+<h3>Phrases</h3>
+
+<p>Searches for complete phrases have to be enclosed in quotation marks, 
+e.g. <code>"wind turbines"</code>.</p>
+
+<h3>Wildcards</h3>
+
+<p>You can use <code>?</code> for a single character or <code>*</code> for multiple characters, e.g. <code>w*d</code> would match <em>wood</em> and <em>wind</em>.</p>
+
+<h3>Field queries</h3>
+
+<p>You can restrict the search to a specific fields, e.g. <code>title:laser</code>. See above for a list of available fields.</p>
+
+<h3>Range queries</h3>
+
+<p>Instead of specifying individual terms or wildcards you could also search for a range of terms.
+This is especially interesting for dates, e.g. <code>publicationYear:[1990 TO 1998]</code>.</p>
 
 </body>
 </html>
