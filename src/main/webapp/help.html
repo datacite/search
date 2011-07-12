@@ -9,40 +9,42 @@
 </head>
 <body>
 <div id="title"><a href="ui" class="title"> 
-  <img src="resources/dc-logo.gif" alt="DataCite Logo" /> Search <small>alpha</small></a>
+  <img src="resources/dc-logo.gif" alt="DataCite Logo" /> Metadata Search <small>beta</small></a>
 </div>
 <h1>DataCite Metadata Search Help</h1>
 <p>
 DataCite Metadata Search offers a simple search interface for metadata
 of datasets registered with <a href="https://mds.datacite.org"
 target="_">MDS</a>.
-
-Just type keywords in the search field and hit the enter key (or click
-on the Search button) to get a list of results.
 </p>
+
 <p>
-This provides faceted search. It allows users to drill into search
-results by any value in designated fields.
+Just type keywords in the search field and hit the Enter key (or click
+on the Search button) to get a list of results. This provides faceted
+search. It allows users to drill into search results by any value in
+the designated fields (see below).
 
 Each facet displayed also shows the number of hits within the search
 that match that category.
 </p>
 
 <p>
-When you type multiple keywords the results will contain all metadata
+When you type multiple keywords the results will contain metadata
 records where <em>all</em> keywords were present. If you wish to find
-the record which match <em>any</em> of the keywords you need to
-separate them with OR operator.
+the records which match <em>any</em> of the keywords you need to
+separate them with OR operator (see examples below).
 </p>
 
 <p>
-Also please note that the search is case insensitive.
+Please note that the search is case insensitive. Also, the indexing
+takes place once a day so this service not will provide metadata
+submitted in the last 24h.
 </p>
 
 <h2>Fields</h2>
 
 <p>Most of the fields in the <a href="http://schema.datacite.org">DataCite Metadata Schema</a>
-are searchable. Have a look at the Schema documentation for non-self-explanatory fields.</p> 
+are searchable. Have a look at the Schema documentation for the details.</p> 
 
 <h3>DataCite's mandatory fields</h3>
 <ul>
@@ -73,16 +75,16 @@ are searchable. Have a look at the Schema documentation for non-self-explanatory
 <h3>Other Fields</h3>
 <ul>
   <li>allocator: symbol of the DataCite member (e.g. BL = British Library)</li>
-  <li>datacentre: symbol of the datacentre, which uploaded the metadata</li>
+  <li>datacentre: symbol of the datacentre, which uploaded the metadata (e.g. BL.ADS = Archeology Data Service)</li>
   <li>indexed: datestamp of indexing</li>
-  <li>prefix: DOI prefix</li>
-  <li>refQuality: reference quality flag</li>
+  <li>prefix: DOI prefix (e.g. 10.5284)</li>
+  <li>refQuality: reference quality flag (1 or 0)</li>
   <li>uploaded: datestamp of metadata uploading</li>
 </ul>
 
 <h2>Query syntax</h2>
 
-<p>Our search is Solr/Lucene based. For more help than provided below you could read 
+<p>Our search is Solr/Lucene based. For more please see 
 <a href="http://lucene.apache.org/java/2_9_1/queryparsersyntax.html">Lucene Syntax</a> and
 <a href="http://wiki.apache.org/solr/SolrQuerySyntax">Solr Syntax</a>.</p>
 
@@ -138,39 +140,39 @@ This is especially interesting for dates, e.g. <code>publicationYear:[1990 TO 19
     </tr>
     <tr>
       <td><code>"wind turbine"</code></td>
-      <td>containing <em>wind turbine</em> as a phrase
+      <td>containing <em>wind turbine</em> as a phrase</td>
     </tr>
     <tr>
       <td><code>subject:geology</code></td>
-      <td>containing <em>geology</em> in metadata field <em>subject</em>
+      <td>containing <em>geology</em> in metadata field <em>subject</em></td>
     </tr>
     <tr>
       <td><code>allocator:(BL OR TIB)</code></td>
-      <td>belonging to DataCite members <a href=http://datacite.org/britishlibrary">BL</a> or <a href=http://datacite.org/TIB">TIB</a>
+      <td>belonging to DataCite members <a href="http://datacite.org/britishlibrary">BL</a> or <a href="http://datacite.org/TIB">TIB</a></td>
     </tr>
     <tr>
       <td><code>publicationYear:[2000 TO 2005]</code></td>
-      <td>published between 2000 and 2005
+      <td>published between 2000 and 2005</td>
     </tr>
     <tr>
       <td><code>uploaded:[NOW-5DAYS TO NOW]</code></td>
-      <td>uploaded to DataCite in the last 5 days
+      <td>uploaded to DataCite in the last 5 days</td>
     </tr>
   </table>
 
 <h2>API</h2>
 
-<p>We have added a Solr Search Handler for API calls: <a href="http://search.datacite.org/api">http://search.datacite.org/api</a>.</p>
+<p>This service is also available as an API. We use Solr Search Handler for our API calls, the endpoint is: <a href="http://search.datacite.org/api">http://search.datacite.org/api</a>.</p>
 
-<p>For the beginning please have a look at <a href="http://wiki.apache.org/solr/CommonQueryParameters">Solr's common query parameters</a>.</p>
+<p>Please check <a href="http://wiki.apache.org/solr/CommonQueryParameters">Solr's common query parameters</a> documenataion in order to understand how to use API.</p>
 
 <h3>Examples</h3>
 
 <ul>
-  <li><a href="http://search.datacite.org/api?q=wind">simple search for <em>wind</em></a></li>
-  <li><a href="http://search.datacite.org/api?q=wind&fl=doi,title&rows=5">search for <em>wind</em>, retrieve only <em>doi</em> and <em>title</em>, and return (at max.) 5 results</a></li>
-  <li><a href="http://search.datacite.org/api?q=wind&fl=doi,title&wt=csv">csv output</a></li>
-  <li><a href="http://search.datacite.org/api?q=wind&fl=doi,title&wt=json&indent=true">json output</a></li>
+  <li><a href="http://search.datacite.org/api?q=wind"><code>http://search.datacite.org/api?q=wind</code> simple search for <em>wind</em></a></li>
+  <li><a href="http://search.datacite.org/api?q=wind&amp;fl=doi,title&amp;rows=5"><code>http://search.datacite.org/api?q=wind&amp;fl=doi,title&amp;rows=5</code> search for <em>wind</em>, retrieve only <em>doi</em> and <em>title</em>, and return (at max.) 5 results</a></li>
+  <li><a href="http://search.datacite.org/api?q=wind&amp;fl=doi,title&amp;wt=csv"><code>http://search.datacite.org/api?q=wind&amp;fl=doi,title&amp;wt=csv</code> csv output</a></li>
+  <li><a href="http://search.datacite.org/api?q=wind&amp;fl=doi,title&amp;wt=json&amp;indent=true"><code>http://search.datacite.org/api?q=wind&amp;fl=doi,title&amp;wt=json&amp;indent=true</code> json output</a></li>
 </ul>
 
 </body>
