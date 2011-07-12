@@ -10,7 +10,7 @@
     <div id="title">
       <a href="ui" class="title">
         <img src="resources/dc-logo.gif" alt="DataCite Logo"/>
-        Search <small>alpha</small>
+        Metadata Search <small>beta</small>
       </a>
       <div id="query">
         #parse("ui/query.vm")
