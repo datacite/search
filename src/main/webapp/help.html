@@ -158,5 +158,20 @@ This is especially interesting for dates, e.g. <code>publicationYear:[1990 TO 19
     </tr>
   </table>
 
+<h2>API</h2>
+
+<p>We have added a Solr Search Handler for API calls: <a href="http://search.datacite.org/api">http://search.datacite.org/api</a>.</p>
+
+<p>Please have a look at <a href="http://wiki.apache.org/solr/CommonQueryParameters">Solr's common query parameters</a> for a step in.</p>
+
+<h3>Examples</h3>
+
+<ul>
+  <li><a href="http://search.datacite.org/api?q=wind">simple search for <em>wind</em></a></li>
+  <li><a href="http://search.datacite.org/api?q=wind&fl=doi,title&rows=5">search for <em>wind</em>, retrieve only <em>doi</em> and <em>title</em>, and return (at max.) 5 results</a></li>
+  <li><a href="http://search.datacite.org/api?q=wind&fl=doi,title&wt=csv">csv output</a></li>
+  <li><a href="http://search.datacite.org/api?q=wind&fl=doi,title&wt=json&indent=true">json output</a></li>
+</ul>
+
 </body>
 </html>
