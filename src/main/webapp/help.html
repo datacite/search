@@ -114,5 +114,49 @@ e.g. <code>"wind turbines"</code>.</p>
 <p>Instead of specifying individual terms or wildcards you could also search for a range of terms.
 This is especially interesting for dates, e.g. <code>publicationYear:[1990 TO 1998]</code>.</p>
 
+<h2>Query Examples</h2>
+  <table>
+    <tr>
+      <th>query</th>
+      <th>retrieves documents...</th>
+    </tr>
+    <tr>
+      <td><code>laser</code></td>
+      <td>containing <em>laser</em></td>
+    </tr>
+    <tr>
+      <td><code>laser safety</code></td>
+      <td>containing <em>laser</em> and <em>safety</em></td>
+    </tr>
+    <tr>
+      <td><code>laser -medicine</code></td>
+      <td>containing <em>laser</em> and not <em>medicine</em></td>
+    </tr>
+    <tr>
+      <td><code>laser AND (red OR green)</code></td>
+      <td>containing <em>laser</em> and <em>red</em> or <em>green</em></td>
+    </tr>
+    <tr>
+      <td><code>"wind turbine"</code></td>
+      <td>containing <em>wind turbine</em> as a phrase
+    </tr>
+    <tr>
+      <td><code>subject:geology</code></td>
+      <td>containing <em>geology</em> in metadata field <em>subject</em>
+    </tr>
+    <tr>
+      <td><code>allocator:(BL OR TIB)</code></td>
+      <td>belonging to DataCite members <a href=http://datacite.org/britishlibrary">BL</a> or <a href=http://datacite.org/TIB">TIB</a>
+    </tr>
+    <tr>
+      <td><code>publicationYear:[2000 TO 2005]</code></td>
+      <td>published between 2000 and 2005
+    </tr>
+    <tr>
+      <td><code>uploaded:[NOW-5DAYS TO NOW]</code></td>
+      <td>uploaded to DataCite in the last 5 days
+    </tr>
+  </table>
+
 </body>
 </html>
