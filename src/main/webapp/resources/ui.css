@@ -8,6 +8,11 @@ body {
   font-size: 10pt;
 }
 
+.help {
+  font-size: 16px;
+  color: #666;
+}
+
 a img {
 	border: 0 none;
 	vertical-align: middle;
