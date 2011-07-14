@@ -59,20 +59,19 @@ h1,h2,h3 {
 }
 
 #results {
-    position: absolute;
-    top: 90px; 
+/*    position: absolute;
+    top: 90px;*/
+    margin-top: 5px; 
     width: 99%;
 }
 
 #main {
   margin-left: 20em;
-  position: relative;
 }
 
 #sidebar {
   width: 20em;
-  position: absolute;
-
+  float: left;
 }
 
 #stats {
@@ -81,7 +80,6 @@ h1,h2,h3 {
 .doc {
   margin: 0.5em;
   padding: 2px;
-  clear: both;
 }
 
 .doc .info {
