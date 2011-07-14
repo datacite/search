@@ -8,7 +8,7 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 import com.ibm.icu.util.ULocale;
 
-public class LanguageCodeFilter extends TokenFilter {
+public final class LanguageCodeFilter extends TokenFilter {
     
     CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
 
