@@ -22,8 +22,6 @@
   </div>
 
   #if($page.results_found > $page.results_per_page)
-    <div id="next_page">
-      <a href="#">next page</a>
-    </div>
+    <div id="next_page"/>
   #end
 </div>

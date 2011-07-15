@@ -84,14 +84,14 @@ function setup_query_form() {
 
 var loading_next_page = false;
 
-function load_next_page() {
-	if (!loading_next_page) {
-		loading_next_page = true;
-		really_load_next_page();
-	}
-}
-
-function really_load_next_page() {
+function load_next_page(async) {
+	if (async == null)
+		async = false;
+	
+	if (loading_next_page)
+		return
+	loading_next_page = true;
+	
 	$.ajax({
 		type  : "GET",
 		url : solr.url,
@@ -103,7 +103,7 @@ function really_load_next_page() {
 			start : $(".doc").length,
 		}, 
 		cache: false,
-		async: true,
+		async: async,
 		success: function(data) {
 			if (data.length == 0) {
 				$("#next_page").hide();
@@ -114,6 +114,10 @@ function really_load_next_page() {
 			loading_next_page = false;
 		},
 	});
+}
+
+function load_next_page_async() {
+	load_next_page(true);
 }
 
 function setup_next_page_link() {
@@ -137,7 +141,7 @@ function is_next_page_needed() {
 function setup_continous_scrolling() {
 	$(window).scroll(function(data) {
 		if (is_next_page_needed())
-			load_next_page();
+			load_next_page_async();
 	});
 }
 
@@ -159,6 +163,9 @@ function process_results() {
 	process_docs();
 	process_facets();
 	hide_pagination();
+	while (is_next_page_needed())
+		load_next_page();
+
 	setup_next_page_link();
 }
 
