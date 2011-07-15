@@ -1,7 +1,10 @@
-#macro(filter $filter)
-  <span class="filter"><a href="#url_for_removing_facet_filter($filter)">$filter</a></span>
-#end
-
 #foreach($filter in $request.params.getParams('fq'))
-  #filter($filter)
+  #set($split = $filter.split(":",2))
+  #set($name = $list.get($split,0))
+  #set($value = $list.get($split,1).replaceAll('"',''))
+  <span class="filter">
+    <a href="#url_for_removing_facet_filter($filter)">
+      <span class="name">#normalize_facet($name)</span><span class="value">$value</span>
+    </a>  
+  </span>
 #end

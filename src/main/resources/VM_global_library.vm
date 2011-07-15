@@ -53,4 +53,5 @@
 #macro(url_for_facet_filter $field $value)#url_for_lens&fq=$esc.url($field):%22$esc.url($value)%22#end
 #macro(url_for_removing_facet_filter $filter)?#qurl#fqs_without($filter)#end
 
+#macro(normalize_facet $facet)$facet.replaceAll("_facet","")#end
 

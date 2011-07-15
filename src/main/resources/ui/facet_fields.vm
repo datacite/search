@@ -3,7 +3,7 @@
     #set($count = $field.values.size())
     #if($count > 0)
     <div class="facet" id="facet-$field.name">     
-      <h3>$field.name.replaceAll("_facet","")</h3>
+      <h3>#normalize_facet($field.name)</h3>
       <div class="facet_data">
         <ul>
         #foreach($facet in $field.values)

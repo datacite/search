@@ -158,6 +158,7 @@ ul {
   padding: 2px;
   cursor: crosshair;
   white-space:nowrap;
+  margin-right: 1ex;
 }
 
 .filter .name {
