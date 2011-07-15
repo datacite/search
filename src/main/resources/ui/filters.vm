@@ -2,12 +2,6 @@
   <span class="filter"><a href="#url_for_removing_facet_filter($filter)">$filter</a></span>
 #end
 
-#set($filters = $request.originalParams.toNamedList().get("fq"))
-
-#if($list.isArray($filters))
-  #foreach($filter in $filters)
-    #filter($filter)
-  #end
-#elseif($filters)
-  #filter($filters)
+#foreach($filter in $request.params.getParams('fq'))
+  #filter($filter)
 #end
