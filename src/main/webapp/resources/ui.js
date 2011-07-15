@@ -314,7 +314,6 @@ function show_filters() {
 
 
 $(document).ready(function() {
-	$("#js_warning").hide();
 	jQuery.ajaxSettings.traditional = true; // use correct array serialization
 											// for solr
 	setup_debug_box();

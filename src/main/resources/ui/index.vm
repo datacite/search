@@ -6,7 +6,6 @@
     #parse("ui/head.vm")
   </head>
   <body>
-    <div id="js_warning">You have disabled javascript. Search functionality is very limited. Enabling javascript is highly recommended.</div>
     <div id="title">
       <a href="ui" class="title">
         <img src="resources/dc-logo.gif" alt="DataCite Logo"/>
