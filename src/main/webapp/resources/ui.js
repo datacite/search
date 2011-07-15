@@ -123,14 +123,21 @@ function setup_next_page_link() {
 	});
 }
 
+function is_next_page_needed() {
+	if ($("#next_page").is(':visible')) { 
+		var advance_in_pixel = 200;
+		var div_top = $("#next_page").position().top;  
+		var window_bottom = $(window).scrollTop() + $(window).height();
+		return div_top - window_bottom < advance_in_pixel;
+	} 
+	return false;
+}
+
 
 function setup_continous_scrolling() {
 	$(window).scroll(function(data) {
-		var div_top = $("#next_page").position().top;  
-		var window_bottom = $(window).scrollTop() + $(window).height();
-		if (div_top - 200 < window_bottom) {
+		if (is_next_page_needed())
 			load_next_page();
-		};
 	});
 }
 
