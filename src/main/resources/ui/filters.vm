@@ -1,5 +1,5 @@
 #macro(filter $filter)
-  <span class="filter">$filter</span>
+  <span class="filter"><a href="#url_for_removing_facet_filter($filter)">$filter</a></span>
 #end
 
 #set($filters = $request.originalParams.toNamedList().get("fq"))

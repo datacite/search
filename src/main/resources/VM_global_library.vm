@@ -39,9 +39,18 @@
 #macro(fqs_generic $fqs)#foreach($fq in $fqs)&fq=$esc.url($fq)#end#end
 #macro(fqs)#fqs_generic($request.params.getParams('fq'))#end
 
+#macro(fqs_without $remove_fq)
+#set($cur_fqs = $request.params.getParams('fq'))
+#set($new_fqs = [])
+#foreach($fq in $cur_fqs)#if(!($fq == $remove_fq))#set($null = $new_fqs.add($fq))#end#end
+#fqs_generic($new_fqs)
+#end
+
 #macro(lens)#qurl#fqs#end
 
 #macro(url_for_lens)?#lens#end
 #macro(url_for_start $start)#url_for_lens&start=$start#end
 #macro(url_for_facet_filter $field $value)#url_for_lens&fq=$esc.url($field):%22$esc.url($value)%22#end
+#macro(url_for_removing_facet_filter $filter)?#qurl#fqs_without($filter)#end
+
 
