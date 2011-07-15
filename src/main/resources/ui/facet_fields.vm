@@ -1,10 +1,10 @@
 #if($response.facetFields)
   #foreach($field in $response.facetFields)
+    #set($count = $field.values.size())
+    #if($count > 0)
     <div class="facet" id="facet-$field.name">     
       <h3>$field.name.replaceAll("_facet","")</h3>
       <div class="facet_data">
-      #set($count = $field.values.size())
-      #if($count > 0)
         <ul>
         #foreach($facet in $field.values)
            #set($fq = "$field.name:$esc.getQ()$esc.url($facet.name)$esc.getQ()")
@@ -12,7 +12,6 @@
             <li><a href="?#esc($query)"><span class="value">$facet.name</span> <span class="count">($facet.count)</span></a></li>
         #end
         </ul>
-      #end
 
       #set($limit = $request.params.toNamedList().get("facet.limit"))
       #if($count == $limit)
@@ -20,5 +19,6 @@
       #end 
       </div>
     </div>
+    #end
   #end
 #end
