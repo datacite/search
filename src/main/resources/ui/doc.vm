@@ -17,7 +17,7 @@
     </div>
   </div>
   <div class="title">
-    <a href="#">
+    <a href='ui-detail?q=doi:"$doi"'>
       #field("title")
     </a>
   </div>
