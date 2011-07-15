@@ -43,4 +43,5 @@
 
 #macro(url_for_lens)?#lens#end
 #macro(url_for_start $start)#url_for_lens&start=$start#end
+#macro(url_for_facet_filter $field $value)#url_for_lens&fq=$esc.url($field):%22$esc.url($value)%22#end
 
