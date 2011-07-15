@@ -8,12 +8,18 @@
   <div id="stats">
     #parse("ui/stats.vm")
   </div>
-
+  
+  <div class="pagination">
+    #parse("ui/pagination.vm")
+  </div>
   
   <div id="docs">
     #parse("ui/docs.vm")
   </div>
 
+  <div class="pagination">
+    #parse("ui/pagination.vm")
+  </div>
 
   #if($page.results_found > $page.results_per_page)
     <div id="next_page">

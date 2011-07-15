@@ -142,12 +142,16 @@ function setup_debug_box() {
 
 function debug(html) {
 	$("#debug").html(html).show();
-	
+}
+
+function hide_pagination() {
+	$(".pagination").hide();
 }
 
 function process_results() {
 	process_docs();
 	process_facets();
+	hide_pagination();
 	setup_next_page_link();
 }
 

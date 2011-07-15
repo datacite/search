@@ -32,3 +32,15 @@
 
 ## return q param if defined
 #macro(q)#if($request.originalParams.q)$request.originalParams.q#end#end
+
+#macro(param $key)$request.params.getParams($key)#end
+
+#macro(qurl)q=$!{esc.url("#q()")}#end
+#macro(fqs_generic $fqs)#foreach($fq in $fqs)&fq=$esc.url($fq)#end#end
+#macro(fqs)#fqs_generic($request.params.getParams('fq'))#end
+
+#macro(lens)#qurl#fqs#end
+
+#macro(url_for_lens)?#lens#end
+#macro(url_for_start $start)#url_for_lens&start=$start#end
+
