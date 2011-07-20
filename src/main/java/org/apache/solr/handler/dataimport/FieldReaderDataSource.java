@@ -89,6 +89,9 @@ public class FieldReaderDataSource extends DataSource<Reader> {
         return null;
 
       }
+    } else if (o instanceof byte[]) {
+        byte[] bytes = (byte[]) o;
+        return new InputStreamReader(new ByteArrayInputStream(bytes));
     } else {
       return new StringReader(o.toString());
     }
