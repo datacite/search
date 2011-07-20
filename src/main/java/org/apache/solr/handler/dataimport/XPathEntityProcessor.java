@@ -20,6 +20,7 @@ import static org.apache.solr.handler.dataimport.DataImportHandlerException.SEVE
 import static org.apache.solr.handler.dataimport.DataImportHandlerException.wrapAndThrow;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.common.ResourceLoader;
+import org.apache.solr.common.util.ContentStream;
 import org.apache.solr.common.util.SystemIdResolver;
 import org.apache.solr.common.util.XMLErrorLogger;
 import org.slf4j.Logger;
@@ -31,9 +32,10 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import java.io.CharArrayReader;
-import java.io.CharArrayWriter;
-import java.io.Reader;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -67,7 +69,7 @@ public class XPathEntityProcessor extends EntityProcessorBase {
 
   private XPathRecordReader xpathReader;
 
-  protected DataSource<Reader> dataSource;
+  protected DataSource<ContentStream> dataSource;
 
   protected javax.xml.transform.Transformer xslTransformer;
 
@@ -276,11 +278,12 @@ public class XPathEntityProcessor extends EntityProcessorBase {
   }
 
   private void initQuery(String s) {
-    Reader data = null;
+    InputStream data = null;
     try {
       final List<Map<String, Object>> rows = new ArrayList<Map<String, Object>>();
       try {
-        data = dataSource.getData(s);
+        ContentStream content = (ContentStream) dataSource.getData(s);  
+        data = content.getStream();
       } catch (Exception e) {
         if (ABORT.equals(onError)) {
           wrapAndThrow(SEVERE, e);
@@ -295,10 +298,10 @@ public class XPathEntityProcessor extends EntityProcessorBase {
       }
       if (xslTransformer != null) {
         try {
-          SimpleCharArrayReader caw = new SimpleCharArrayReader();
+          SimpleByteArrayStream caw = new SimpleByteArrayStream();
           xslTransformer.transform(new StreamSource(data),
                   new StreamResult(caw));
-          data = caw.getReader();
+          data = caw.getInputStream();
         } catch (TransformerException e) {
           if (ABORT.equals(onError)) {
             wrapAndThrow(SEVERE, e, "Exception in applying XSL Transformeation");
@@ -345,7 +348,7 @@ public class XPathEntityProcessor extends EntityProcessorBase {
     }
   }
 
-  private void closeIt(Reader data) {
+  private void closeIt(InputStream data) {
     try {
       data.close();
     } catch (Exception e) { /* Ignore */
@@ -381,9 +384,9 @@ public class XPathEntityProcessor extends EntityProcessorBase {
   }
 
 
-  private static class SimpleCharArrayReader extends CharArrayWriter {
-    public Reader getReader() {
-      return new CharArrayReader(super.buf, 0, super.count);
+  private static class SimpleByteArrayStream extends ByteArrayOutputStream {
+    public InputStream getInputStream() {
+      return new ByteArrayInputStream(this.toByteArray());
     }
 
   }
@@ -414,7 +417,7 @@ public class XPathEntityProcessor extends EntityProcessorBase {
 
   }
 
-  private Iterator<Map<String, Object>> getRowIterator(final Reader data, final String s) {
+  private Iterator<Map<String, Object>> getRowIterator(final InputStream data, final String s) {
     //nothing atomic about it. I just needed a StongReference
     final AtomicReference<Exception> exp = new AtomicReference<Exception>();
     final BlockingQueue<Map<String, Object>> blockingQueue = new ArrayBlockingQueue<Map<String, Object>>(blockingQueueSize);

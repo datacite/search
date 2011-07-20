@@ -18,6 +18,9 @@ package org.apache.solr.handler.dataimport;
 
 import static org.apache.solr.handler.dataimport.DataImportHandlerException.SEVERE;
 import static org.apache.solr.handler.dataimport.DataImportHandlerException.wrapAndThrow;
+
+import org.apache.solr.common.util.ContentStream;
+import org.apache.solr.common.util.ContentStreamBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +48,7 @@ import java.util.Properties;
  * @version $Id: FieldReaderDataSource.java 1065312 2011-01-30 16:08:25Z rmuir $
  * @since 1.4
  */
-public class FieldReaderDataSource extends DataSource<Reader> {
+public class FieldReaderDataSource extends DataSource<ContentStream> {
   private static final Logger LOG = LoggerFactory.getLogger(FieldReaderDataSource.class);
   protected VariableResolver vr;
   protected String dataField;
@@ -61,13 +64,13 @@ public class FieldReaderDataSource extends DataSource<Reader> {
   }
 
   @Override
-  public Reader getData(String query) {
+  public ContentStream getData(String query) {
     Object o = entityProcessor.getVariableResolver().resolve(dataField);
     if (o == null) {
        throw new DataImportHandlerException (SEVERE, "No field available for name : " +dataField);
     }
     if (o instanceof String) {
-      return new StringReader((String) o);
+      return new ContentStreamBase.StringStream((String) o);
     } else if (o instanceof Clob) {
       Clob clob = (Clob) o;
       try {
@@ -91,29 +94,48 @@ public class FieldReaderDataSource extends DataSource<Reader> {
       }
     } else if (o instanceof byte[]) {
         byte[] bytes = (byte[]) o;
-        return new InputStreamReader(new ByteArrayInputStream(bytes));
+        return new SimpleContentStream(new ByteArrayInputStream(bytes));
     } else {
-      return new StringReader(o.toString());
+      return new ContentStreamBase.StringStream(o.toString());
     }
 
   }
 
-  static Reader readCharStream(Clob clob) {
+  private ContentStream readCharStream(Clob clob) {
     try {
-      return clob.getCharacterStream();
+      return new SimpleContentStream(clob.getAsciiStream());
     } catch (Exception e) {
       wrapAndThrow(SEVERE, e,"Unable to get reader from clob");
       return null;//unreachable
     }
   }
 
-  private Reader getReader(Blob blob)
+  private ContentStream getReader(Blob blob)
           throws SQLException, UnsupportedEncodingException {
     if (encoding == null) {
-      return (new InputStreamReader(blob.getBinaryStream()));
+      return (new SimpleContentStream(blob.getBinaryStream()));
     } else {
-      return (new InputStreamReader(blob.getBinaryStream(), encoding));
+      return (new SimpleContentStream(blob.getBinaryStream(), encoding));
     }
+  }
+  
+  private class SimpleContentStream extends ContentStreamBase {
+      
+    InputStream input;
+
+    public SimpleContentStream(InputStream input) {
+        this.input = input;
+    }
+    
+    public SimpleContentStream(InputStream input, String encoding) {
+        this.input = input;
+        this.contentType = "charset=" + encoding;
+    }
+
+    public InputStream getStream() throws IOException {
+        return input;
+    }
+      
   }
 
   @Override

@@ -22,7 +22,7 @@ import static javax.xml.stream.XMLStreamConstants.*;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.IOException;
-import java.io.Reader;
+import java.io.InputStream;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -160,7 +160,7 @@ public class XPathRecordReader {
    * @param r the stream reader
    * @return results a List of emitted records
    */
-  public List<Map<String, Object>> getAllRecords(Reader r) {
+  public List<Map<String, Object>> getAllRecords(InputStream r) {
     final List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
     streamRecords(r, new Handler() {
       public void handle(Map<String, Object> record, String s) {
@@ -178,7 +178,7 @@ public class XPathRecordReader {
    * @param r the stream reader
    * @param handler The callback instance
    */
-  public void streamRecords(Reader r, Handler handler) {
+  public void streamRecords(InputStream r, Handler handler) {
     try {
       XMLStreamReader parser = factory.createXMLStreamReader(r);
       rootNode.parse(parser, handler, new HashMap<String, Object>(),
