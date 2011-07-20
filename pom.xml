@@ -92,6 +92,17 @@
           <packagingExcludes>WEB-INF/lib/slf4j-jdk14-*</packagingExcludes>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>cobertura-maven-plugin</artifactId>
+        <configuration>
+          <instrumentation>
+            <excludes>
+              <exclude>org/apache/solr/**/*.class</exclude>
+            </excludes>
+          </instrumentation>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>
