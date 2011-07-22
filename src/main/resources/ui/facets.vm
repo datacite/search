@@ -1,3 +1,6 @@
+#if($page.results_found > 0)
+  <h2>Filter</h2>
+#end
 #parse('ui/facet_fields.vm')  
 
 
