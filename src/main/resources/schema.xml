@@ -67,6 +67,14 @@
         <filter class="org.datacite.search.filter.LanguageCodeFilterFactory"/>
       </analyzer>
     </fieldType>
+    
+    <!-- lowercases the entire field value, keeping it as a single token.  -->
+    <fieldType name="symbol" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter="." reverse="true"/>
+        <filter class="solr.LowerCaseFilterFactory" />
+      </analyzer>
+    </fieldType>
 
     <!-- since fields of this type are by default not stored or indexed,
          any data added to them will be ignored outright.  --> 
@@ -122,8 +130,8 @@
    <field name="description" type="textgen" indexed="true" stored="true" multiValued="true"/>
    
    <!-- MDS fields -->
-   <field name="allocator" type="lowercase" indexed="true" stored="true"/>
-   <field name="datacentre" type="lowercase" indexed="true" stored="true"/>
+   <field name="allocator" type="symbol" indexed="true" stored="true"/>
+   <field name="datacentre" type="symbol" indexed="true" stored="true"/>
    <field name="prefix" type="string" indexed="true" stored="true"/>
    <field name="refQuality" type="boolean" indexed="true" stored="true" default="false"/>
    <field name="dataset_id" type="string" indexed="false" stored="true"/>
