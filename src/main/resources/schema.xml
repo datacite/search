@@ -53,13 +53,20 @@
       </analyzer>
     </fieldType>
     
+    <!-- lowercases the entire field value, keeping it as a single token.  -->
+    <fieldType name="lowercase" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory" />
+      </analyzer>
+    </fieldType>
+    
     <fieldType name="lang" class="solr.TextField" positionIncrementGap="100" autoGeneratePhraseQueries="true">
       <analyzer>
         <tokenizer class="solr.WhitespaceTokenizerFactory"/>
         <filter class="org.datacite.search.filter.LanguageCodeFilterFactory"/>
       </analyzer>
     </fieldType>
-    
 
     <!-- since fields of this type are by default not stored or indexed,
          any data added to them will be ignored outright.  --> 
@@ -93,7 +100,7 @@
    -->
    
    <!-- DataCite mandatory fields -->
-   <field name="doi" type="string" indexed="true" stored="true" required="true" /> 
+   <field name="doi" type="lowercase" indexed="true" stored="true" required="true" /> 
    <field name="creator" type="textgen" indexed="true" stored="true" multiValued="true"/> 
    <field name="title" type="textgen" indexed="true" stored="true" multiValued="true"/> 
    <field name="publisher" type="textgen" indexed="true" stored="true"/> 
@@ -105,18 +112,18 @@
    <field name="date" type="string" indexed="true" stored="true" multiValued="true"/>
    <field name="language" type="lang" indexed="true" stored="true"/>
    <field name="resourceType" type="textgen" indexed="true" stored="true"/>
-   <field name="resourceTypeGeneral" type="string" indexed="true" stored="true"/>
-   <field name="alternateIdentifier" type="string" indexed="true" stored="true" multiValued="true"/>
-   <field name="relatedIdentifier" type="string" indexed="true" stored="true" multiValued="true"/>
+   <field name="resourceTypeGeneral" type="lowercase" indexed="true" stored="true"/>
+   <field name="alternateIdentifier" type="lowercase" indexed="true" stored="true" multiValued="true"/>
+   <field name="relatedIdentifier" type="lowercase" indexed="true" stored="true" multiValued="true"/>
    <field name="size" type="textgen" indexed="true" stored="true" multiValued="true"/>
-   <field name="format" type="string" indexed="true" stored="true" multiValued="true"/>
+   <field name="format" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="rights" type="text" indexed="true" stored="true"/>
    <field name="version" type="string" indexed="true" stored="true"/>
    <field name="description" type="textgen" indexed="true" stored="true" multiValued="true"/>
    
    <!-- MDS fields -->
-   <field name="allocator" type="string" indexed="true" stored="true"/>
-   <field name="datacentre" type="string" indexed="true" stored="true"/>
+   <field name="allocator" type="lowercase" indexed="true" stored="true"/>
+   <field name="datacentre" type="lowercase" indexed="true" stored="true"/>
    <field name="prefix" type="string" indexed="true" stored="true"/>
    <field name="refQuality" type="boolean" indexed="true" stored="true" default="false"/>
    <field name="dataset_id" type="string" indexed="false" stored="true"/>
@@ -158,6 +165,9 @@
   <!-- copyField commands copy one field to another at the time a document
         is added to the index.  It's used either to index the same field differently,
         or to add multiple fields to the same field for easier/faster searching.  -->
+ <copyField source="resourceTypeGeneral" dest="resourceType_facet"/>
+ <copyField source="datacentre" dest="datacentre_facet"/>
+ <copyField source="allocator" dest="allocator_facet"/>
  <copyField source="creator" dest="creator_facet"/>
  <copyField source="publisher" dest="publisher_facet"/>
  <copyField source="contributor" dest="contributor_facet"/>
