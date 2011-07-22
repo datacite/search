@@ -208,6 +208,7 @@ ul {
 
 .facet .more {
     font-size: small;
+    display: none;
 }
 
 .facet_data {

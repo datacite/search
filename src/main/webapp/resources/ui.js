@@ -211,7 +211,7 @@ function process_facets() {
 			data.slideToggle();
 		});
 		$("a",this).attr("href","#");
-		$("a.more",this).unbind().click(function() {
+		$("a.more",this).show().unbind().click(function() {
 			load_full_facet(facet);
 			return false;
 		});
