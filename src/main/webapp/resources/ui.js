@@ -11,10 +11,16 @@ function filter_to_fq(filters) {
 	return fq;
 }
 
+$.fn.load_sync = function (url, params, callback) { 
+	$.ajaxSetup({async : false});
+	this.load(url, params, callback)
+    $.ajaxSetup({async : true});
+};
+
 function load_results() {
 // debug(solr.toSource() + filter_to_fq(solr.filter).toSource());
 	$("#results").fadeTo(0,0.5);
-	$("#results").load(solr.url, {
+	$("#results").load_sync(solr.url, {
 		"v.template" : "ui/results",
 		q : solr.q,
 		fq : filter_to_fq(solr.filter),
