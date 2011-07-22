@@ -35,7 +35,7 @@
       #break
     #end
     $value
-    #if($velocityHasNext)&bullet;#end
+    #if($velocityHasNext)&bull;#end
   #end
   
 #end
@@ -49,7 +49,7 @@
 #macro(param $key)$request.params.getParams($key)#end
 
 #macro(qurl)q=$!{esc.url("#q()")}#end
-#macro(fqs_generic $fqs)#foreach($fq in $fqs)&fq=$esc.url($fq)#end#end
+#macro(fqs_generic $fqs)#foreach($fq in $fqs)&amp;fq=$esc.url($fq)#end#end
 #macro(fqs)#fqs_generic($request.params.getParams('fq'))#end
 
 #macro(fqs_without $remove_fq)
@@ -64,8 +64,8 @@
 #macro(lens)#qurl#fqs#end
 
 #macro(url_for_lens)?#lens#end
-#macro(url_for_start $start)#url_for_lens&start=$start#end
-#macro(url_for_facet_filter $field $value)#url_for_lens&fq=#make_fq($field,$value)#end
+#macro(url_for_start $start)#url_for_lens&amp;start=$start#end
+#macro(url_for_facet_filter $field $value)#url_for_lens&amp;fq=#make_fq($field,$value)#end
 #macro(url_for_removing_facet_filter $filter)?#qurl#fqs_without($filter)#end
 
 #macro(normalize_facet $facet)$facet.replaceAll("_facet","")#end
