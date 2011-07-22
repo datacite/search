@@ -1,4 +1,5 @@
 #if($response.facetFields)
+  #set($cur_fqs = $request.params.getParams('fq'))
   #foreach($field in $response.facetFields)
     #set($count = $field.values.size())
     #if($count > 0)
@@ -7,7 +8,17 @@
       <div class="facet_data">
         <ul>
         #foreach($facet in $field.values)
-          <li><a href="#url_for_facet_filter($field.name, $facet.name)"><span class="value">$facet.name</span> <span class="count">($facet.count)</span></a></li>
+          #set($fq = "$esc.url($field.name):$esc.getQ()$esc.url($facet.name)$esc.getQ()")
+          #set($fq_applied = false)
+          #foreach($cur_fq in $cur_fqs)
+            #if($fq == $cur_fq)
+              #set($fq_applied = true)
+              #break
+            #end
+          #end
+          #if(!$fq_applied) 
+            <li><a href="#url_for_facet_filter($field.name, $facet.name)"><span class="value">$facet.name</span> <span class="count">($facet.count)</span></a></li>
+          #end
         #end
         </ul>
 
