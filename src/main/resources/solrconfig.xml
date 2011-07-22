@@ -20,7 +20,7 @@
      For more details about configurations options that may appear in
      this file, see http://wiki.apache.org/solr/SolrConfigXml. 
 -->
-<config>
+<config xmlns:xi="http://www.w3.org/2001/XInclude">
   <!-- In all configuration below, a prefix of "solr." for class names
        is an alias that causes solr to search appropriate packages,
        including org.apache.solr.(search|update|request|core|analysis)
@@ -703,7 +703,7 @@
      </lst>
      <lst name="invariants">
        <str name="defType">edismax</str>
-       <str name="qf">title doi creator publisher subject contributor</str>
+       <xi:include href="solrconfig-qf.xml"/>
 
        <str name="wt">velocity</str>
 
@@ -730,7 +730,7 @@
      </lst>
      <lst name="invariants">
        <str name="defType">edismax</str>
-       <str name="qf">title doi creator publisher subject contributor</str>
+       <xi:include href="solrconfig-qf.xml"/>
        <str name="fl">dataset_id</str>
        <str name="wt">json</str>
      </lst>
@@ -744,7 +744,7 @@
      </lst>
      <lst name="invariants">
        <str name="defType">edismax</str>
-       <str name="qf">title doi creator publisher subject contributor</str>
+       <xi:include href="solrconfig-qf.xml"/>
        <str name="facet">off</str>
        <str name="hl">off</str>
      </lst>
