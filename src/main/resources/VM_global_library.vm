@@ -27,6 +27,19 @@
   #end
 #end
 
+#macro(field_et_al $field $max)
+  #set($values = $doc.getFieldValues($field))
+  #foreach($value in $values)
+    #if($velocityCount > $max)
+      (et. al.)
+      #break
+    #end
+    $value
+    #if($velocityHasNext)&bullet;#end
+  #end
+  
+#end
+
 ## escape method especially for href attribute
 #macro(esc $txt)$txt.replaceAll("&", "&amp;").replaceAll("\"", "&quot;")#end
 

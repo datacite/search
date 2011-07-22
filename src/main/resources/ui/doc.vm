@@ -28,8 +28,7 @@
     #field("resourceType")
   </div>
   <div class="short">
-    #field_br("publisher")
-##    #field_br("description")
+    #field_et_al("creator",5)
   </div>
   <div class="full"></div>
   <div class="hl">
