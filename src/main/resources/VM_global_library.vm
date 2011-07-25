@@ -61,9 +61,11 @@
 
 #macro(make_fq $field $value)$esc.url($field):%22$esc.url($value)%22#end
 
-#macro(lens)#qurl#fqs#end
+#macro(lens_without_q)#fqs#end
+#macro(lens)#qurl#lens_without_q#end
 
 #macro(url_for_lens)?#lens#end
+#macro(url_for_lens_without_q)?#lens_without_q#end
 #macro(url_for_start $start)#url_for_lens&amp;start=$start#end
 #macro(url_for_facet_filter $field $value)#url_for_lens&amp;fq=#make_fq($field,$value)#end
 #macro(url_for_removing_facet_filter $filter)?#qurl#fqs_without($filter)#end

@@ -1,5 +1,6 @@
 ## static link to the current result 
 <a id="lens" href="#url_for_lens"/>
+<a id="lens_without_q" href="#url_for_lens_without_q"/>
 
 <div id="sidebar">
   <div id="facets">

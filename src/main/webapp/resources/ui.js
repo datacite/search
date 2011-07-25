@@ -1,8 +1,3 @@
-var solr = {
-		q : "",
-		url : "ui" // RequestHandler
-}
-
 $.fn.load_sync = function (url, params, callback) { 
 	$.ajaxSetup({async : false});
 	this.load(url, params, callback)
@@ -13,8 +8,17 @@ function get_lens() {
 	return $("#lens").attr("href");
 }
 
+function get_lens_without_q() {
+	return $("#lens_without_q").attr("href");
+}
+
+function submit_query() {
+	q = $("#query_input").val();
+	url = get_lens_without_q() + "&q=" + escape(q)
+	load_results(url);
+}
+
 function load_results(query) {
-	if (query == null) query = "";
 	$("#results").fadeTo(0,0.5);
 	$("#results").load_sync(query, {
 		"v.template" : "ui/results",
@@ -47,11 +51,6 @@ function load_full_facet(facet_name) {
 	
 }
 
-function submit_query() {
-	solr.q = $("#query_input").val();
-	load_results("?q=" + solr.q);
-}
-
 var timeout_instant_search;
 
 $.fn.inputChange = function (handler) {
@@ -66,7 +65,6 @@ $.fn.inputChange = function (handler) {
 }
 
 function setup_query_form() {
-	/*
 	$("#query_form").submit(function() {
 		clearTimeout(timeout_instant_search);
 		submit_query();
@@ -77,7 +75,6 @@ function setup_query_form() {
 		clearTimeout(timeout_instant_search);
 		timeout_instant_search = setTimeout(submit_query,500);
 	});
-	*/
 	$("#query_input").focus();
 }
 
@@ -179,7 +176,7 @@ function load_detail(doc) {
 	var doi = $(".info .doi", doc).text();
 	var detail = $(".full",doc);
 	if (detail.text().length == 0) { // not already loaded
-		detail.load(solr.url + "-detail", {
+		detail.load("ui-detail", {
 			q : 'doi:"' + doi + '"'
 		});
 	};
