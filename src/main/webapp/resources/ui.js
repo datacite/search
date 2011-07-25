@@ -215,12 +215,12 @@ function process_facets() {
 		$("h3",this).unbind().click(function() {
 			data.slideToggle();
 		});
-		$("a",this).attr("href","#");
 		$("a.more",this).show().unbind().click(function() {
 			load_full_facet(facet);
 			return false;
 		});
 		$("li", this).unbind().each(function() {
+			var url = $("a",this).attr("href");
 			var value = $("span.value",this).text();
 			$(this).click(function() {
 				add_filter(facet, value);
@@ -230,7 +230,7 @@ function process_facets() {
 			$(this).hover(function() {
 				clearTimeout(timeout_preview_filter);
 				timeout_preview_filter = setTimeout(function() {
-					preview_filter(facet, value);
+					preview_filter(url);
 				}, 250);
 			}, function() {
 				clearTimeout(timeout_preview_filter);
@@ -266,16 +266,12 @@ function has_filter(facet, value) {
 	});
 }
 
-function preview_filter(facet, value) {
-	var filter = make_filter(facet, value);
-	var filters = solr.filter.concat(filter);
-	
+function preview_filter(query) {
+	debug(query);
 	$.ajax({
 		type  : "GET",
-		url : solr.url + "-ids",
+		url : "ui-ids" + query,
 		data :  {
-			q : solr.q,
-			fq : filter_to_fq(filters),
 			rows : $(".doc").length
 		}, 
 		dataType : "json",
