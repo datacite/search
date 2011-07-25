@@ -3,18 +3,15 @@ var solr = {
 		url : "ui" // RequestHandler
 }
 
-function filter_to_fq(filters) {
-	var fq = filters.map(function(elem) {
-		return elem.facet + ":\"" + elem.value + "\"";
-	});
-	return fq;
-}
-
 $.fn.load_sync = function (url, params, callback) { 
 	$.ajaxSetup({async : false});
 	this.load(url, params, callback)
     $.ajaxSetup({async : true});
 };
+
+function get_lens() {
+	return $("#lens").attr("href");
+}
 
 function load_results(query) {
 	if (query == null) query = "";
@@ -32,10 +29,8 @@ function load_full_facet(facet_name) {
 	var count = $("li",facet).length;
 	$(".more",facet).before($("<div class='tmp'>"));
 	var div = $("div.tmp",facet).hide();
-	div.load(solr.url + " ul", {
+	div.load(get_lens() + " ul", {
 		"v.template" : "ui/facet_fields",
-		q : solr.q,
-		fq : filter_to_fq(solr.filter),
 		"facet.field" : facet_name,
 		"facet.sort" : "count",
 		"facet.offset" : count,
