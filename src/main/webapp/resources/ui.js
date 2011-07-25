@@ -1,69 +1,20 @@
-$.fn.load_sync = function (url, params, callback) { 
-	$.ajaxSetup({async : false});
-	this.load(url, params, callback)
-    $.ajaxSetup({async : true});
-};
+/******************
+ * General setup functions loaded only once
+ *******************/
 
-function get_lens() {
-	return $("#lens").attr("href");
-}
-
-function get_lens_without_q() {
-	return $("#lens_without_q").attr("href");
-}
-
-function submit_query() {
-	q = $("#query_input").val();
-	url = get_lens_without_q() + "&q=" + escape(q)
-	load_results(url);
-}
-
-function load_results(query) {
-	$("#results").fadeTo(0,0.5);
-	$("#results").load_sync(query, {
-		"v.template" : "ui/results",
-	}, function() {
-		process_results();
-		$("#results").fadeTo(0,1);
-	});
-}
-
-function load_full_facet(facet_name) {
-	var facet = $("#facet-" + facet_name);
-	var count = $("li",facet).length;
-	$(".more",facet).before($("<div class='tmp'>"));
-	var div = $("div.tmp",facet).hide();
-	div.load(get_lens() + " ul", {
-		"v.template" : "ui/facet_fields",
-		"facet.field" : facet_name,
-		"facet.sort" : "count",
-		"facet.offset" : count,
-		rows: 0
-	}, function() {
-		process_facets();
-		div.slideDown();
-		$("ul",div).unwrap();
-		var new_count = $("li",facet).length;
-		if (new_count == count) {
-			$("a.more",facet).fadeOut();
-		}
-	});
+function init() {
+	// use correct array serialization for solr
+	jQuery.ajaxSettings.traditional = true; 
+	jQuery.support.cors = true;
 	
+	setup_debug_box();
+	setup_continous_scrolling();
+	setup_query_form();
+	
+	process_results();
 }
 
 var timeout_instant_search;
-
-$.fn.inputChange = function (handler) {
-	var oldVal = $(this).val();
-	$(this).keyup(function() {
-		var val = $(this).val();
-		if (val != oldVal) {
-			handler();
-			oldVal = val;
-		}
-	});
-}
-
 function setup_query_form() {
 	$("#query_form").submit(function() {
 		clearTimeout(timeout_instant_search);
@@ -78,8 +29,104 @@ function setup_query_form() {
 	$("#query_input").focus();
 }
 
-var loading_next_page = false;
+function setup_continous_scrolling() {
+	$(window).scroll(function(data) {
+		if (is_next_page_needed())
+			load_next_page_async();
+	});
+}
 
+function setup_debug_box() {
+	var div = $("<div>").attr("id","debug").hide();
+	$("body").prepend(div);
+	
+}
+
+/******************
+ * General functions
+ *******************/
+
+function debug(html) {
+	$("#debug").html(html).show();
+}
+
+// returns the url of the current results
+function get_lens() {
+	return $("#lens").attr("href");
+}
+
+function get_lens_without_q() {
+	return $("#lens_without_q").attr("href");
+}
+
+function is_next_page_needed() {
+	if ($("#next_page").is(':visible')) { 
+		var advance_in_pixel = 200;
+		var div_top = $("#next_page").position().top;  
+		var window_bottom = $(window).scrollTop() + $(window).height();
+		return div_top - window_bottom < advance_in_pixel;
+	} 
+	return false;
+}
+
+function hide_pagination() {
+	$(".pagination").hide();
+}
+
+/******************
+ * functions for loading content
+ ******************/
+
+function submit_query() {
+	q = $("#query_input").val();
+	url = get_lens_without_q() + "&q=" + escape(q);
+	load_results(url);
+}
+
+function load_results(query) {
+	$("#results").fadeTo("fast",0.7);
+	$("#results").load_sync(query, {
+		"v.template" : "ui/results"
+	}, function() {
+		process_results();
+		$("#results").fadeTo("fast",1);
+	});
+}
+
+function load_detail(doc) {
+	var doi = $(".info .doi", doc).text();
+	var detail = $(".full",doc);
+	if (detail.text().length == 0) { // not already loaded
+		detail.load("ui-detail", {
+			q : 'doi:"' + doi + '"'
+		});
+	};
+}
+
+function load_full_facet(facet_field) {
+	var facet = $("#facet-" + facet_field);
+	var count = $("li",facet).length;
+	$(".more",facet).before($("<div class='tmp'>"));
+	var div = $("div.tmp",facet).hide();
+	div.load_sync(get_lens() + " ul", {
+		"v.template" : "ui/facet_fields",
+		"facet.field" : facet_field,
+		"facet.sort" : "count",
+		"facet.offset" : count,
+		rows: 0
+	}, function() {
+		process_facets();
+		div.slideDown();
+		$("ul",div).unwrap();
+		var new_count = $("li",facet).length;
+		if (new_count == count) {
+			$("a.more",facet).fadeOut();
+		}
+	});
+}
+
+
+var loading_next_page = false;
 function load_next_page(async) {
 	if (async == null)
 		async = false;
@@ -114,52 +161,34 @@ function load_next_page_async() {
 	load_next_page(true);
 }
 
-function setup_next_page_link() {
-	$("#next_page a").unbind().click(function() {
-		load_next_page();
-		return false;
+function preview_filter(query) {
+	$.ajax({
+		type : "GET",
+		url : "ui-ids" + query,
+		data : {
+			rows : $(".doc").length
+		}, 
+		dataType : "json",
+		cache: false,
+		async: false,
+		success: function(data) {
+			var ids = data.response.docs.map(function(elem) {
+				return elem.dataset_id;
+			});
+			$(".doc").each(function() {
+				var id = $(this).attr("id");
+				id = id.replace(/^result-/,"");
+				if (ids.indexOf(id) == -1) {
+					$(this).fadeTo(0,0.5);
+				}
+			});
+		}
 	});
 }
 
-function is_next_page_needed() {
-	if ($("#next_page").is(':visible')) { 
-		var advance_in_pixel = 200;
-		var div_top = $("#next_page").position().top;  
-		var window_bottom = $(window).scrollTop() + $(window).height();
-		return div_top - window_bottom < advance_in_pixel;
-	} 
-	return false;
-}
-
-
-function setup_continous_scrolling() {
-	$(window).scroll(function(data) {
-		if (is_next_page_needed())
-			load_next_page_async();
-	});
-}
-
-function setup_debug_box() {
-	var div = $("<div>").attr("id","debug").hide();
-	$("body").prepend(div);
-	
-}
-
-function debug(html) {
-	$("#debug").html(html).show();
-}
-
-function hide_pagination() {
-	$(".pagination").hide();
-}
-
-function process_filters() {
-	$("#filters a").unbind().click(function() {
-		url = $(this).attr("href");
-		load_results(url);
-		return false;
-	});
-}
+/******************
+ * functions for processing content after loading
+ ******************/
 
 function process_results() {
 	process_docs();
@@ -168,19 +197,6 @@ function process_results() {
 	hide_pagination();
 	while (is_next_page_needed())
 		load_next_page();
-
-	setup_next_page_link();
-}
-
-function load_detail(doc) {
-	var doi = $(".info .doi", doc).text();
-	var detail = $(".full",doc);
-	if (detail.text().length == 0) { // not already loaded
-		detail.load("ui-detail", {
-			q : 'doi:"' + doi + '"'
-		});
-	};
-	
 }
 	
 function process_docs() {
@@ -200,10 +216,15 @@ function process_docs() {
 		return false;
 	});
 	$("a").attr("target", "_blank");
+
+	$("#next_page a").unbind().click(function() {
+		load_next_page();
+		return false;
+	});
+
 }
 
 var timeout_preview_filter;
-
 function process_facets() {
 	$(".facet").each(function() {
 		var id = $(this).attr("id");
@@ -244,37 +265,16 @@ function process_facets() {
 	
 }
 
-function preview_filter(query) {
-	$.ajax({
-		type  : "GET",
-		url : "ui-ids" + query,
-		data :  {
-			rows : $(".doc").length
-		}, 
-		dataType : "json",
-		cache: false,
-		async: false,
-		success: function(data) {
-			var ids = data.response.docs.map(function(elem){
-				return elem.dataset_id;
-			});
-			$(".doc").each(function() {
-				var id = $(this).attr("id");
-				id = id.replace(/^result-/,"");
-				if (ids.indexOf(id) == -1) {
-					$(this).fadeTo(0,0.5);
-				}
-			});
-		}
+function process_filters() {
+	$("#filters a").unbind().click(function() {
+		url = $(this).attr("href");
+		load_results(url);
+		return false;
 	});
 }
 
-$(document).ready(function() {
-	jQuery.ajaxSettings.traditional = true; // use correct array serialization
-											// for solr
-	setup_debug_box();
-	setup_next_page_link();
-	setup_continous_scrolling();
-	setup_query_form();
-	process_results();
-});
+/******************
+ * Startup
+ ******************/
+
+$(document).ready(init);
