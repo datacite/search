@@ -5,6 +5,10 @@
 </div>
 
 <div id="main">
+  <div id="filters">
+    #parse("ui/filters.vm")
+  </div>
+
   <div id="stats">
     #parse("ui/stats.vm")
   </div>

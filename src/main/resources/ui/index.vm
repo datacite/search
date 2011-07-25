@@ -17,9 +17,6 @@
       <span id="links">
         <a href="help.html">help</a>
       </span>
-      <div id="filters">
-        #parse("ui/filters.vm")
-      </div>
     </div>
     <div id="results">
       #parse("ui/results.vm")

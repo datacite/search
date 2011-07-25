@@ -54,7 +54,7 @@ h1,h2,h3 {
     vertical-align: middle;
 }
 
-#query,#query_form,#filters,#query_form p {
+#query,#query_form,#query_form p {
     display:inline;
 }
 
