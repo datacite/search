@@ -93,11 +93,9 @@ function load_next_page(async) {
 	
 	$.ajax({
 		type  : "GET",
-		url : solr.url,
+		url : get_lens(),
 		data :  {
 			"v.template" : "ui/docs",
-			q : solr.q,
-			fq : filter_to_fq(solr.filter),
 			facet: "off",
 			start : $(".doc").length
 		}, 
