@@ -23,7 +23,7 @@ function load_results() {
 	$("#results").load_sync(solr.url, {
 		"v.template" : "ui/results",
 		q : solr.q,
-		fq : filter_to_fq(solr.filter),
+		fq : filter_to_fq(solr.filter)
 	}, function() {
 		process_results();
 		$("#results").fadeTo(0,1);
@@ -42,7 +42,7 @@ function load_full_facet(facet_name) {
 		"facet.field" : facet_name,
 		"facet.sort" : "count",
 		"facet.offset" : count,
-		rows: 0,
+		rows: 0
 	}, function() {
 		process_facets();
 		div.slideDown();
@@ -51,7 +51,6 @@ function load_full_facet(facet_name) {
 		if (new_count == count) {
 			$("a.more",facet).fadeOut();
 		}
-
 	});
 	
 }
@@ -106,7 +105,7 @@ function load_next_page(async) {
 			q : solr.q,
 			fq : filter_to_fq(solr.filter),
 			facet: "off",
-			start : $(".doc").length,
+			start : $(".doc").length
 		}, 
 		cache: false,
 		async: async,
@@ -118,7 +117,7 @@ function load_next_page(async) {
 				process_docs();
 			}
 			loading_next_page = false;
-		},
+		}
 	});
 }
 
@@ -277,7 +276,7 @@ function preview_filter(facet, value) {
 		data :  {
 			q : solr.q,
 			fq : filter_to_fq(filters),
-			rows : $(".doc").length,
+			rows : $(".doc").length
 		}, 
 		dataType : "json",
 		cache: false,
@@ -293,7 +292,7 @@ function preview_filter(facet, value) {
 					$(this).fadeTo(0,0.5);
 				}
 			});
-		},
+		}
 	});
 }
 
