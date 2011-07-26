@@ -13,7 +13,7 @@
         <ul>
         #foreach($facet in $field.values)
           #if($velocityCount == $limit)#break#end
-          #set($fq = "$esc.url($field.name):$esc.getQ()$esc.url($facet.name)$esc.getQ()")
+          #set($fq = "$esc.url($field.name):$esc.getQ()$esc.url($facet.name).replaceAll('\+', ' ')$esc.getQ()")
           #set($fq_applied = false)
           #foreach($cur_fq in $cur_fqs)
             #if($fq == $cur_fq)
