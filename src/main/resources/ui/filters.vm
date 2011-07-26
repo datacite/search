@@ -1,3 +1,10 @@
+<span class="text">
+#if($request.params.getParams('fq'))
+Active filters (<a href="#url_for_nofilters">clear all</a>):
+#elseif($page.results_found > 0)
+No active filters. Use the sidebar to filter search results.
+#end
+</span>
 #foreach($filter in $request.params.getParams('fq'))
   #set($split = $filter.split(":",2))
   #set($name = $list.get($split,0))

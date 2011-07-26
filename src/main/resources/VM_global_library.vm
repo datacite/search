@@ -76,6 +76,7 @@
 #macro(lens_without_q)#fqs#end
 #macro(lens)#qurl#lens_without_q#end
 
+#macro(url_for_nofilters)?#qurl#end
 #macro(url_for_lens)?#lens#end
 #macro(url_for_lens_without_q)?#lens_without_q#end
 #macro(url_for_start $start)#url_for_lens&amp;start=$start#end

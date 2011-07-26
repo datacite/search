@@ -153,12 +153,20 @@ ul {
   margin-top: 5px;
 }
 
+#filters .text {
+  color: #666;
+}
+
 .filter {
-  background: #FFCCCC;
+  background: #F0F0F0;
   padding: 2px;
-  cursor: crosshair;
   white-space:nowrap;
   margin-right: 1ex;
+}
+
+#filters a {
+  background: url("../img/tango/16x16/emblems/emblem-unreadable.png") no-repeat scroll 0 0 transparent;
+  padding-left: 20px;
 }
 
 .filter .name {
