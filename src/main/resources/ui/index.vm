@@ -8,7 +8,7 @@
   <body>
     <div id="title">
       <a href="ui" class="title">
-        <img src="resources/dc-logo.gif" alt="DataCite Logo"/>
+        <img src="resources/img/dc-logo.gif" alt="DataCite Logo"/>
         Metadata Search <small>beta</small>
       </a>
       <div id="query">

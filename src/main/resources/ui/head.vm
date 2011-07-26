@@ -1,18 +1,18 @@
 <title>DataCite Metadata Search</title>
 
-<script type="text/javascript" src="resources/browser-support.js"></script>
-<script type="text/javascript" src="resources/jquery-1.5.2.min.js"></script>
-<script type="text/javascript" src="resources/jquery-custom.js"></script>
+<script type="text/javascript" src="resources/js/browser-support.js"></script>
+<script type="text/javascript" src="resources/js/jquery-1.5.2.min.js"></script>
+<script type="text/javascript" src="resources/js/jquery-custom.js"></script>
 
 <script>if ( typeof window.JSON === 'undefined' ) {
-  document.write('<script src="resources/balupton/json2.js"><\/script>'); }
+  document.write('<script src="resources/js/history/json2.js"><\/script>'); }
 </script>
-<script type="text/javascript" src="resources/balupton/history.adapter.jquery.js"></script>
-<script type="text/javascript" src="resources/balupton/history.js"></script>
-<script type="text/javascript" src="resources/balupton/history.html4.js"></script>
+<script type="text/javascript" src="resources/js/history/history.adapter.jquery.js"></script>
+<script type="text/javascript" src="resources/js/history/history.js"></script>
+<script type="text/javascript" src="resources/js/history/history.html4.js"></script>
 
-<script type="text/javascript" src="resources/ui.js"></script>
+<script type="text/javascript" src="resources/js/ui.js"></script>
 
-<link rel="stylesheet" type="text/css" href="resources/ui.css"/>
-<link rel="SHORTCUT ICON" href="resources/favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="resources/css/ui.css"/>
+<link rel="SHORTCUT ICON" href="resources/img/favicon.ico"/>
   
