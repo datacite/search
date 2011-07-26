@@ -103,23 +103,26 @@ function load_detail(doc) {
 	};
 }
 
-function load_full_facet(facet_field) {
+function load_more_facet(facet_field) {
+	var limit = 5;
 	var facet = $("#facet-" + facet_field);
 	var count = $("li",facet).length;
 	$(".more",facet).before($("<div class='tmp'>"));
-	var div = $("div.tmp",facet).hide();
-	div.load_sync(get_lens() + " ul", {
+	var div_tmp = $("div.tmp",facet).hide();
+	div_tmp.load_sync(get_lens() + " ul", {
 		"v.template" : "ui/facet_fields",
 		"facet.field" : facet_field,
 		"facet.sort" : "count",
 		"facet.offset" : count,
+		"facet.limit" : limit, 
 		rows: 0
 	}, function() {
+		var loaded = $("li", div_tmp).length;
+		debug(loaded);
 		process_facets();
-		div.slideDown();
-		$("ul",div).unwrap();
-		var new_count = $("li",facet).length;
-		if (new_count == count) {
+		div_tmp.slideDown();
+		$("ul",div_tmp).unwrap();
+		if (loaded < limit) {
 			$("a.more",facet).fadeOut();
 		}
 	});
@@ -235,7 +238,7 @@ function process_facets() {
 			data.slideToggle();
 		});
 		$("a.more",this).show().unbind().click(function() {
-			load_full_facet(facet);
+			load_more_facet(facet);
 			return false;
 		});
 		$("li", this).unbind().each(function() {
