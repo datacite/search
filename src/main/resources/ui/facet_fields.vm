@@ -1,7 +1,10 @@
 #if($response.facetFields)
   #set($cur_fqs = $request.params.getParams('fq'))
-  #set($limit = $request.params.toNamedList().get("facet.limit"))
+  #set($limit_glob = $request.params.toNamedList().get("facet.limit"))
   #foreach($field in $response.facetFields)
+    #set($limit_local = 0)
+    #set($limit_local = $request.params.toNamedList().get("f.${field.name}.facet.limit"))
+    #set($limit = $math.max($limit_glob,$limit_local))
     #set($count = $field.values.size())
     #if($count > 0)
     <div class="facet" id="facet-$field.name">     
@@ -25,7 +28,8 @@
         </ul>
 
       #if($count == $limit)
-        <a class="more" href="#">more</a>
+        #set($new_limit = $math.add($limit,5))
+        <a class="more" href="#url_for_show_more_facet($field.name,$new_limit)">more</a>
       #end 
       </div>
     </div>

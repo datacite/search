@@ -103,16 +103,12 @@ function load_detail(doc) {
 	};
 }
 
-function load_more_facet(facet_field) {
-	var how_many_more = 5;
+function load_more_facet(query, facet_field) {
 	var facet = $("#facet-" + facet_field);
-	var count = $("li",facet).length;
 	var div = $(".facet_data",facet);
-	div.load_sync(get_lens() + " .facet_data", {
+	div.load_sync(query + " .facet_data", {
 		"v.template" : "ui/facet_fields",
 		"facet.field" : facet_field,
-		"facet.sort" : "count",
-		"facet.limit" : count + how_many_more + 1, 
 		rows: 0
 	}, function() {
 		$(".facet_data", div).unwrap();
@@ -229,8 +225,9 @@ function process_facets() {
 		$("h3",this).unbind().click(function() {
 			data.slideToggle();
 		});
-		$("a.more",this).show().unbind().click(function() {
-			load_more_facet(facet);
+		$("a.more",this).unbind().click(function() {
+			var query = $(this).attr("href"); 
+			load_more_facet(query, facet);
 			return false;
 		});
 		$("li", this).unbind().each(function() {

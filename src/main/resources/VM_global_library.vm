@@ -59,6 +59,18 @@
 #fqs_generic($new_fqs)
 #end
 
+#macro(make_facet_limit $field $limit)&amp;f.${field}.facet.limit=$limit#end
+
+#macro(facet_limit_without $field)
+#foreach($myfield in $response.facetFields)
+#set($mylimit = false)
+#set($mylimit = $request.params.get("f.${myfield.name}.facet.limit"))
+#if($mylimit && $myfield.name != $field)
+#make_facet_limit($myfield.name, $mylimit)
+#end
+#end
+#end
+
 #macro(make_fq $field $value)$esc.url($field):%22$esc.url($value)%22#end
 
 #macro(lens_without_q)#fqs#end
@@ -69,6 +81,8 @@
 #macro(url_for_start $start)#url_for_lens&amp;start=$start#end
 #macro(url_for_facet_filter $field $value)#url_for_lens&amp;fq=#make_fq($field,$value)#end
 #macro(url_for_removing_facet_filter $filter)?#qurl#fqs_without($filter)#end
+#macro(url_for_show_more_facet $field $limit)#url_for_lens#facet_limit_without($field)#make_facet_limit($field, $limit)#end
+
 
 #macro(normalize_facet $facet)$facet.replaceAll("_facet","")#end
 
