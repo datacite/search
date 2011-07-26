@@ -10,6 +10,7 @@ function init() {
 	setup_debug_box();
 	setup_continous_scrolling();
 	setup_query_form();
+	setup_history();
 	
 	process_results();
 }
@@ -39,7 +40,13 @@ function setup_continous_scrolling() {
 function setup_debug_box() {
 	var div = $("<div>").attr("id","debug").hide();
 	$("body").prepend(div);
-	
+}
+
+function setup_history() {
+	History.Adapter.bind(window,'statechange',function(){
+        var State = History.getState();
+        load_results(State.url);
+    });
 }
 
 /******************
@@ -73,6 +80,13 @@ function hide_pagination() {
 	$(".pagination").hide();
 }
 
+// prevent history.js from prepending '/' to url if it starts with '?'
+function fixUrl(url) {
+	if (url.match(/^\?/))
+		url = "ui" + url;
+	return url;
+}
+
 /******************
  * functions for loading content
  ******************/
@@ -80,7 +94,11 @@ function hide_pagination() {
 function submit_query() {
 	q = $("#query_input").val();
 	url = get_lens_without_q() + "&q=" + escape(q);
-	load_results(url);
+	goto_results(url);
+}
+
+function goto_results(query) {
+	History.pushState(null, null, fixUrl(query));
 }
 
 function load_results(query) {
@@ -206,7 +224,6 @@ function process_docs() {
 		$(".exp", score).slideToggle();
 		return false;
 	});
-	$("a").attr("target", "_blank");
 
 	$("#next_page a").unbind().click(function() {
 		load_next_page();
@@ -234,7 +251,7 @@ function process_facets() {
 			var url = $("a",this).attr("href");
 			var value = $("span.value",this).text();
 			$(this).click(function() {
-				load_results(url);
+				goto_results(url);
 				$(window).scrollTop(0);
 				return false;
 			});
@@ -260,7 +277,7 @@ function process_facets() {
 function process_filters() {
 	$("#filters a").unbind().click(function() {
 		url = $(this).attr("href");
-		load_results(url);
+		goto_results(url);
 		return false;
 	});
 }
