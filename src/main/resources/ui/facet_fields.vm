@@ -1,5 +1,6 @@
 #if($response.facetFields)
   #set($cur_fqs = $request.params.getParams('fq'))
+  #set($limit = $request.params.toNamedList().get("facet.limit"))
   #foreach($field in $response.facetFields)
     #set($count = $field.values.size())
     #if($count > 0)
@@ -8,6 +9,7 @@
       <div class="facet_data">
         <ul>
         #foreach($facet in $field.values)
+          #if($velocityCount == $limit)#break#end
           #set($fq = "$esc.url($field.name):$esc.getQ()$esc.url($facet.name)$esc.getQ()")
           #set($fq_applied = false)
           #foreach($cur_fq in $cur_fqs)
@@ -22,7 +24,6 @@
         #end
         </ul>
 
-      #set($limit = $request.params.toNamedList().get("facet.limit"))
       #if($count == $limit)
         <a class="more" href="#">more</a>
       #end 

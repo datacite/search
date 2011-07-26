@@ -104,7 +104,7 @@ function load_detail(doc) {
 }
 
 function load_more_facet(facet_field) {
-	var limit = 5;
+	var limit = 6;
 	var facet = $("#facet-" + facet_field);
 	var count = $("li",facet).length;
 	$(".more",facet).before($("<div class='tmp'>"));
@@ -114,15 +114,18 @@ function load_more_facet(facet_field) {
 		"facet.field" : facet_field,
 		"facet.sort" : "count",
 		"facet.offset" : count,
-		"facet.limit" : limit, 
+		"facet.limit" : limit + 1, 
 		rows: 0
 	}, function() {
 		var loaded = $("li", div_tmp).length;
-		debug(loaded);
+		var hasMore = (loaded == limit);
+		if (hasMore) {
+		  $("li", div_tmp).last().remove();
+		}
 		process_facets();
 		div_tmp.slideDown();
 		$("ul",div_tmp).unwrap();
-		if (loaded < limit) {
+		if (!hasMore) {
 			$("a.more",facet).fadeOut(function() { $(this).remove() });
 		}
 	});
