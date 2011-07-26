@@ -104,30 +104,19 @@ function load_detail(doc) {
 }
 
 function load_more_facet(facet_field) {
-	var limit = 6;
+	var how_many_more = 5;
 	var facet = $("#facet-" + facet_field);
 	var count = $("li",facet).length;
-	$(".more",facet).before($("<div class='tmp'>"));
-	var div_tmp = $("div.tmp",facet).hide();
-	div_tmp.load_sync(get_lens() + " ul", {
+	var div = $(".facet_data",facet);
+	div.load_sync(get_lens() + " .facet_data", {
 		"v.template" : "ui/facet_fields",
 		"facet.field" : facet_field,
 		"facet.sort" : "count",
-		"facet.offset" : count,
-		"facet.limit" : limit + 1, 
+		"facet.limit" : count + how_many_more + 1, 
 		rows: 0
 	}, function() {
-		var loaded = $("li", div_tmp).length;
-		var hasMore = (loaded == limit);
-		if (hasMore) {
-		  $("li", div_tmp).last().remove();
-		}
+		$(".facet_data", div).unwrap();
 		process_facets();
-		div_tmp.slideDown();
-		$("ul",div_tmp).unwrap();
-		if (!hasMore) {
-			$("a.more",facet).fadeOut(function() { $(this).remove() });
-		}
 	});
 }
 
