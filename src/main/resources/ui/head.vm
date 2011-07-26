@@ -1,8 +1,18 @@
 <title>DataCite Metadata Search</title>
+
 <script type="text/javascript" src="resources/browser-support.js"></script>
 <script type="text/javascript" src="resources/jquery-1.5.2.min.js"></script>
 <script type="text/javascript" src="resources/jquery-custom.js"></script>
+
+<script>if ( typeof window.JSON === 'undefined' ) {
+  document.write('<script src="resources/balupton/json2.js"><\/script>'); }
+</script>
+<script type="text/javascript" src="resources/balupton/history.adapter.jquery.js"></script>
+<script type="text/javascript" src="resources/balupton/history.js"></script>
+<script type="text/javascript" src="resources/balupton/history.html4.js"></script>
+
 <script type="text/javascript" src="resources/ui.js"></script>
+
 <link rel="stylesheet" type="text/css" href="resources/ui.css"/>
 <link rel="SHORTCUT ICON" href="resources/favicon.ico"/>
   
