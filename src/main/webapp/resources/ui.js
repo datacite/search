@@ -123,7 +123,7 @@ function load_more_facet(facet_field) {
 		div_tmp.slideDown();
 		$("ul",div_tmp).unwrap();
 		if (loaded < limit) {
-			$("a.more",facet).fadeOut();
+			$("a.more",facet).fadeOut(function() { $(this).remove() });
 		}
 	});
 }
