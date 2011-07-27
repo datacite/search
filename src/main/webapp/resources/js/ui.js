@@ -261,8 +261,8 @@ var options = {
 		var span_name = $("<span>").html(text);
 		if (tooltip)
 			span_name.attr("title", tooltip);
-		var span_option = $("<span>").attr("id","option-" + name)
-			.append(span_name).append(" is ").append(a).append(" | ");
+		var span_option = $("<span>").attr("id", "option-" + name)
+			.append(span_name, " is ", a, " | ");
 		$("#options").append(span_option);
 		this.refreshStatusText(name);
 	},
