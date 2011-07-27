@@ -63,6 +63,14 @@ function debug(html) {
 	$("#debug").html(html).show();
 }
 
+function add_test_link(text, hook) {
+	var a = $("<a href='#'>").html(text).click(function() {
+		hook();
+		return false;
+	});	
+	$("#topbar").prepend(a, " | ");
+}
+
 // returns the url of the current results
 function get_lens() {
 	return $("#lens").attr("href");
