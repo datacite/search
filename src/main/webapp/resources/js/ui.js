@@ -11,7 +11,8 @@ function init() {
 	setup_query_form();
 	setup_history();
 	
-	pagination.continous = false;
+	options.init();
+	
 	pagination.init();
 	
 	process_results();
@@ -240,14 +241,49 @@ function process_filters() {
 }
 
 /******************
+ * Options
+ ******************/
+
+var options = {
+	opts : new Array(),
+	init : function() {
+	},
+	add : function(name, value, text, hook) {
+		this.opts[name] = {
+				"value" : value,
+				"hook" : hook
+		};
+		var a = $("<a href='#'>?</a>").click(function() { options.flip(name); return false; });
+		var span = $("<span>").attr("id","option-" + name).html(text + " is ").append(a);
+		$("#options").append(span);
+		this.refreshStatusText(name);
+	},
+	get : function(name) {
+		return this.opts[name].value;
+	},
+	set : function(name, value) {
+		this.opts[name].value = value;
+		this.refreshStatusText(name);
+		var hook = this.opts[name].hook;
+		if (hook != null)
+			hook();
+	},
+	flip : function(name) {
+		this.set(name, !this.get(name));
+	},
+	refreshStatusText : function(name) {
+		var text = this.get(name)?"enabled":"disabled";
+		$("#option-" + name + " a").html(text);
+	}
+}
+
+/******************
  * Pagination
  ******************/
 
 var pagination = {
-	continous : null,
 	init : function() {
-		if (this.continous == null)
-			this.continous = true;
+		options.add("continous", true, "continous scrolling", submit_query);
 		this.init_continous();
 		this.process();
 	},
@@ -265,7 +301,7 @@ var pagination = {
 			load_main(url);
 			return false;
 		});
-		if (this.continous)
+		if (options.get("continous"))
 			$(".pagination").hide();
 		$("#next_page a").unbind().click(function() {
 			pagination.next_page.load();
@@ -306,7 +342,7 @@ pagination.next_page = {
 		});
 	},
 	is_needed : function () {
-		if (pagination.continous && $("#next_page").is(':visible')) { 
+		if (options.get("continous") && $("#next_page").is(':visible')) { 
 			var advance_in_pixel = 200;
 			var div_top = $("#next_page").position().top;  
 			var window_bottom = $(window).scrollTop() + $(window).height();
