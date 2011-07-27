@@ -38,10 +38,18 @@ function setup_debug_box() {
 }
 
 function setup_history() {
-	History.Adapter.bind(window,'statechange',function(){
-        var State = History.getState();
-        load_results(State.url);
+	History.Adapter.bind(window,'statechange',function() {
+		if (History.skipTrigger) {
+			History.skipTrigger = false;
+		} else {
+			var State = History.getState();
+			load_results(State.url);
+		}
     });
+	History.pushStateWithoutTrigger = function (data, title, url) {
+		History.skipTrigger = true;
+		History.pushState(data, title, url);
+	}
 }
 
 /******************
@@ -75,14 +83,11 @@ function fixUrl(url) {
 function submit_query() {
 	q = $("#query_input").val();
 	url = get_lens_without_q() + "&q=" + escape(q);
-	goto_results(url);
-}
-
-function goto_results(query) {
-	History.pushState(null, null, fixUrl(query));
+	load_results(url);
 }
 
 function load_results(query) {
+	History.pushStateWithoutTrigger(null, null, fixUrl(query));
 	$("#results").fadeTo("fast",0.7);
 	$("#results").load_sync(query, {
 		"v.template" : "ui/results"
@@ -93,6 +98,7 @@ function load_results(query) {
 }
 
 function load_main(query) {
+	History.pushStateWithoutTrigger(null, null, fixUrl(query));
 	$("#main").fadeTo("fast",0.7);
 	$("#main").load_sync(query + " #main", {
 		"v.template" : "ui/results",
@@ -202,7 +208,7 @@ function process_facets() {
 			var url = $("a",this).attr("href");
 			var value = $("span.value",this).text();
 			$(this).click(function() {
-				goto_results(url);
+				load_results(url);
 				$(window).scrollTop(0);
 				return false;
 			});
@@ -228,7 +234,7 @@ function process_facets() {
 function process_filters() {
 	$("#filters a").unbind().click(function() {
 		url = $(this).attr("href");
-		goto_results(url);
+		load_results(url);
 		return false;
 	});
 }
