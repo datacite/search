@@ -8,9 +8,11 @@ function init() {
 	jQuery.support.cors = true;
 	
 	setup_debug_box();
-	setup_continous_scrolling();
 	setup_query_form();
 	setup_history();
+	
+	pagination.continous = false;
+	pagination.init();
 	
 	process_results();
 }
@@ -28,13 +30,6 @@ function setup_query_form() {
 		timeout_instant_search = setTimeout(submit_query,500);
 	});
 	$("#query_input").focus();
-}
-
-function setup_continous_scrolling() {
-	$(window).scroll(function(data) {
-		if (is_next_page_needed())
-			load_next_page_async();
-	});
 }
 
 function setup_debug_box() {
@@ -64,20 +59,6 @@ function get_lens() {
 
 function get_lens_without_q() {
 	return $("#lens_without_q").attr("href");
-}
-
-function is_next_page_needed() {
-	if ($("#next_page").is(':visible')) { 
-		var advance_in_pixel = 200;
-		var div_top = $("#next_page").position().top;  
-		var window_bottom = $(window).scrollTop() + $(window).height();
-		return div_top - window_bottom < advance_in_pixel;
-	} 
-	return false;
-}
-
-function hide_pagination() {
-	$(".pagination").hide();
 }
 
 // prevent history.js from prepending '/' to url if it starts with '?'
@@ -111,6 +92,20 @@ function load_results(query) {
 	});
 }
 
+function load_main(query) {
+	$("#main").fadeTo("fast",0.7);
+	$("#main").load_sync(query + " #main", {
+		"v.template" : "ui/results",
+		"facet" : "off"
+	}, function() {
+		$("#main", this).unwrap();
+		process_docs();
+		pagination.process();
+		process_filters();
+		$("#main").fadeTo("fast",1);
+	});
+}
+
 function load_detail(doc) {
 	var doi = $(".info .doi", doc).text();
 	var detail = $(".full",doc);
@@ -132,42 +127,6 @@ function load_more_facet(query, facet_field) {
 		$(".facet_data", div).unwrap();
 		process_facets();
 	});
-}
-
-
-var loading_next_page = false;
-function load_next_page(async) {
-	if (async == null)
-		async = false;
-	
-	if (loading_next_page)
-		return
-	loading_next_page = true;
-	
-	$.ajax({
-		type  : "GET",
-		url : get_lens(),
-		data :  {
-			"v.template" : "ui/docs",
-			facet: "off",
-			start : $(".doc").length
-		}, 
-		cache: false,
-		async: async,
-		success: function(data) {
-			if (data.length == 0) {
-				$("#next_page").hide();
-			} else {
-				$("#docs").append(data);
-				process_docs();
-			}
-			loading_next_page = false;
-		}
-	});
-}
-
-function load_next_page_async() {
-	load_next_page(true);
 }
 
 function preview_filter(query) {
@@ -203,9 +162,7 @@ function process_results() {
 	process_docs();
 	process_facets();
 	process_filters();
-	hide_pagination();
-	while (is_next_page_needed())
-		load_next_page();
+	pagination.process();
 }
 	
 function process_docs() {
@@ -224,12 +181,6 @@ function process_docs() {
 		$(".exp", score).slideToggle();
 		return false;
 	});
-
-	$("#next_page a").unbind().click(function() {
-		load_next_page();
-		return false;
-	});
-
 }
 
 var timeout_preview_filter;
@@ -280,6 +231,83 @@ function process_filters() {
 		goto_results(url);
 		return false;
 	});
+}
+
+/******************
+ * Pagination
+ ******************/
+
+var pagination = {
+	continous : null,
+	init : function() {
+		if (this.continous == null)
+			this.continous = true;
+		this.init_continous();
+		this.process();
+	},
+	init_continous : function() {
+		$(window).scroll(function(data) {
+			if (pagination.next_page.is_needed())
+				pagination.next_page.load(true);
+		});
+		while (pagination.next_page.is_needed())
+			pagination.next_page.load();
+	},
+	process : function() {
+		$(".pagination a").unbind().click(function() {
+			url = $(this).attr("href");
+			load_main(url);
+			return false;
+		});
+		if (this.continous)
+			$(".pagination").hide();
+		$("#next_page a").unbind().click(function() {
+			pagination.next_page.load();
+			return false;
+		});
+	}
+}
+
+pagination.next_page = {
+	loading : false,
+	load : function(async) {
+		if (async == null)
+			async = false;
+		
+		if (this.loading)
+			return
+		this.loading = true;
+		
+		$.ajax({
+			type  : "GET",
+			url : get_lens(),
+			data :  {
+				"v.template" : "ui/docs",
+				facet: "off",
+				start : $(".doc").length
+			}, 
+			cache: false,
+			async: async,
+			success: function(data) {
+				if (data.length == 0) {
+					$("#next_page").hide();
+				} else {
+					$("#docs").append(data);
+					process_docs();
+				}
+				pagination.next_page.loading = false;
+			}
+		});
+	},
+	is_needed : function () {
+		if (pagination.continous && $("#next_page").is(':visible')) { 
+			var advance_in_pixel = 200;
+			var div_top = $("#next_page").position().top;  
+			var window_bottom = $(window).scrollTop() + $(window).height();
+			return div_top - window_bottom < advance_in_pixel;
+		} 
+		return false;
+	}
 }
 
 /******************
