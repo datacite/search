@@ -7,11 +7,11 @@ function init() {
 	jQuery.ajaxSettings.traditional = true; 
 	jQuery.support.cors = true;
 	
+	options.init();
+
 	setup_debug_box();
 	setup_query_form();
 	setup_history();
-	
-	options.init();
 	
 	pagination.init();
 	
@@ -27,8 +27,10 @@ function setup_query_form() {
 	});
 
 	$("#query_input").inputChange(function() {
-		clearTimeout(timeout_instant_search);
-		timeout_instant_search = setTimeout(submit_query,500);
+		if (options.get("instant")) {
+			clearTimeout(timeout_instant_search);
+			timeout_instant_search = setTimeout(submit_query,500);
+		};
 	});
 	$("#query_input").focus();
 }
@@ -247,6 +249,8 @@ function process_filters() {
 var options = {
 	opts : new Array(),
 	init : function() {
+		this.add("instant", true, "instant search", null);
+		this.add("continous", true, "continous scrolling", submit_query);
 	},
 	add : function(name, value, text, hook) {
 		this.opts[name] = {
@@ -254,7 +258,7 @@ var options = {
 				"hook" : hook
 		};
 		var a = $("<a href='#'>?</a>").click(function() { options.flip(name); return false; });
-		var span = $("<span>").attr("id","option-" + name).html(text + " is ").append(a);
+		var span = $("<span>").attr("id","option-" + name).html(text + " is ").append(a).append(". ");
 		$("#options").append(span);
 		this.refreshStatusText(name);
 	},
@@ -283,7 +287,6 @@ var options = {
 
 var pagination = {
 	init : function() {
-		options.add("continous", true, "continous scrolling", submit_query);
 		this.init_continous();
 		this.process();
 	},
