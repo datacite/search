@@ -63,6 +63,11 @@ h1,h2,h3 {
     display:inline;
 }
 
+#options span[title] {
+    border-bottom: thin dotted black;
+    cursor: help;
+}
+
 #results {
     margin-top: 5px; 
     width: 99%;

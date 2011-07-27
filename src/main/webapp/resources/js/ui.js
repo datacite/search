@@ -249,17 +249,21 @@ function process_filters() {
 var options = {
 	opts : new Array(),
 	init : function() {
-		this.add("instant", true, "instant search", null);
-		this.add("continous", true, "continous scrolling", submit_query);
+		this.add("instant", true, null, "instant search", "load results immediately without clicking 'search' button");
+		this.add("continous", true, submit_query, "continous scrolling", "load next results automatically when hitting the bottom of the page");
 	},
-	add : function(name, value, text, hook) {
+	add : function(name, value, hook, text, tooltip) {
 		this.opts[name] = {
 				"value" : value,
 				"hook" : hook
 		};
 		var a = $("<a href='#'>?</a>").click(function() { options.flip(name); return false; });
-		var span = $("<span>").attr("id","option-" + name).html(text + " is ").append(a).append(" | ");
-		$("#options").append(span);
+		var span_name = $("<span>").html(text);
+		if (tooltip)
+			span_name.attr("title", tooltip);
+		var span_option = $("<span>").attr("id","option-" + name)
+			.append(span_name).append(" is ").append(a).append(" | ");
+		$("#options").append(span_option);
 		this.refreshStatusText(name);
 	},
 	get : function(name) {
