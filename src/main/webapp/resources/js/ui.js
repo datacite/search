@@ -264,13 +264,22 @@ function process_filters() {
  ******************/
 
 homepage_mode = {
+		enabled : false,
 		init : function() {
-			q = $("#query_input").val();
-			if (q == "")
+			if (this.isQueryEmpty()) {
+				this.enabled = true;
 				$("#header *").addClass("homepage");
+			}
 		},
 		exit : function() {
-			$("#header *").removeClass("homepage");	
+			if (this.enabled && ! this.isQueryEmpty()) {
+				this.enabled = false;
+				$("#header *").removeClass("homepage");
+			}
+		},
+		isQueryEmpty : function() {
+			q = $("#query_input").val();
+			return q == "";
 		}
 	}
 
