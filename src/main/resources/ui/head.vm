@@ -3,6 +3,7 @@
 <script type="text/javascript" src="resources/js/browser-support.js"></script>
 <script type="text/javascript" src="resources/js/jquery-1.5.2.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery-custom.js"></script>
+<script type="text/javascript" src="resources/js/jquery.cookie.js"></script>
 
 <script type="text/javascript">
 <!--

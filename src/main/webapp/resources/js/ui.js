@@ -252,7 +252,9 @@ var options = {
 		this.add("instant", true, null, "instant search", "load results immediately without clicking 'search' button");
 		this.add("continous", true, submit_query, "continous scrolling", "load next results automatically when hitting the bottom of the page");
 	},
-	add : function(name, value, hook, text, tooltip) {
+	add : function(name, defaultvalue, hook, text, tooltip) {
+		var cookie = $.cookie(name)
+		var value = cookie ? cookie == "true" : defaultvalue;
 		this.opts[name] = {
 				"value" : value,
 				"hook" : hook
@@ -271,6 +273,7 @@ var options = {
 	},
 	set : function(name, value) {
 		this.opts[name].value = value;
+		$.cookie(name, value, { expires: 365 });
 		this.refreshStatusText(name);
 		var hook = this.opts[name].hook;
 		if (hook != null)
