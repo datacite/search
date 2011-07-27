@@ -66,7 +66,7 @@ function debug(html) {
 }
 
 function add_topbar_link(text, hook) {
-	var a = $("<a href='#'>").html(text).click(function() {
+	var a = $("<a href='#'>" + text + "</a>").click(function() {
 		hook();
 		return false;
 	});	
