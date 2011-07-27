@@ -283,10 +283,7 @@ var options = {
 	init : function() {
 		this.add("instant", true, null, "Instant Search", "load results immediately without clicking 'search' button");
 		this.add("continous", true, reload_results, "Continous Scrolling", "load next results automatically when hitting the bottom of the page");
-		
-		add_topbar_link("Options", function() {
-			$("#options").slideToggle();
-		})
+		options.menu.init();
 	},
 	add : function(name, defaultvalue, hook, text, tooltip) {
 		var cookie = $.cookie(name)
@@ -295,6 +292,9 @@ var options = {
 				"value" : value,
 				"hook" : hook
 		};
+		if (text == null)
+			return;
+		
 		var a = $("<a href='#'>?</a>").click(function() { options.flip(name); return false; });
 		var span_name = $("<span>").html(text);
 		if (tooltip)
@@ -306,6 +306,7 @@ var options = {
 		$("#options").append(span_option);
 		this.refreshStatusText(name);
 	},
+	
 	get : function(name) {
 		return this.opts[name].value;
 	},
@@ -325,6 +326,18 @@ var options = {
 		$("#option-" + name + " a").html(text);
 	}
 }
+
+options.menu = {
+	init : function() {
+		options.add("show_options", true, this.toggle);
+		add_topbar_link("Options", function() { options.flip("show_options") });
+		$("#options").toggle(options.get("show_options"));
+	},
+	toggle : function() {
+		$("#options").slideToggle();
+	}
+}
+
 
 /******************
  * Pagination
