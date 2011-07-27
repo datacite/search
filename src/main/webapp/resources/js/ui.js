@@ -65,12 +65,12 @@ function debug(html) {
 	$("#debug").html(html).show();
 }
 
-function add_test_link(text, hook) {
+function add_topbar_link(text, hook) {
 	var a = $("<a href='#'>").html(text).click(function() {
 		hook();
 		return false;
 	});	
-	$("#topbar").prepend(a, " | ");
+	$("#links").prepend(a, " | ");
 }
 
 // returns the url of the current results
@@ -281,8 +281,12 @@ homepage_mode = {
 var options = {
 	opts : new Array(),
 	init : function() {
-		this.add("instant", true, null, "instant search", "load results immediately without clicking 'search' button");
-		this.add("continous", true, reload_results, "continous scrolling", "load next results automatically when hitting the bottom of the page");
+		this.add("instant", true, null, "Instant Search", "load results immediately without clicking 'search' button");
+		this.add("continous", true, reload_results, "Continous Scrolling", "load next results automatically when hitting the bottom of the page");
+		
+		add_topbar_link("Options", function() {
+			$("#options").slideToggle();
+		})
 	},
 	add : function(name, defaultvalue, hook, text, tooltip) {
 		var cookie = $.cookie(name)
@@ -295,8 +299,10 @@ var options = {
 		var span_name = $("<span>").html(text);
 		if (tooltip)
 			span_name.attr("title", tooltip);
-		var span_option = $("<span>").attr("id", "option-" + name)
-			.append(span_name, " is ", a, " | ");
+		var span_option = $("<span>").attr("id", "option-" + name).addClass("option")
+			.append(span_name, " is ", a);
+		if ($(".option").length > 0)
+			span_option.prepend( " | ");
 		$("#options").append(span_option);
 		this.refreshStatusText(name);
 	},

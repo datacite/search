@@ -8,10 +8,12 @@
   <body>
     <div id="header">
       <div id="topbar">
-        <div id="options">
-        </div>
         <div id="links">
-          <a href="help.html">help</a>
+          <a href="http://datacite.org/whatisdatacite">About Us</a> |
+          <a href="http://datacite.org/contact">Contact</a> |
+          <a href="help.html">Help</a>
+        </div>
+        <div id="options">
         </div>
       </div>
       <div id="title">

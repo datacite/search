@@ -60,11 +60,12 @@ h1,h2,h3 {
 }
 
 #topbar {
+    color: #666;
     text-align: right;
     float: right;
 }
 
-#topbar div,#query,#query_form,#query_form p {
+#query,#query_form,#query_form p {
     display: inline;
 }
 
@@ -75,6 +76,15 @@ h1,h2,h3 {
 
 #query_input.homepage {
     width: 500px;
+}
+
+#links {
+    font-size: large;
+}
+
+#options {
+    font-size: small;
+    margin-top: 5px;
 }
 
 #options span[title] {
