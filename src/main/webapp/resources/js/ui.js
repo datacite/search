@@ -295,7 +295,7 @@ var options = {
 		if (text == null)
 			return;
 		
-		var a = $("<a href='#'>?</a>").click(function() { options.flip(name); return false; });
+		var a = $("<a href='#'>?</a>").click(function() { options.toggle(name); return false; });
 		var span_name = $("<span>").html(text);
 		if (tooltip)
 			span_name.attr("title", tooltip);
@@ -318,7 +318,7 @@ var options = {
 		if (hook != null)
 			hook();
 	},
-	flip : function(name) {
+	toggle : function(name) {
 		this.set(name, !this.get(name));
 	},
 	refreshStatusText : function(name) {
@@ -330,7 +330,7 @@ var options = {
 options.menu = {
 	init : function() {
 		options.add("show_options", true, this.toggle);
-		add_topbar_link("Options", function() { options.flip("show_options") });
+		add_topbar_link("Options", function() { options.toggle("show_options") });
 		$("#options").toggle(options.get("show_options"));
 	},
 	toggle : function() {
