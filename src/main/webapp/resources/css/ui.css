@@ -257,3 +257,7 @@ code {
 th {
     text-align: left;
 }
+
+.hidden {
+    display: none;
+}

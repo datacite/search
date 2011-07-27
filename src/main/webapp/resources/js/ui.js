@@ -139,11 +139,13 @@ function load_more_facet(query, facet_field) {
 }
 
 function preview_filter(query) {
+	var start = $("#start").text();
+	var rows = $(".doc").length;
 	$.ajax({
 		type : "GET",
 		url : "ui-ids" + query,
 		data : {
-			rows : $(".doc").length
+			rows : start + rows
 		}, 
 		dataType : "json",
 		cache: false,
