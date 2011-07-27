@@ -304,6 +304,8 @@ var pagination = {
 		});
 	},
 	process : function() {
+		if (options.get("continous"))
+			$(".pagination").hide();
 		while (pagination.next_page.is_needed())
 			pagination.next_page.load();
 		$(".pagination a").unbind().click(function() {
@@ -311,8 +313,6 @@ var pagination = {
 			load_main(url);
 			return false;
 		});
-		if (options.get("continous"))
-			$(".pagination").hide();
 		$("#next_page a").unbind().click(function() {
 			pagination.next_page.load();
 			return false;
