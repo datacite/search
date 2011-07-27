@@ -36,8 +36,12 @@ h1,h2,h3 {
 /* header elements */
 
 #title {
-    margin-right: 2em;
-    float: left;
+    margin: auto;
+}
+
+#title.homepage {
+    text-align: center;
+    padding-top: 150px;
 }
 
 #title a.title {
@@ -57,10 +61,20 @@ h1,h2,h3 {
 
 #topbar {
     text-align: right;
+    float: right;
 }
 
 #topbar div,#query,#query_form,#query_form p {
-    display:inline;
+    display: inline;
+}
+
+#query.homepage {
+    display: block;
+    margin-top: 20px;
+}
+
+#query_input.homepage {
+    width: 500px;
 }
 
 #options span[title] {

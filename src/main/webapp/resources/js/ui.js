@@ -16,6 +16,8 @@ function init() {
 	pagination.init();
 	
 	process_results();
+	
+	homepage_mode.init();
 }
 
 var timeout_instant_search;
@@ -92,6 +94,11 @@ function fixUrl(url) {
  ******************/
 
 function submit_query() {
+	homepage_mode.exit();
+	reload_results();
+}
+
+function reload_results() {
 	q = $("#query_input").val();
 	url = get_lens_without_q() + "&q=" + escape(q);
 	load_results(url);
@@ -253,6 +260,21 @@ function process_filters() {
 }
 
 /******************
+ * Homepage Mode
+ ******************/
+
+homepage_mode = {
+		init : function() {
+			q = $("#query_input").val();
+			if (q == "")
+				$("#header *").addClass("homepage");
+		},
+		exit : function() {
+			$("#header *").removeClass("homepage");	
+		}
+	}
+
+/******************
  * Options
  ******************/
 
@@ -260,7 +282,7 @@ var options = {
 	opts : new Array(),
 	init : function() {
 		this.add("instant", true, null, "instant search", "load results immediately without clicking 'search' button");
-		this.add("continous", true, submit_query, "continous scrolling", "load next results automatically when hitting the bottom of the page");
+		this.add("continous", true, reload_results, "continous scrolling", "load next results automatically when hitting the bottom of the page");
 	},
 	add : function(name, defaultvalue, hook, text, tooltip) {
 		var cookie = $.cookie(name)

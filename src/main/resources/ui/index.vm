@@ -7,6 +7,13 @@
   </head>
   <body>
     <div id="header">
+      <div id="topbar">
+        <div id="options">
+        </div>
+        <div id="links">
+          <a href="help.html">help</a>
+        </div>
+      </div>
       <div id="title">
         <a href="ui" class="title">
           <img src="resources/img/dc-logo.gif" alt="DataCite Logo"/>
@@ -14,13 +21,6 @@
         </a>
         <div id="query">
           #parse("ui/query.vm")
-        </div>
-      </div>
-      <div id="topbar">
-        <div id="options">
-        </div>
-        <div id="links">
-          <a href="help.html">help</a>
         </div>
       </div>
     </div>
