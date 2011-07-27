@@ -37,6 +37,7 @@ h1,h2,h3 {
 
 #title {
     margin-right: 2em;
+    float: left;
 }
 
 #title a.title {
@@ -54,15 +55,18 @@ h1,h2,h3 {
     vertical-align: middle;
 }
 
-#query,#query_form,#query_form p {
+#topbar {
+    text-align: right;
+}
+
+#topbar div,#query,#query_form,#query_form p {
     display:inline;
 }
 
 #results {
-/*    position: absolute;
-    top: 90px;*/
     margin-top: 5px; 
     width: 99%;
+    clear: both;
 }
 
 #main {

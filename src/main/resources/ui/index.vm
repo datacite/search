@@ -6,19 +6,23 @@
     #parse("ui/head.vm")
   </head>
   <body>
-    <div id="title">
-      <a href="ui" class="title">
-        <img src="resources/img/dc-logo.gif" alt="DataCite Logo"/>
-        Metadata Search <small>beta</small>
-      </a>
-      <div id="query">
-        #parse("ui/query.vm")
+    <div id="header">
+      <div id="title">
+        <a href="ui" class="title">
+          <img src="resources/img/dc-logo.gif" alt="DataCite Logo"/>
+          Metadata Search <small>beta</small>
+        </a>
+        <div id="query">
+          #parse("ui/query.vm")
+        </div>
       </div>
-      <span id="options">
-      </span>
-      <span id="links">
-        <a href="help.html">help</a>
-      </span>
+      <div id="topbar">
+        <div id="options">
+        </div>
+        <div id="links">
+          <a href="help.html">help</a>
+        </div>
+      </div>
     </div>
     <div id="results">
       #parse("ui/results.vm")

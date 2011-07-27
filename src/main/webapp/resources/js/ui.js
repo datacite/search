@@ -258,7 +258,7 @@ var options = {
 				"hook" : hook
 		};
 		var a = $("<a href='#'>?</a>").click(function() { options.flip(name); return false; });
-		var span = $("<span>").attr("id","option-" + name).html(text + " is ").append(a).append(". ");
+		var span = $("<span>").attr("id","option-" + name).html(text + " is ").append(a).append(" | ");
 		$("#options").append(span);
 		this.refreshStatusText(name);
 	},
