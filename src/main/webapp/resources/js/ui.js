@@ -295,10 +295,10 @@ var pagination = {
 			if (pagination.next_page.is_needed())
 				pagination.next_page.load(true);
 		});
-		while (pagination.next_page.is_needed())
-			pagination.next_page.load();
 	},
 	process : function() {
+		while (pagination.next_page.is_needed())
+			pagination.next_page.load();
 		$(".pagination a").unbind().click(function() {
 			url = $(this).attr("href");
 			load_main(url);
