@@ -346,7 +346,7 @@ var options = {
 
 options.menu = {
 	init : function() {
-		options.add("show_options", true, this.toggle);
+		options.add("show_options", false, this.toggle);
 		add_topbar_link("Options", function() { options.toggle("show_options") });
 		$("#options").toggle(options.get("show_options"));
 	},
