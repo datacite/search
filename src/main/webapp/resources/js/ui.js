@@ -49,6 +49,14 @@ function setup_history() {
 		} else {
 			var State = History.getState();
 			load_results(State.url);
+
+			// parse q from result if necessary (e.g. for html4-browser)
+			var q = $("#query_input");
+			if (q.val() == "") {
+				q.val($("#q").text());
+			}
+
+			homepage_mode.exit();
 		}
     });
 	History.pushStateWithoutTrigger = function (data, title, url) {
@@ -99,7 +107,7 @@ function submit_query() {
 }
 
 function reload_results() {
-	q = $("#query_input").val();
+	var q = $("#query_input").val();
 	url = get_lens_without_q() + "&q=" + escape(q);
 	load_results(url);
 }
@@ -278,7 +286,7 @@ homepage_mode = {
 			}
 		},
 		isQueryEmpty : function() {
-			q = $("#query_input").val();
+			var q = $("#query_input").val();
 			return q == "";
 		}
 	}
