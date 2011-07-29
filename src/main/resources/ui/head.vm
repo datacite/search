@@ -18,6 +18,7 @@ if ( typeof window.JSON === 'undefined' ) {
 <script type="text/javascript" src="resources/js/history/history.html4.js"></script>
 
 <script type="text/javascript" src="resources/js/ui.js"></script>
+<script type="text/javascript" src="resources/js/ui-advanced.js"></script>
 
 <link rel="stylesheet" type="text/css" href="resources/css/jquery-ui-1.8.14.custom.css"/>
 <link rel="stylesheet" type="text/css" href="resources/css/ui.css"/>

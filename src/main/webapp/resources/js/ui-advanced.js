@@ -1,10 +1,16 @@
-var advanced = {
+advanced = {
 	text_fields : ["doi", "title", "creator", "publisher", "contributor", "format", 
 	               "subject", "date", "description", "resourceType",
 	               "relatedIdentifier", "alternateIdentifier"],
 	range_fields : ["publicationYear"],
 	init : function() {
 		$("#advanced_form").submit(advanced.submit);
+	},
+	init_for_dialog : function() {
+		var q_input = $('<input type="text" id="advanced_q"/>');
+		var q_hidden = $('<input type="hidden" id="advanced_q_hidden" name="q"/>');
+		$("#advanced_fieldset_search").append(q_input, q_hidden);
+		this.init();
 	},
 	submit : function() {
 		var q_input = $("#advanced_q");

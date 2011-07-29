@@ -21,27 +21,33 @@ function init() {
 	homepage_mode.init();
 }
 
-var Dialog = function() {
-	self = this;
+Dialog = function() {
 	this.div = $("<div>");
 	this.open = function() {
-		if (self.div.is(':empty')) 
-			self.load();
-		self.div.dialog("open");
-		return false;
-	}
-	this.load = function() { }; //abstract
+		if (this.div.is(':empty')) 
+			this.load();
+		this.div.dialog("open");
+	};
 }
 
 dialog = {
 	init : function() {
-		$("#link_help").click(dialog.help.open);
+		$("#link_help").click(function() { dialog.help.open(); return false; });
+		$("#link_advanced").click(function() { dialog.advanced.open(); return false; });
 	}
 }
+
 dialog.help = new Dialog;
 dialog.help.load = function() { 
-	self.div.load("help.html #content").bigDialog("DataCite Metadata Search Help");
+	this.div.load("help.html #content").bigDialog("DataCite Metadata Search Help");
 };
+
+dialog.advanced = new Dialog;
+dialog.advanced.load = function() {
+	this.div.load("ui-advanced form").bigDialog("DataCite Metadata Advanced Search");
+	advanced.init_for_dialog();
+};
+
 
 var timeout_instant_search;
 function setup_query_form() {
