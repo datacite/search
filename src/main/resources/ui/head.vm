@@ -2,6 +2,7 @@
 
 <script type="text/javascript" src="resources/js/browser-support.js"></script>
 <script type="text/javascript" src="resources/js/jquery-1.5.2.min.js"></script>
+<script type="text/javascript" src="resources/js/jquery-ui-1.8.14.custom.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery-custom.js"></script>
 <script type="text/javascript" src="resources/js/jquery.cookie.js"></script>
 
@@ -18,6 +19,7 @@ if ( typeof window.JSON === 'undefined' ) {
 
 <script type="text/javascript" src="resources/js/ui.js"></script>
 
+<link rel="stylesheet" type="text/css" href="resources/css/jquery-ui-1.8.14.custom.css"/>
 <link rel="stylesheet" type="text/css" href="resources/css/ui.css"/>
 <link rel="SHORTCUT ICON" href="resources/img/favicon.ico"/>
   
