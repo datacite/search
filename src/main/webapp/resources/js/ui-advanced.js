@@ -29,6 +29,7 @@ advanced = {
 	},
 	parse_text_field : function(field) {
 		var val = $("#advanced_field_" + field).val();
+		val = $.trim(val);
 		if (val == "")
 			return "";
 		else if (!val.match(/ /))
