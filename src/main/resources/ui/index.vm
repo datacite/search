@@ -12,7 +12,7 @@
           <a href="ui-advanced">Advanced Search</a> |
           <a href="http://datacite.org/whatisdatacite">About Us</a> |
           <a href="http://datacite.org/contact">Contact</a> |
-          <a href="help.html">Help</a>
+          <a href="help.html" id="link_help">Help</a>
         </div>
         <div id="options">
         </div>

@@ -14,11 +14,34 @@ function init() {
 	setup_history();
 	
 	pagination.init();
+	dialog.init();
 	
 	process_results();
 	
 	homepage_mode.init();
 }
+
+var Dialog = function() {
+	self = this;
+	this.div = $("<div>");
+	this.open = function() {
+		if (self.div.is(':empty')) 
+			self.load();
+		self.div.dialog("open");
+		return false;
+	}
+	this.load = function() { }; //abstract
+}
+
+dialog = {
+	init : function() {
+		$("#link_help").click(dialog.help.open);
+	}
+}
+dialog.help = new Dialog;
+dialog.help.load = function() { 
+	self.div.load("help.html #content").bigDialog("DataCite Metadata Search Help");
+};
 
 var timeout_instant_search;
 function setup_query_form() {
