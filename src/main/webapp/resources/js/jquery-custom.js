@@ -3,6 +3,7 @@ $.fn.load_sync = function(url, params, callback) {
 	$.ajaxSetup({async : false});
 	this.load(url, params, callback);
     $.ajaxSetup({async : true});
+    return this;
 };
 
 $.fn.inputChange = function(handler) {
@@ -16,12 +17,13 @@ $.fn.inputChange = function(handler) {
 	});
 }
 
-$.fn.bigDialog = function(title) {
+$.fn.modalDialog = function(title, width_auto, height_auto) {
 	var height = $(window).height() * 0.8;
+	var width = $(window).width() * 0.8;
 	return this.dialog({
 		autoOpen: false,
-		width: "80%",
-		height: height,
+		width: width_auto ? "auto" : width,
+		height: height_auto ? "auto" : height,
 		modal: true,
 		title: title
 	});

@@ -27,6 +27,7 @@ Dialog = function() {
 		if (this.div.is(':empty')) 
 			this.load();
 		this.div.dialog("open");
+		this.div.dialog("open");
 	};
 }
 
@@ -39,12 +40,12 @@ dialog = {
 
 dialog.help = new Dialog;
 dialog.help.load = function() { 
-	this.div.load("help.html #content").bigDialog("DataCite Metadata Search Help");
+	this.div.load_sync("help.html #content").modalDialog("DataCite Metadata Search Help");
 };
 
 dialog.advanced = new Dialog;
 dialog.advanced.load = function() {
-	this.div.load("ui-advanced form").bigDialog("DataCite Metadata Advanced Search");
+	this.div.load_sync("ui-advanced form").modalDialog("DataCite Metadata Advanced Search", true, true);
 	advanced.init_for_dialog();
 };
 
