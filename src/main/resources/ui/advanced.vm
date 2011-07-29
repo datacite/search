@@ -1,0 +1,80 @@
+<script type="text/javascript" src="resources/js/browser-support.js"></script>
+<script type="text/javascript" src="resources/js/jquery-1.5.2.min.js"></script>
+<script type="text/javascript" src="resources/js/ui-advanced.js"></script>
+<link rel="stylesheet" type="text/css" href="resources/css/ui.css"/>
+
+#macro(select_facet $field $label)
+  <label>$label</label>
+  <select name="fq">
+  #set($facet = $response.getFacetField($field))
+    <option value="">$esc.html("<any>")</option>
+  #foreach($value in $facet.values)
+    <option value='$field:"$value.name"'>$value.name</option>
+  #end
+  </select>
+  <br/>
+#end
+
+#macro(field_text $field $label)
+  <label>$label</label>
+  <input type="text" id="advanced_field_$field"/>
+  <br/>
+#end
+
+#macro(field_range $field $label)
+  <label>$label</label>
+  <input class="range" type="text" id="advanced_field_${field}_from"/>
+  <span>(to</span>
+  <input class="range" type="text" id="advanced_field_${field}_to"/>
+  <span>)</span>
+  <br/>
+#end
+
+<form id="advanced_form" action="ui">
+  <fieldset id="advanced_fieldset_search">
+    <legend>Search</legend>
+    <label>Search in all fields</label>
+    <noscript>
+      <input type="text" id="advanced_q" name="q"/>
+    </noscript>
+    <script type="text/javascript">
+    <!--
+       document.write('<input type="text" id="advanced_q"/>');
+       document.write('<input type="hidden" id="advanced_q_hidden" name="q"/>');
+	-->
+	</script>
+    
+  </fieldset>
+  
+  <fieldset id="advanced_fieldset_fields">
+    <legend>Field Search</legend>
+    <noscript>Javascript is required for Advanced Field Search.</noscript>
+
+    #field_text("doi", "DOI")
+    #field_text("title", "Title")
+    #field_text("creator", "Creator")
+    #field_text("publisher", "Publisher")
+    #field_text("contributor", "Contributor")
+    #field_text("format", "Format")
+    #field_text("subject", "Subject")
+    #field_text("date", "Date")
+    #field_text("description", "Description")
+    #field_text("resourceType", "Resource Type")
+    #field_text("alternateIdentifier", "Alternate Identifier")
+    #field_text("relatedIdentifier", "Related Identifier")
+    #field_range("publicationYear", "Publication Year")
+  </fieldset>
+
+  <fieldset id="advanced_fieldset_filter">
+    <legend>Filter</legend>
+    #select_facet("prefix", "Prefix")
+    #select_facet("allocator_facet", "Allocator")
+    #select_facet("datacentre_facet", "Datacentre")
+    #select_facet("resourceType_facet", "General Resource Type")
+    #select_facet("language", "Language")
+  </fieldset>
+  
+  <br/>
+  <input type="submit" value="Search"/>
+  <input type="reset" value="Reset"/>
+</form>
