@@ -1,11 +1,17 @@
+#set($filters = [])
+#foreach($filter in $request.params.getParams('fq'))
+  #if($filter != "")
+    #set($null = $filters.add($filter))
+  #end
+#end
 <span class="text">
-#if($request.params.getParams('fq'))
+#if($filters.size() > 0)
 Active filters (<a href="#url_for_nofilters">clear all</a>):
 #elseif($page.results_found > 0)
 No active filters. Use the sidebar to filter search results.
 #end
 </span>
-#foreach($filter in $request.params.getParams('fq'))
+#foreach($filter in $filters)
   #set($split = $filter.split(":",2))
   #set($name = $list.get($split,0))
   #set($value = $list.get($split,1).replaceAll('"',''))

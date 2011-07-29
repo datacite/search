@@ -9,6 +9,7 @@
     <div id="header">
       <div id="topbar">
         <div id="links">
+          <a href="ui-advanced">Advanced Search</a> |
           <a href="http://datacite.org/whatisdatacite">About Us</a> |
           <a href="http://datacite.org/contact">Contact</a> |
           <a href="help.html">Help</a>

@@ -283,5 +283,41 @@ th {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
+}
+
+#advanced_form label,
+#advanced_form select,
+#advanced_form fieldset input[type="text"]{
+    width: 240px;
+}
+
+#advanced_form fieldset label,
+#advanced_form fieldset select,
+#advanced_form fieldset input, 
+#advanced_form fieldset span 
+{
+    float: left;
+    display: block;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+#advanced_form fieldset {
+    float: left; 
+    margin: 5px;
+    clear: both;
+    width: 500px;
+}
+
+#advanced_form .range {
+    width: 100px !important;
+}
+
+#advanced_form br {
+    clear: both;
+}
+
+noscript {
+    color: red;
 }
