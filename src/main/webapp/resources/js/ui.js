@@ -61,7 +61,7 @@ function setup_query_form() {
 	$("#query_input").inputChange(function() {
 		if (options.get("instant")) {
 			clearTimeout(timeout_instant_search);
-			timeout_instant_search = setTimeout(submit_query,500);
+			timeout_instant_search = setTimeout(submit_query,1000);
 		};
 	});
 	$("#query_input").focus();
