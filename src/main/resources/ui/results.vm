@@ -1,7 +1,7 @@
 ## static link to the current result 
 <a id="lens" href="#url_for_lens"/>
 <a id="lens_without_q" href="#url_for_lens_without_q"/>
-
+<span id="start" class="hidden">$page.start</span>
 <span id="q" class="hidden">#q</span>
 
 <div id="sidebar">

@@ -18,4 +18,3 @@
   #link_to_prev_page("<")
   #link_to_next_page(">")
 #end
-<span id="start" class="hidden">$page.start</span>
