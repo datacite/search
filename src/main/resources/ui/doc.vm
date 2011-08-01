@@ -1,4 +1,4 @@
-#set($doi = $doc.getFieldValue('doi'))
+#set($id = $doc.getFieldValue('dataset_id'))
 <div id="#result_id($doc)" class="doc">
   <div class="stats">
     <div class="count">
@@ -11,13 +11,13 @@
       </a>
       #if($response.getExplainMap())
       <div class="exp">
-        $response.getExplainMap().get($doi)
+        $response.getExplainMap().get($id)
       </div>
       #end
     </div>
   </div>
   <div class="title">
-    <a href='ui-detail?q=doi:"$doi"'>
+    <a href='ui-detail?q=dataset_id:"$id"'>
       #field("title")
     </a>
   </div>
