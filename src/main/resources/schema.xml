@@ -134,7 +134,7 @@
    <field name="datacentre" type="symbol" indexed="true" stored="true"/>
    <field name="prefix" type="string" indexed="true" stored="true"/>
    <field name="refQuality" type="boolean" indexed="true" stored="true" default="false"/>
-   <field name="dataset_id" type="string" indexed="false" stored="true"/>
+   <field name="dataset_id" type="string" indexed="true" stored="true"/>
    <field name="uploaded" type="date" indexed="true" stored="true"/>
    
    <!-- Solr fields -->
@@ -162,7 +162,7 @@
  <!-- Field to use to determine and enforce document uniqueness. 
       Unless this field is marked with required="false", it will be a required field
    -->
- <uniqueKey>doi</uniqueKey>
+ <uniqueKey>dataset_id</uniqueKey>
 
  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
  <defaultSearchField>doi</defaultSearchField>
