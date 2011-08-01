@@ -329,7 +329,7 @@ var options = {
 	opts : new Array(),
 	init : function() {
 		this.add("instant", true, null, "Instant Search", "load results immediately without clicking 'search' button");
-		this.add("continous", true, reload_results, "Continous Scrolling", "load next results automatically when hitting the bottom of the page");
+		this.add("continous", false, reload_results, "Continous Scrolling", "load next results automatically when hitting the bottom of the page");
 		options.menu.init();
 	},
 	add : function(name, defaultvalue, hook, text, tooltip) {
