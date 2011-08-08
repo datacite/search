@@ -1,9 +1,11 @@
 <table>
   #set($fields = $sort.sort($doc.getFieldNames()))
   #foreach($field in $fields)
+    #if($field != "xml")
     <tr>
       <td class="field_name">$field</td>
       <td class="field_value">#field_ul($field)</td>
     </tr>
+    #end
   #end
 </table>
