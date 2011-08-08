@@ -30,7 +30,7 @@
     <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true" omitNorms="true"/>
 
     <!--Binary data type. The data should be sent/retrieved in as Base64 encoded Strings -->
-    <!-- <fieldtype name="binary" class="solr.BinaryField"/>-->
+    <fieldtype name="binary" class="solr.BinaryField"/>
 
     <!-- The format for this date field is of the form 1995-12-31T23:59:59Z -->
     <fieldType name="date" class="solr.TrieDateField" omitNorms="true" precisionStep="0" positionIncrementGap="0"/>
@@ -136,6 +136,7 @@
    <field name="refQuality" type="boolean" indexed="true" stored="true" default="false"/>
    <field name="dataset_id" type="string" indexed="true" stored="true"/>
    <field name="uploaded" type="date" indexed="true" stored="true"/>
+   <field name="xml" type="binary" indexed="false" stored="true"/>
    
    <!-- Solr fields -->
    <field name="indexed" type="date" indexed="true" stored="true" default="NOW"/>
