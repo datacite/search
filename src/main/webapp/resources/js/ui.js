@@ -19,6 +19,10 @@ function init() {
 	process_results();
 	
 	homepage_mode.init();
+
+	// fix for #57
+	if (History.getHash())
+		History.Adapter.trigger(window,'statechange');
 }
 
 Dialog = function() {
