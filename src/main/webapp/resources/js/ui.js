@@ -69,6 +69,16 @@ function setup_query_form() {
 
 function setup_debug_box() {
 	var div = $("<div>").attr("id","debug").hide();
+	var reset_link = $("<a>").attr("href","#").html("reset").click(function() {
+		$("#debug ul").empty();
+		$("#debug").hide();
+		return false;
+	});
+	var add_hr_link = $("<a>").attr("href","#").html("add hr").click(function() {
+		debug("<hr/>");
+		return false;
+	});
+	div.append(reset_link, "&bullet;", add_hr_link, $("<ul>"));
 	$("body").prepend(div);
 }
 
@@ -100,7 +110,9 @@ function setup_history() {
  *******************/
 
 function debug(html) {
-	$("#debug").html(html).show();
+	var item = $("<li>").html(html);
+	$("#debug ul").append(item);
+	$("#debug").show();
 }
 
 function add_topbar_link(text, hook) {
