@@ -100,7 +100,12 @@ function setup_history() {
 		}
     });
 	History.pushStateWithoutTrigger = function (data, title, url) {
-		History.skipTrigger = true;
+		var old_url = History.getState().url;
+		if (old_url != url) 
+			// if state has not changed, event changestate is not fired,
+			// so setting skipTrigger=true will not be reset and
+			// would bite us at next popstate event.
+			History.skipTrigger = true;
 		History.pushState(data, title, url);
 	}
 }
