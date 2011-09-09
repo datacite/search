@@ -84,8 +84,8 @@ function setup_debug_box() {
 
 function setup_history() {
 	History.Adapter.bind(window,'statechange',function() {
-		if (History.skipTrigger) {
-			History.skipTrigger = false;
+		if (History.skipReloadingResults) {
+			History.skipReloadingResults = false;
 		} else {
 			var State = History.getState();
 			load_results(State.url);
@@ -99,13 +99,13 @@ function setup_history() {
 			homepage_mode.exit();
 		}
     });
-	History.pushStateWithoutTrigger = function (data, title, url) {
+	History.pushStateWithoutReloadingResults = function (data, title, url) {
 		var old_url = History.getState().url;
 		if (old_url != url) 
 			// if state has not changed, event changestate is not fired,
-			// so setting skipTrigger=true will not be reset and
+			// so setting skipReloadingResults=true will not be reset and
 			// would bite us at next popstate event.
-			History.skipTrigger = true;
+			History.skipReloadingResults = true;
 		History.pushState(data, title, url);
 	}
 }
@@ -160,7 +160,7 @@ function reload_results() {
 }
 
 function load_results(query) {
-	History.pushStateWithoutTrigger(null, null, fixUrl(query));
+	History.pushStateWithoutReloadingResults(null, null, fixUrl(query));
 	$("#results").fadeTo("fast",0.7);
 	$("#results").load_sync(query, {
 		"v.template" : "ui/results"
@@ -171,7 +171,7 @@ function load_results(query) {
 }
 
 function load_main(query) {
-	History.pushStateWithoutTrigger(null, null, fixUrl(query));
+	History.pushStateWithoutReloadingResults(null, null, fixUrl(query));
 	$("#main").fadeTo("fast",0.7);
 	$("#main").load_sync(query + " #main", {
 		"v.template" : "ui/results",
