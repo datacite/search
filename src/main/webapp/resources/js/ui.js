@@ -138,7 +138,7 @@ function submit_query() {
 
 function reload_results() {
 	var q = $("#query_input").val();
-	url = get_lens_without_q() + "&q=" + escape(q);
+	url = get_lens_without_q() + "&q=" + encodeURIComponent(q);
 	load_results(url);
 }
 
