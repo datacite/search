@@ -23,7 +23,6 @@
   </div>
   <div class="info">  
     <a href="http://dx.doi.org/#f("doi")"><span class="doi">#f("doi")</span></a>
-    (<a href="#esc("http://oai.datacite.org/oai?verb=GetRecord&metadataPrefix=oai_datacite&identifier=oai:oai.datacite.org"):#f("dataset_id")">metadata</a>)
     #field("resourceTypeGeneral"): 
     #field("resourceType")
   </div>
