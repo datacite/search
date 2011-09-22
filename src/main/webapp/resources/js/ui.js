@@ -252,7 +252,7 @@ function process_results() {
 	
 function process_docs() {
 	$(".doc a").unbind();
-	$(".doc .title a").click(function() {
+	$(".doc .count").unbind().click(function() {
 		var doc = this.parentNode.parentNode;
 		var detail = $(".full", doc);
 		load_detail(doc);

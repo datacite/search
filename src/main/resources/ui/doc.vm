@@ -17,7 +17,7 @@
     </div>
   </div>
   <div class="title">
-    <a href='ui-detail?q=dataset_id:"$id"'>
+    <a href='http://data.datacite.org/#f("doi")'>
       #field("title")
     </a>
   </div>
