@@ -1,7 +1,7 @@
 <div class="hidden">
   ## static link to the current result 
-  <a id="lens" href="#url_for_lens">lens</a>
-  <a id="lens_without_q" href="#url_for_lens_without_q">lens_without_q</a>
+  <a id="lens" href="#url_for_lens">&nbsp;</a>
+  <a id="lens_without_q" href="#url_for_lens_without_q">&nbsp;</a>
   <span id="start">$page.start</span>
   <span id="q">#q</span>
 </div>
