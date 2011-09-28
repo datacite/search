@@ -17,12 +17,12 @@
     </div>
   </div>
   <div class="title">
-    <a href='http://data.datacite.org/#f("doi")'>
+    <a href='http://data.datacite.org/#esc_doi("#f('doi')")'>
       #field("title")
     </a>
   </div>
   <div class="info">  
-    <a href="http://dx.doi.org/#f("doi")"><span class="doi">#f("doi")</span></a>
+    <a href="http://dx.doi.org/#esc_doi("#f('doi')")"><span class="doi">#f("doi")</span></a>
     #field("resourceTypeGeneral"): 
     #field("resourceType")
   </div>

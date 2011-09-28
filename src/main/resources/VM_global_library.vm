@@ -43,6 +43,8 @@
 ## escape method especially for href attribute
 #macro(esc $txt)$txt.replaceAll("&", "&amp;").replaceAll("\"", "&quot;")#end
 
+#macro(esc_doi $doi)$esc.url($doi).replaceAll("%2F", "/")#end
+
 ## return q param if defined
 #macro(q)#if($request.originalParams.q)$request.originalParams.q#end#end
 
