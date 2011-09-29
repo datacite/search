@@ -12,6 +12,7 @@
                     dc.symbol AS datacentre,
                     m.xml,
                     m.created AS uploaded,
+                    m.namespace,
                     d.is_ref_quality AS refQuality,
                     if(d.is_active,null,'true') AS $skipDoc,
                     if(d.is_active,null,d.doi) AS $deleteDocById
@@ -31,6 +32,7 @@
        -->
       <field column="allocator" regex="([^.]*)\." sourceColName="datacentre"/>
       <field column="prefix" regex="([^/]*)/" sourceColName="doi"/>
+      <field column="schema_version" regex="-(\d+(.\d+)*)$" sourceColName="namespace"/>
        
       <entity name="xml" dataSource="field" dataField="metadata.xml"
         forEach="/resource" processor="XPathEntityProcessor">
