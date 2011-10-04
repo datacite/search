@@ -190,7 +190,7 @@ function load_main(query) {
 }
 
 function load_detail(doc) {
-	var doi = $(".info .doi", doc).text();
+	var doi = $(".info span.doi", doc).text();
 	var detail = $(".full",doc);
 	if (detail.text().length == 0) { // not already loaded
 		detail.load("ui-detail", {
