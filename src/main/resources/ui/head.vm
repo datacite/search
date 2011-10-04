@@ -5,6 +5,7 @@
 <script type="text/javascript" src="resources/js/jquery-ui-1.8.14.custom.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery-custom.js"></script>
 <script type="text/javascript" src="resources/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="resources/js/jquery.base64.js"></script>
 
 <script type="text/javascript">
 <!--

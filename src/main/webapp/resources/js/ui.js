@@ -195,6 +195,14 @@ function load_detail(doc) {
 	if (detail.text().length == 0) { // not already loaded
 		detail.load("ui-detail", {
 			q : 'doi:"' + doi + '"'
+		}, function() {
+			// hack to display xml. How to do with velocity?!
+			$.get('api', { fl: "xml", wt: "csv", q: "doi:" + doi, rows: 1, "csv.header" :false},
+					function(data) {
+				var xml = $.base64Decode(data);
+				var pre = $("<pre>").text(xml);
+				detail.append(pre);
+			});
 		});
 	};
 }
@@ -260,7 +268,6 @@ function process_docs() {
 		$(".full", doc).slideToggle();
 		return false;
 	});
-
 	$(".doc .score a").click(function() {
 		var score = this.parentNode;
 		$(".exp", score).slideToggle();

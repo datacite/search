@@ -1,6 +1,7 @@
 <a href="#esc("http://oai.datacite.org/oai?verb=GetRecord&metadataPrefix=oai_datacite&identifier=oai:oai.datacite.org"):#f("dataset_id")">OAI</a>
 &nbsp;|&nbsp;
 <a href='http://data.datacite.org/#f("doi")'>Content Service</a>
+<br/>
 <table>
   #set($fields = $sort.sort($doc.getFieldNames()))
   #foreach($field in $fields)

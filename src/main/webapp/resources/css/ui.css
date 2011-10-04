@@ -136,6 +136,10 @@ h1,h2,h3 {
   display: none;
 }
 
+.doc .full pre {
+    white-space: pre-wrap;
+}
+
 div.doc:hover {
     background: #F0F0F0;
 }
