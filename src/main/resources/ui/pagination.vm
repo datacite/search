@@ -1,20 +1,43 @@
+#macro(link_to_first_page $text)
+  #if($page.current_page_number > 1)
+    <a class="first-page pagelink" title="goto first page" href="#url_for_start(0)">$text</a>
+  #else
+    <span class="first-page pagelink">$text</span>
+  #end
+#end
+
 #macro(link_to_prev_page $text)
   #if($page.current_page_number > 1)
     #set($prev_start = $page.start - $page.results_per_page)
-    <a class="prev-page" href="#url_for_start($prev_start)">$text</a>
+    <a class="prev-page pagelink" title="goto previous page" href="#url_for_start($prev_start)">$text</a>
+  #else
+    <span class="prev-page pagelink">$text</span>
   #end
 #end
 
 #macro(link_to_next_page $text)
   #if($page.current_page_number < $page.page_count)
     #set($next_start = $page.start + $page.results_per_page)
-    <a class="next-page" href="#url_for_start($next_start)">$text</a>
+    <a class="next-page pagelink" title="goto next page" href="#url_for_start($next_start)">$text</a>
+  #else
+    <span class="next-page pagelink">$text</span>
+  #end
+#end
+
+#macro(link_to_last_page $text)
+  #if($page.current_page_number < $page.page_count)
+    #set($last_start = ($page.page_count - 1) * $page.results_per_page)
+    <a class="last-page pagelink" title="goto last page" href="#url_for_start($last_start)">$text</a>
+  #else
+    <span class="last-page pagelink">$text</span>
   #end
 #end
 
 #if($page.results_found > 0)
   Page <span class="page-num">$page.current_page_number</span> of <span
         class="page-count">$page.page_count</span>
+  #link_to_first_page("<<")
   #link_to_prev_page("<")
   #link_to_next_page(">")
+  #link_to_last_page(">>")
 #end
