@@ -36,8 +36,8 @@
 #if($page.results_found > 0)
   Page <span class="page-num">$page.current_page_number</span> of <span
         class="page-count">$page.page_count</span>
-  #link_to_first_page("<<")
-  #link_to_prev_page("<")
-  #link_to_next_page(">")
-  #link_to_last_page(">>")
+  #link_to_first_page("&lt;&lt;")
+  #link_to_prev_page("&lt;")
+  #link_to_next_page("&gt;")
+  #link_to_last_page("&gt;&gt;")
 #end

@@ -4,13 +4,13 @@
 
 #macro(field $f)
   #foreach($v in $doc.getFieldValues($f))
-    $v
+    $esc.html($v)
   #end
 #end  
 
 #macro(field_br $f)
   #foreach($v in $doc.getFieldValues($f))
-    $v<br/>
+    $esc.html($v)<br/>
   #end
 #end  
 
@@ -19,11 +19,11 @@
   #if($values.size() > 1)
     <ul>
       #foreach($value in $values)
-        <li>$value</li>
+        <li>$esc.html($value)</li>
       #end
     </ul>
   #else
-    $values.get(0)
+    $esc.html($values.get(0))
   #end
 #end
 
@@ -34,7 +34,7 @@
       (et. al.)
       #break
     #end
-    $value
+    $esc.html($value)
     #if($velocityHasNext)&bull;#end
   #end
   

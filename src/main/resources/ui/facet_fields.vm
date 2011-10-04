@@ -23,7 +23,7 @@
             #end
           #end
           #if(!$fq_applied) 
-            <li><a href="#url_for_facet_filter($field.name, $facet.name)"><span class="value">$facet.name</span> <span class="count">($facet.count)</span></a></li>
+            <li><a href="#url_for_facet_filter($field.name, $facet.name)"><span class="value">$esc.html($facet.name)</span> <span class="count">($facet.count)</span></a></li>
           #end
         #end
         </ul>
