@@ -21,10 +21,10 @@
       #field("title")
     </a>
   </div>
-  <div class="info">  
+  <div class="info">
     <a href="http://dx.doi.org/#esc_doi("#f('doi')")"><span class="doi">#f("doi")</span></a>
-    #field("resourceTypeGeneral"): 
-    #field("resourceType")
+    #field("resourceTypeGeneral")
+    #if_has_field("resourceType", ": #field('resourceType')")
   </div>
   <div class="short">
     #field_et_al("creator",5)

@@ -6,7 +6,7 @@
   #foreach($v in $doc.getFieldValues($f))
     $esc.html($v)
   #end
-#end  
+#end
 
 #macro(field_br $f)
   #foreach($v in $doc.getFieldValues($f))
@@ -37,7 +37,12 @@
     $esc.html($value)
     #if($velocityHasNext)&bull;#end
   #end
-  
+#end
+
+#macro(if_has_field $field $body)
+   #if($doc.containsKey($field) && $doc.getFieldValue($field) != "")
+     $body
+   #end
 #end
 
 ## escape method especially for href attribute
