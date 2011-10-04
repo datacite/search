@@ -23,5 +23,10 @@ if ( typeof window.JSON === 'undefined' ) {
 
 <link rel="stylesheet" type="text/css" href="resources/css/jquery-ui-1.8.14.custom.css"/>
 <link rel="stylesheet" type="text/css" href="resources/css/ui.css"/>
+
+<!--[if IE]>
+  <link rel="stylesheet" type="text/css" href="resources/css/ui_ie.css" />
+<![endif]--> 
+
 <link rel="SHORTCUT ICON" href="resources/img/favicon.ico"/>
   

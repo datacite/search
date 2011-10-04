@@ -341,6 +341,7 @@ a .doi {
 .pagination span.pagelink {
     opacity : 0.4;
 }
+
 .pagination .next-page {
   background: url("../img/tango/16x16/actions/go-next.png") no-repeat scroll top center transparent;
 }

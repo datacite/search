@@ -1,0 +1,15 @@
+a .doi {
+    /* IE<9 does not respect background-size, so we need more space */ 
+    padding-left: 20px;
+}
+
+.pagination .pagelink {
+    /* hack for IE to hide text if background icon is present */
+    text-indent: -9999px;
+}
+
+.pagination span.pagelink {
+    /* IE uses proprietary solution for opacity*/
+    filter:alpha(opacity=40);
+}
+
