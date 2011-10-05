@@ -9,12 +9,25 @@ import org.apache.solr.handler.dataimport.Transformer;
 
 public class KeyValueTransformer extends Transformer {
 
-    String keysField = "ignored_alternateIdentifier_keys";
-    String valuesField = "ignored_alternateIdentifier";
-    String targetField = "alternateIdentifier";
+    public static final String targetAttribute = "column";
+    public static final String keysAttribute = "keys";
+    public static final String valuesAttribute = "values";
 
     @Override
     public Object transformRow(Map<String, Object> row, Context context) {
+        List<Map<String, String>> fields = context.getAllEntityFields();
+        for (Map<String, String> field : fields) {
+            if (field.containsKey(keysAttribute) && field.containsKey(valuesAttribute)) {
+                String keysField = field.get(keysAttribute);
+                String valuesField = field.get(valuesAttribute);
+                String targetField = field.get(targetAttribute);
+                row = transformField(row, keysField, valuesField, targetField);
+            }
+        }
+        return row;
+    }
+    
+    public Map<String, Object> transformField(Map<String, Object> row, String keysField, String valuesField, String targetField) {
         Object keys = row.get(keysField);
         Object values = row.get(valuesField);
         if (keys != null && values != null) {

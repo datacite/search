@@ -48,7 +48,10 @@
         <field column="resourceType" xpath="//resourceType" />
         <field column="ignored_alternateIdentifier_keys" xpath="//alternateIdentifier/@alternateIdentifierType" />
         <field column="ignored_alternateIdentifier" xpath="//alternateIdentifier" />
-        <field column="relatedIdentifier" xpath="//relatedIdentifier" />
+        <field column="alternateIdentifier" keys="ignored_alternateIdentifier_keys" values="ignored_alternateIdentifier" />
+        <field column="ignored_relatedIdentifier_keys" xpath="//relatedIdentifier/@relatedIdentifierType" />
+        <field column="ignored_relatedIdentifier" xpath="//relatedIdentifier" />
+        <field column="relatedIdentifier" keys="ignored_relatedIdentifier_keys" values="ignored_relatedIdentifier" />
         <field column="size" xpath="//size" />
         <field column="format" xpath="//format" />
         <field column="version" xpath="//version" />
