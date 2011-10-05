@@ -46,12 +46,17 @@
         <field column="language" xpath="//language" />
         <field column="resourceTypeGeneral" xpath="//resourceType/@resourceTypeGeneral" />
         <field column="resourceType" xpath="//resourceType" />
-        <field column="ignored_alternateIdentifier_keys" xpath="//alternateIdentifier/@alternateIdentifierType" />
+        
+        <field column="ignored_alternateIdentifier_type" xpath="//alternateIdentifier/@alternateIdentifierType" />
         <field column="ignored_alternateIdentifier" xpath="//alternateIdentifier" />
-        <field column="alternateIdentifier" keys="ignored_alternateIdentifier_keys" values="ignored_alternateIdentifier" />
-        <field column="ignored_relatedIdentifier_keys" xpath="//relatedIdentifier/@relatedIdentifierType" />
+        <field column="alternateIdentifier" keys="ignored_alternateIdentifier_type" values="ignored_alternateIdentifier" />
+        
+        <field column="ignored_relatedIdentifier_type" xpath="//relatedIdentifier/@relatedIdentifierType" />
+        <field column="ignored_relatedIdentifier_relation" xpath="//relatedIdentifier/@relationType" />
         <field column="ignored_relatedIdentifier" xpath="//relatedIdentifier" />
-        <field column="relatedIdentifier" keys="ignored_relatedIdentifier_keys" values="ignored_relatedIdentifier" />
+        <field column="ignored_relatedIdentifier_relation_and_type" keys="ignored_relatedIdentifier_relation" values="ignored_relatedIdentifier_type" />
+        <field column="relatedIdentifier" keys="ignored_relatedIdentifier_relation_and_type" values="ignored_relatedIdentifier" />
+        
         <field column="size" xpath="//size" />
         <field column="format" xpath="//format" />
         <field column="version" xpath="//version" />

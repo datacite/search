@@ -76,6 +76,14 @@
       </analyzer>
     </fieldType>
 
+    <!-- lowercases the entire field value, keeping it as a single token.  -->
+    <fieldType name="identifiers" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter=":" reverse="true"/>
+        <filter class="solr.LowerCaseFilterFactory" />
+      </analyzer>
+    </fieldType>
+
     <!-- since fields of this type are by default not stored or indexed,
          any data added to them will be ignored outright.  --> 
     <fieldtype name="ignored" stored="false" indexed="false" multiValued="true" class="solr.StrField" />
@@ -121,8 +129,8 @@
    <field name="language" type="lang" indexed="true" stored="true"/>
    <field name="resourceType" type="textgen" indexed="true" stored="true"/>
    <field name="resourceTypeGeneral" type="lowercase" indexed="true" stored="true"/>
-   <field name="alternateIdentifier" type="lowercase" indexed="true" stored="true" multiValued="true"/>
-   <field name="relatedIdentifier" type="lowercase" indexed="true" stored="true" multiValued="true"/>
+   <field name="alternateIdentifier" type="identifiers" indexed="true" stored="true" multiValued="true"/>
+   <field name="relatedIdentifier" type="identifiers" indexed="true" stored="true" multiValued="true"/>
    <field name="size" type="textgen" indexed="true" stored="true" multiValued="true"/>
    <field name="format" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="rights" type="text" indexed="true" stored="true"/>
