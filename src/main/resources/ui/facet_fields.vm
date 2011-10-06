@@ -11,7 +11,7 @@
       <h3>#normalize_facet($field.name)</h3>
       <div class="facet_data">
         <ul>
-          <li class="hidden">foo</li> ## ugly hack to make validator happy
+          <li class="hidden">&nbsp;</li> ## ugly hack to make validator happy
         #foreach($facet in $field.values)
           #if($velocityCount == $limit)#break#end
           #set($fq = "$esc.url($field.name):$esc.getQ()$esc.url($facet.name).replaceAll('\+', ' ')$esc.getQ()")
