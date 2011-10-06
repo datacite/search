@@ -9,7 +9,10 @@
     <entity name="metadata" dataSource="db"
       query="SELECT d.doi AS doi,
                     d.id AS dataset_id,
-                    dc.symbol AS datacentre,
+                    dc.symbol AS datacentre_symbol,
+                    CONCAT(dc.symbol, ' - ', dc.name) AS datacentre,
+                    al.symbol AS allocator_symbol,
+                    CONCAT(al.symbol, ' - ', al.name) AS allocator,
                     m.xml,
                     m.created AS uploaded,
                     m.namespace,
@@ -19,6 +22,7 @@
              FROM metadata AS m 
              JOIN dataset AS d ON m.dataset = d.id
              JOIN datacentre AS dc ON d.datacentre = dc.id
+             JOIN allocator AS al ON dc.allocator = al.id
              WHERE d.doi not like '${dataimporter.request.testprefix}/%'
                AND ( '${dataimporter.request.clean}' != 'false'
                      OR m.created > '${dataimporter.last_index_time}'
@@ -30,7 +34,6 @@
         using delta import as proposed in
         http://wiki.apache.org/solr/DataImportHandlerDeltaQueryViaFullImport
        -->
-      <field column="allocator" regex="([^.]*)\." sourceColName="datacentre"/>
       <field column="prefix" regex="([^/]*)/" sourceColName="doi"/>
       <field column="schema_version" regex="-(\d+(.\d+)*)$" sourceColName="namespace"/>
        

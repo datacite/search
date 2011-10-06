@@ -138,8 +138,10 @@
    <field name="description" type="textgen" indexed="true" stored="true" multiValued="true"/>
    
    <!-- MDS fields -->
-   <field name="allocator" type="symbol" indexed="true" stored="true"/>
-   <field name="datacentre" type="symbol" indexed="true" stored="true"/>
+   <field name="allocator" type="textgen" indexed="true" stored="true"/>
+   <field name="allocator_symbol" type="symbol" indexed="true" stored="true"/>
+   <field name="datacentre" type="textgen" indexed="true" stored="true"/>
+   <field name="datacentre_symbol" type="symbol" indexed="true" stored="true"/>
    <field name="prefix" type="string" indexed="true" stored="true"/>
    <field name="refQuality" type="boolean" indexed="true" stored="true" default="false"/>
    <field name="dataset_id" type="string" indexed="true" stored="true"/>
