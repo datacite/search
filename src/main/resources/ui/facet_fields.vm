@@ -23,19 +23,24 @@
             #end
           #end
           #if(!$fq_applied) 
-            <li>
-              <a href="#url_for_facet_filter($field.name, $facet.name)">
-              #if($field.name.matches("(allocator|datacentre)_facet"))
-                #set($arr = $facet.name.split(" ",3))
-                #set($symbol = $arr.get(0))
-                #set($name = $arr.get(2))
-                <span class="value" title="$esc.html($name)">$esc.html($symbol)</span>
-              #else
-                <span class="value">$esc.html($facet.name)</span>
-              #end
-                <span class="count">($facet.count)</span>
-              </a>
-            </li>
+            #if($field.name.matches("(allocator|datacentre)_facet"))
+              #set($arr = $facet.name.split(" ",3))
+              #set($symbol = $arr.get(0))
+              #set($name = $arr.get(2))
+              <li title="$esc.html($name)">
+                <a href="#url_for_facet_filter($field.name, $facet.name)">
+                  <span class="value" title="$esc.html($name)">$esc.html($symbol)</span>
+                  <span class="count">($facet.count)</span>
+                </a>
+              </li>
+            #else
+              <li>
+                <a href="#url_for_facet_filter($field.name, $facet.name)">
+                  <span class="value">$esc.html($facet.name)</span>
+                  <span class="count">($facet.count)</span>
+                </a>
+              </li>
+            #end
           #end
         #end
         </ul>
