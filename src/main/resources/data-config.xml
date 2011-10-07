@@ -66,6 +66,14 @@
         <field column="rights" xpath="//right" />
         <field column="description" xpath="//description" />
       </entity>
+      
+      <entity name="media" dataSource="db"
+        query="SELECT CONCAT(media_type,':',url) AS media
+               FROM media AS m
+               WHERE m.dataset = '${metadata.dataset_id}'
+              ">
+      </entity>
+      
     </entity>
   </document>
 </dataConfig>
