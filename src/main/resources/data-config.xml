@@ -19,15 +19,19 @@
                     d.is_ref_quality AS refQuality,
                     if(d.is_active,null,'true') AS $skipDoc,
                     if(d.is_active,null,d.doi) AS $deleteDocById
-             FROM metadata AS m 
-             JOIN dataset AS d ON m.dataset = d.id
+             FROM dataset AS d
+             JOIN metadata AS m
+               ON m.dataset = d.id
+                 AND m.metadata_version =
+                     (SELECT MAX(metadata_version) AS max_version
+                      FROM metadata AS mm
+                      WHERE mm.dataset = d.id)
              JOIN datacentre AS dc ON d.datacentre = dc.id
              JOIN allocator AS al ON dc.allocator = al.id
              WHERE d.doi not like '${dataimporter.request.testprefix}/%'
                AND ( '${dataimporter.request.clean}' != 'false'
                      OR m.created > '${dataimporter.last_index_time}'
                      OR d.updated > '${dataimporter.last_index_time}' )
-             ORDER BY m.created
             "
       transformer="RegexTransformer">
       <!-- 
