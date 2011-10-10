@@ -6,7 +6,7 @@
   <dataSource name="field" type="FieldReaderDataSource" />
   <document>
     <!-- SOLR-2104 -->
-    <entity name="metadata" dataSource="db"
+    <entity name="dataset" dataSource="db"
       query="SELECT d.doi AS doi,
                     d.id AS dataset_id,
                     dc.symbol AS datacentre_symbol,
@@ -41,7 +41,7 @@
       <field column="prefix" regex="([^/]*)/" sourceColName="doi"/>
       <field column="schema_version" regex="-(\d+(.\d+)*)$" sourceColName="namespace"/>
        
-      <entity name="xml" dataSource="field" dataField="metadata.xml"
+      <entity name="xml" dataSource="field" dataField="dataset.xml"
         forEach="/resource" processor="XPathEntityProcessor" transformer="org.datacite.search.handler.dataimport.KeyValueTransformer">
         <field column="title" xpath="//title" />
         <field column="creator" xpath="//creatorName" />
@@ -70,14 +70,13 @@
         <field column="rights" xpath="//right" />
         <field column="description" xpath="//description" />
       </entity>
-      
+    
       <entity name="media" dataSource="db"
         query="SELECT CONCAT(media_type,':',url) AS media
                FROM media AS m
-               WHERE m.dataset = '${metadata.dataset_id}'
+               WHERE m.dataset = '${dataset.dataset_id}'
               ">
       </entity>
-      
     </entity>
   </document>
 </dataConfig>
