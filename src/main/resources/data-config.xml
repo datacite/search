@@ -14,10 +14,11 @@
                     al.symbol AS allocator_symbol,
                     CONCAT(al.symbol, ' - ', al.name) AS allocator,
                     m.xml,
+                    m.xml IS NOT NULL as has_metadata,
                     m.created AS uploaded,
                     m.namespace,
                     d.is_ref_quality AS refQuality,
-                    mt.dataset AS has_media,
+                    mt.dataset IS NOT NULL AS has_media,
                     if(d.is_active,null,'true') AS $skipDoc,
                     if(d.is_active,null,d.doi) AS $deleteDocById
              FROM dataset AS d
@@ -43,7 +44,7 @@
       <field column="prefix" regex="([^/]*)/" sourceColName="doi"/>
       <field column="schema_version" regex="-(\d+(.\d+)*)$" sourceColName="namespace"/>
 
-      <entity name="if_xml" hasField="dataset.xml" processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor">
+      <entity name="if_metadata" hasField="dataset.has_metadata" processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor">
       <entity name="xml" dataSource="field" dataField="dataset.xml"
         forEach="/resource" processor="XPathEntityProcessor" onError="skip"
         transformer="org.datacite.search.handler.dataimport.KeyValueTransformer">
