@@ -12,8 +12,6 @@ public class ConditionalEntityProcessor extends EntityProcessorBase {
     
     boolean skip;
 
-    boolean nextRowExecuted;
-
     @Override
     public void init(Context context) {
         super.init(context);
