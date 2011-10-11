@@ -33,7 +33,10 @@
              JOIN allocator AS al ON dc.allocator = al.id
              WHERE d.doi not like '${dataimporter.request.testprefix}/%'
                AND ( '${dataimporter.request.clean}' != 'false'
-                     OR GREATEST(m.created, d.updated, mt.updated) > '${dataimporter.last_index_time}' )
+                     OR GREATEST(d.updated,
+                                 IFNULL(m.created,0),
+                                 IFNULL(mt.updated,0))
+                        > '${dataimporter.last_index_time}' )
              GROUP BY dataset_id
             "
       transformer="RegexTransformer">
