@@ -28,8 +28,7 @@
 #end
 
 #macro(field_et_al $field $max)
-  #set($values = $doc.getFieldValues($field))
-  #foreach($value in $values)
+  #foreach($value in $doc.getFieldValues($field))
     #if($velocityCount > $max)
       (et. al.)
       #break
