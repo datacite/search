@@ -20,18 +20,19 @@
                     if(d.is_active,null,'true') AS $skipDoc,
                     if(d.is_active,null,d.doi) AS $deleteDocById
              FROM dataset AS d
-             JOIN metadata AS m
+             LEFT JOIN metadata AS m
                ON m.dataset = d.id
                  AND m.metadata_version =
                      (SELECT MAX(metadata_version) AS max_version
                       FROM metadata AS mm
                       WHERE mm.dataset = d.id)
+             LEFT JOIN media AS mt ON mt.dataset = d.id
              JOIN datacentre AS dc ON d.datacentre = dc.id
              JOIN allocator AS al ON dc.allocator = al.id
              WHERE d.doi not like '${dataimporter.request.testprefix}/%'
                AND ( '${dataimporter.request.clean}' != 'false'
-                     OR m.created > '${dataimporter.last_index_time}'
-                     OR d.updated > '${dataimporter.last_index_time}' )
+                     OR GREATEST(m.created, d.updated, mt.updated) > '${dataimporter.last_index_time}' )
+             GROUP BY dataset_id
             "
       transformer="RegexTransformer">
       <!-- 
@@ -42,7 +43,8 @@
       <field column="schema_version" regex="-(\d+(.\d+)*)$" sourceColName="namespace"/>
        
       <entity name="xml" dataSource="field" dataField="dataset.xml"
-        forEach="/resource" processor="XPathEntityProcessor" transformer="org.datacite.search.handler.dataimport.KeyValueTransformer">
+        forEach="/resource" processor="XPathEntityProcessor" onError="skip"
+        transformer="org.datacite.search.handler.dataimport.KeyValueTransformer">
         <field column="title" xpath="//title" />
         <field column="creator" xpath="//creatorName" />
         <field column="publisher" xpath="//publisher" />
