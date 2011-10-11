@@ -42,6 +42,14 @@ public class LanguageCodeFilterTest extends BaseTokenTestCase {
         assertFilter("ger", "de");
         assertFilter("chi", "zh");
     }
+    
+    @Ignore
+    @Test
+    public void testFullname() {
+        assertFilter("deutsch", "de");
+        assertFilter("german", "de");
+        assertFilter("english", "en");
+    }
 
     private void assertFilter(String in, String... out) {
         Reader reader = new StringReader(in);
