@@ -17,6 +17,7 @@
                     m.created AS uploaded,
                     m.namespace,
                     d.is_ref_quality AS refQuality,
+                    mt.dataset AS has_media,
                     if(d.is_active,null,'true') AS $skipDoc,
                     if(d.is_active,null,d.doi) AS $deleteDocById
              FROM dataset AS d
@@ -41,7 +42,8 @@
        -->
       <field column="prefix" regex="([^/]*)/" sourceColName="doi"/>
       <field column="schema_version" regex="-(\d+(.\d+)*)$" sourceColName="namespace"/>
-       
+
+      <entity name="if_xml" hasField="dataset.xml" processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor">
       <entity name="xml" dataSource="field" dataField="dataset.xml"
         forEach="/resource" processor="XPathEntityProcessor" onError="skip"
         transformer="org.datacite.search.handler.dataimport.KeyValueTransformer">
@@ -72,12 +74,15 @@
         <field column="rights" xpath="//right" />
         <field column="description" xpath="//description" />
       </entity>
-    
+      </entity>
+ 
+      <entity name="if_media" hasField="dataset.has_media" processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor">
       <entity name="media" dataSource="db"
         query="SELECT CONCAT(media_type,':',url) AS media
                FROM media AS m
                WHERE m.dataset = '${dataset.dataset_id}'
               ">
+      </entity>
       </entity>
     </entity>
   </document>
