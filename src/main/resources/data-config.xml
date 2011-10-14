@@ -72,6 +72,10 @@
         <field column="ignored_relatedIdentifier_relation_and_type" keys="ignored_relatedIdentifier_relation" values="ignored_relatedIdentifier_type" />
         <field column="relatedIdentifier" keys="ignored_relatedIdentifier_relation_and_type" values="ignored_relatedIdentifier" />
         
+        <field column="ignored_nameIdentifier_scheme" xpath="//nameIdentifier/@nameIdentifierScheme" />
+        <field column="ignored_nameIdentifier" xpath="//nameIdentifier" />
+        <field column="nameIdentifier" keys="ignored_nameIdentifier_scheme" values="ignored_nameIdentifier" />
+        
         <field column="size" xpath="//size" />
         <field column="format" xpath="//format" />
         <field column="version" xpath="//version" />
