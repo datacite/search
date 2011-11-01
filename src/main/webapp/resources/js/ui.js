@@ -300,11 +300,13 @@ function process_filters() {
 filter_preview = {
 	timeout : null,
 	show : function(query) {
-		clearTimeout(this.timeout);
-		var self = this;
-		this.timeout = setTimeout(function() {
-			self.do_preview(query);
-		}, 250);
+		if (options.get("filter_preview")) {
+			clearTimeout(this.timeout);
+			var self = this;
+			this.timeout = setTimeout(function() {
+				self.do_preview(query);
+			}, 250);
+		};
 	},
 	clear : function() {
 		clearTimeout(this.timeout);
@@ -373,6 +375,7 @@ var options = {
 	init : function() {
 		this.add("instant", true, null, "Instant Search", "load results immediately without clicking 'search' button");
 		this.add("continous", false, reload_results, "Continous Scrolling", "load next results automatically when hitting the bottom of the page");
+		this.add("filter_preview", false, null, "Filter Preview", "show preview of filter on mouse hover");
 		options.menu.init();
 	},
 	add : function(name, defaultvalue, hook, text, tooltip) {
