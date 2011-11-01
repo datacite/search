@@ -165,18 +165,18 @@ function reload_results() {
 
 function load_results(query) {
 	History.pushStateWithoutReloadingResults(null, null, fixUrl(query));
-	$("#results").fadeTo("fast",0.7);
+	$("#results").fadeTo(0,0.3);
 	$("#results").load_sync(query, {
 		"v.template" : "ui/results"
 	}, function() {
 		process_results();
-		$("#results").fadeTo("fast",1);
+		$("#results").fadeTo(0,1);
 	});
 }
 
 function load_main(query) {
 	History.pushStateWithoutReloadingResults(null, null, fixUrl(query));
-	$("#main").fadeTo("fast",0.7);
+	$("#main").fadeTo(0,0.3);
 	$("#main").load_sync(query + " #main", {
 		"v.template" : "ui/results",
 		"facet" : "off"
@@ -185,7 +185,7 @@ function load_main(query) {
 		process_docs();
 		pagination.process();
 		process_filters();
-		$("#main").fadeTo("fast",1);
+		$("#main").fadeTo(0,1);
 	});
 }
 
