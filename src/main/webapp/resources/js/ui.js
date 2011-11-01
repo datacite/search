@@ -451,7 +451,7 @@ var pagination = {
 		$("#next_page_loading").hide();
 		if (options.get("continous"))
 			$(".pagination").hide();
-		while (pagination.next_page.is_needed())
+		if (pagination.next_page.is_needed())
 			pagination.next_page.load();
 		$(".pagination a").unbind().click(function() {
 			url = $(this).attr("href");
@@ -495,6 +495,9 @@ pagination.next_page = {
 				}
 				$("#next_page_loading").hide();
 				pagination.next_page.loading = false;
+
+				if (pagination.next_page.is_needed())
+					pagination.next_page.load(async);
 			}
 		});
 	},
