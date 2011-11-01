@@ -432,6 +432,7 @@ var pagination = {
 		});
 	},
 	process : function() {
+		$("#next_page_loading").hide();
 		if (options.get("continous"))
 			$(".pagination").hide();
 		while (pagination.next_page.is_needed())
@@ -453,11 +454,12 @@ pagination.next_page = {
 	load : function(async) {
 		if (async == null)
 			async = false;
-		
+
 		if (this.loading)
 			return
 		this.loading = true;
-		
+		$("#next_page_loading").show();
+
 		$.ajax({
 			type  : "GET",
 			url : get_lens(),
@@ -475,6 +477,7 @@ pagination.next_page = {
 					$("#docs").append(data);
 					process_docs();
 				}
+				$("#next_page_loading").hide();
 				pagination.next_page.loading = false;
 			}
 		});

@@ -37,6 +37,11 @@
     <div id="next_page"/>
   #end
   
+  <div id="next_page_loading">
+    <img src="resources/img/tango/32x32/animations/process-working.gif" class="loading"/>
+    Loading next page
+  </div>
+    
   <div id="footer">
     #parse("ui/footer.vm")
   </div>

@@ -368,3 +368,7 @@ a.doi {
 #footer span {
   font-size: small !important;
 }
+
+img.loading {
+  vertical-align: middle;
+}
