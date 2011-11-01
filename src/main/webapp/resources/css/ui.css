@@ -216,8 +216,6 @@ ul {
 }
 
 .facet {
-  margin-bottom: 5px;
-  background: #EEEEEE;
   padding: 5px;
 }
 
@@ -257,6 +255,8 @@ ul {
 
 .facet_data {
     margin-top: 5px;
+    background: #EEEEEE;
+    padding: 3px;
 }
 
 #js_warning {
