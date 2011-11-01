@@ -36,4 +36,8 @@
   #if($page.results_found > $page.results_per_page)
     <div id="next_page"/>
   #end
+  
+  <div id="footer">
+    #parse("ui/footer.vm")
+  </div>
 </div>

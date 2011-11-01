@@ -358,4 +358,13 @@ a.doi {
   background: url("../img/tango/16x16/actions/go-first.png") no-repeat scroll top center transparent;  
 }
 
+#footer {
+  color: grey;
+  border-top: solid thin grey;
+  margin-top: 1.5ex;
+  padding-top: 5px;
+}
 
+#footer span {
+  font-size: small !important;
+}

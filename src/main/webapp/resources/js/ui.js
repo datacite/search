@@ -335,12 +335,14 @@ homepage_mode = {
 			if (this.isQueryEmpty()) {
 				this.enabled = true;
 				$("#header *").addClass("homepage");
+				$("#main").hide();
 			}
 		},
 		exit : function() {
 			if (this.enabled && ! this.isQueryEmpty()) {
 				this.enabled = false;
 				$("#header *").removeClass("homepage");
+				$("#main").show();
 			}
 		},
 		isQueryEmpty : function() {

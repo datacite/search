@@ -1,0 +1,3 @@
+<span class="title">DataCite Metadata Search</span>
+&bull;
+<span class="qtime">Query Time: $response.getHeader().get("QTime")ms</span>
