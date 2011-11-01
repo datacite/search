@@ -248,15 +248,21 @@ function process_docs() {
 	});
 }
 
+var facet_state = new Array();
 function process_facets() {
 	$(".facet").each(function() {
 		var id = $(this).attr("id");
 		var facet = id.replace(/facet-/,"");
+		if (facet_state[facet] == undefined)
+			facet_state[facet] = true;
 		
 		var data = $(".facet_data", this);
 		$("h3",this).unbind().click(function() {
+			facet_state[facet] = !facet_state[facet];
 			data.slideToggle();
 		});
+		data.toggle(facet_state[facet]);
+		
 		$("a.more",this).unbind().click(function() {
 			var query = $(this).attr("href"); 
 			load_more_facet(query, facet);
