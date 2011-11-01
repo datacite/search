@@ -5,8 +5,9 @@ a.doi {
     background-color: white; /* hack for transparent png */
 }
 
-a.doi:hover {
-    background-color: #F0F0F0; /* copy from div.doc:hover; hack for transparent png */
+div.doc:hover {
+    /* disable hover effect because of problem with transparent png */
+    background-color: white;
 }
 
 .pagination .pagelink {
