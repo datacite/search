@@ -220,33 +220,6 @@ function load_more_facet(query, facet_field) {
 	});
 }
 
-function preview_filter(query) {
-	var start = $("#start").text();
-	var rows = $(".doc").length;
-	$.ajax({
-		type : "GET",
-		url : "ui-ids" + query,
-		data : {
-			rows : start + rows
-		}, 
-		dataType : "json",
-		cache: false,
-		async: false,
-		success: function(data) {
-			var ids = data.response.docs.map(function(elem) {
-				return elem.dataset_id;
-			});
-			$(".doc").each(function() {
-				var id = $(this).attr("id");
-				id = id.replace(/^result-/,"");
-				if (ids.indexOf(id) == -1) {
-					$(this).fadeTo(0,0.5);
-				}
-			});
-		}
-	});
-}
-
 /******************
  * functions for processing content after loading
  ******************/
@@ -275,7 +248,6 @@ function process_docs() {
 	});
 }
 
-var timeout_preview_filter;
 function process_facets() {
 	$(".facet").each(function() {
 		var id = $(this).attr("id");
@@ -299,13 +271,9 @@ function process_facets() {
 				return false;
 			});
 			$(this).hover(function() {
-				clearTimeout(timeout_preview_filter);
-				timeout_preview_filter = setTimeout(function() {
-					preview_filter(url);
-				}, 250);
+				filter_preview.show(url);
 			}, function() {
-				clearTimeout(timeout_preview_filter);
-				$(".doc").fadeTo(0,1);
+				filter_preview.clear();
 			});
 		});
 		var hasVisibleElements = $("li:visible",this).length != 0;
@@ -323,6 +291,51 @@ function process_filters() {
 		load_results(url);
 		return false;
 	});
+}
+
+/******************
+ * Filter Preview
+ ******************/
+
+filter_preview = {
+	timeout : null,
+	show : function(query) {
+		clearTimeout(this.timeout);
+		var self = this;
+		this.timeout = setTimeout(function() {
+			self.do_preview(query);
+		}, 250);
+	},
+	clear : function() {
+		clearTimeout(this.timeout);
+		$(".doc").fadeTo(0,1);
+	},
+	do_preview : function (query) {
+		var start = $("#start").text();
+		var rows = $(".doc").length;
+		$.ajax({
+			type : "GET",
+			url : "ui-ids" + query,
+			data : {
+				rows : start + rows
+			},
+			dataType : "json",
+			cache: false,
+			async: false,
+			success: function(data) {
+				var ids = data.response.docs.map(function(elem) {
+					return elem.dataset_id;
+				});
+				$(".doc").each(function() {
+					var id = $(this).attr("id");
+					id = id.replace(/^result-/,"");
+					if (ids.indexOf(id) == -1) {
+						$(this).fadeTo(0,0.5);
+					}
+				});
+			}
+		});
+	}
 }
 
 /******************
