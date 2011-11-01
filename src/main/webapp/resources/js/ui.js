@@ -254,7 +254,7 @@ function process_facets() {
 		var id = $(this).attr("id");
 		var facet = id.replace(/facet-/,"");
 		if (facet_state[facet] == undefined)
-			facet_state[facet] = true;
+			facet_state[facet] = false;
 		
 		var data = $(".facet_data", this);
 		$("h3",this).unbind().click(function() {
