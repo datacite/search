@@ -276,8 +276,8 @@ function process_facets() {
 				filter_preview.clear();
 			});
 		});
-		var hasVisibleElements = $("li:visible",this).length != 0;
-		$(this).toggle(hasVisibleElements);
+		var isNonEmpty = $("li:not(.hidden)",this).length != 0;
+		$(this).toggle(isNonEmpty);
 	});
 	
 	var hasVisibleElements = $(".facet:visible").length != 0;
