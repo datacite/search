@@ -229,6 +229,8 @@ function process_results() {
 	process_facets();
 	process_filters();
 	pagination.process();
+	if (homepage_mode.isQueryEmpty())
+		$("#main").hide();
 }
 	
 function process_docs() {
