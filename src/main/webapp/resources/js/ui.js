@@ -321,7 +321,7 @@ filter_preview = {
 			},
 			dataType : "json",
 			cache: false,
-			async: false,
+			async: true,
 			success: function(data) {
 				var ids = data.response.docs.map(function(elem) {
 					return elem.dataset_id;
