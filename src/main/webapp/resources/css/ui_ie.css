@@ -1,11 +1,18 @@
 a.doi {
     /* IE<9 does not respect background-size, so we need more space */ 
     padding-left: 20px;
+    
+    background-color: white; /* hack for transparent png */
+}
+
+a.doi:hover {
+    background-color: #F0F0F0; /* copy from div.doc:hover; hack for transparent png */
 }
 
 .pagination .pagelink {
     /* hack for IE to hide text if background icon is present */
     text-indent: -9999px;
+    background-color: white; /* hack for transparent png */
 }
 
 .pagination span.pagelink {
