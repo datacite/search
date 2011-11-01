@@ -1,4 +1,4 @@
-a .doi {
+a.doi {
     /* IE<9 does not respect background-size, so we need more space */ 
     padding-left: 20px;
 }
