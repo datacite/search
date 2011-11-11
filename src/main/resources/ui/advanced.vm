@@ -72,6 +72,7 @@
     #select_facet("datacentre_facet", "Datacentre")
     #select_facet("resourceType_facet", "General Resource Type")
     #select_facet("language_facet", "Language")
+    #select_facet("has_metadata", "Has Metadata")
   </fieldset>
   
   <br/>
