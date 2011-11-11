@@ -43,7 +43,6 @@ public class LanguageCodeFilterTest extends BaseTokenTestCase {
         assertFilter("chi", "zh");
     }
     
-    @Ignore
     @Test
     public void testFullname() {
         assertFilter("deutsch", "de");
