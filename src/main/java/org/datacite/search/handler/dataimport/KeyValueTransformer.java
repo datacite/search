@@ -27,7 +27,7 @@ public class KeyValueTransformer extends Transformer {
         return row;
     }
     
-    public Map<String, Object> transformField(Map<String, Object> row, String keysField, String valuesField, String targetField) {
+    private Map<String, Object> transformField(Map<String, Object> row, String keysField, String valuesField, String targetField) {
         Object keys = row.get(keysField);
         Object values = row.get(valuesField);
         if (keys != null && values != null) {
