@@ -36,7 +36,6 @@ public class LanguageCodeFilterTest extends BaseTokenTestCase {
         assertFilter("en_GB", "en");
     }
     
-    @Ignore
     @Test
     public void testThreeLetterAlternatives() {
         assertFilter("ger", "de");
