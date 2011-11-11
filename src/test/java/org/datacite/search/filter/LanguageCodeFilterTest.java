@@ -48,6 +48,11 @@ public class LanguageCodeFilterTest extends BaseTokenTestCase {
         assertFilter("german", "de");
         assertFilter("english", "en");
     }
+    
+    @Test
+    public void testUnknownFullname() {
+        assertFilter("foobar", "foobar");
+    }
 
     private void assertFilter(String in, String... out) {
         Reader reader = new StringReader(in);
