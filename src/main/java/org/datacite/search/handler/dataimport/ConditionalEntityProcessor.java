@@ -7,6 +7,17 @@ import org.apache.commons.lang.BooleanUtils;
 import org.apache.solr.handler.dataimport.Context;
 import org.apache.solr.handler.dataimport.EntityProcessorBase;
 
+/**
+ * DataImportHandler entity, which is only processed if a given field exists and
+ * have a true value ("1" or interpreted by {@link BooleanUtils#toBoolean(String)}
+ * 
+ * <pre>
+ * &lt;entity name="myname" hasField="field_to_check" 
+ *         processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor">
+ *   [...]
+ * &lt;/entity>
+ * </pre>
+ */
 public class ConditionalEntityProcessor extends EntityProcessorBase {
 
     public static final String CONDITIONAL_ATTRIBUTE = "hasField";
@@ -35,6 +46,13 @@ public class ConditionalEntityProcessor extends EntityProcessorBase {
         }
     }
 
+    /** 
+     *  @return
+     *   <ul>
+     *   <li>empty row, if executed for the first time and CONDITIONAL_ATTRIBUTE was true
+     *   <li>null, otherwise
+     *   </ul>
+     */
     @Override
     public Map<String, Object> nextRow() {
         if (skip)
