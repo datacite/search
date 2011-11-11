@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.ListUtils;
 import org.apache.solr.handler.dataimport.Context;
 import org.easymock.EasyMock;
 import org.junit.Assert;
@@ -35,7 +36,27 @@ public class KeyValueTransformerTest {
         assertTransformRow(target, keys, values);
     }
     
-    private void assertTransformRow(List target, List keys, List values) {
+    @Test
+    public void testNullKeys() {
+        assertTransformRow(null, null, ListUtils.EMPTY_LIST);
+    }
+
+    @Test
+    public void testNullValues() {
+        assertTransformRow(null, ListUtils.EMPTY_LIST, null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testWrongKeysType() {
+        assertTransformRow(null, "this is not a multivalued field", ListUtils.EMPTY_LIST);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testWrongValuesType() {
+        assertTransformRow(null, ListUtils.EMPTY_LIST, "this is not a multivalued field");
+    }
+
+    private void assertTransformRow(List target, Object keys, Object values) {
         Context context = createMockContext();
         Map<String, Object> row = new HashMap<String, Object>();
         row.put(keysField, keys);
@@ -43,9 +64,7 @@ public class KeyValueTransformerTest {
         row = (Map<String, Object>) transformer.transformRow(row, context);
         List targetActual = (List) row.get(targetField);
         EasyMock.verify(context);
-        Assert.assertNotNull(targetActual);
-        Assert.assertEquals(target.size(), targetActual.size());
-        Assert.assertArrayEquals(target.toArray(), targetActual.toArray());
+        Assert.assertEquals(target, targetActual);
     }
     
     private Context createMockContext() {
@@ -61,5 +80,4 @@ public class KeyValueTransformerTest {
         return context;
     }
     
-
 }
