@@ -696,7 +696,7 @@
        <str name="facet.field">creator_facet</str>
        <str name="facet.field">publicationYear</str>
        <str name="facet.field">publisher_facet</str>
-       <str name="facet.field">language</str>
+       <str name="facet.field">language_facet</str>
        <str name="facet.field">refQuality</str>
        <str name="facet.field">has_metadata</str>
        
@@ -752,7 +752,7 @@
        <str name="facet.field">datacentre_facet</str>
        <str name="facet.field">prefix</str>
        <str name="facet.field">resourceType_facet</str>
-       <str name="facet.field">language</str>
+       <str name="facet.field">language_facet</str>
        <str name="wt">velocity</str>
        <str name="v.template">ui/advanced</str>
        <str name="v.properties">velocity.properties</str>

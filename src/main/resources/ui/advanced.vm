@@ -71,7 +71,7 @@
     #select_facet("allocator_facet", "Allocator")
     #select_facet("datacentre_facet", "Datacentre")
     #select_facet("resourceType_facet", "General Resource Type")
-    #select_facet("language", "Language")
+    #select_facet("language_facet", "Language")
   </fieldset>
   
   <br/>
