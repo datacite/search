@@ -10,9 +10,12 @@ import org.datacite.search.util.LanguageUtils;
 public final class LanguageCodeFilter extends TokenFilter {
 
     CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
+    
+    boolean languageName;
 
-    protected LanguageCodeFilter(TokenStream input) {
+    protected LanguageCodeFilter(TokenStream input, boolean languageName) {
         super(input);
+        this.languageName = languageName;
     }
 
     @Override
@@ -20,7 +23,13 @@ public final class LanguageCodeFilter extends TokenFilter {
         if (input.incrementToken()) {
             String term = termAtt.toString();
             termAtt.setEmpty();
-            termAtt.append(LanguageUtils.toIsoCode(term));
+            String code = LanguageUtils.toIsoCode(term);
+            if (languageName) {
+                String name = LanguageUtils.toName(code);
+                termAtt.append(name);
+            } else {
+                termAtt.append(code);
+            }
             return true;
         } else {
             return false;
