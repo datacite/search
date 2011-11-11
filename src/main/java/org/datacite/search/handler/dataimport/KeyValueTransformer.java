@@ -9,18 +9,18 @@ import org.apache.solr.handler.dataimport.Transformer;
 
 public class KeyValueTransformer extends Transformer {
 
-    public static final String targetAttribute = "column";
-    public static final String keysAttribute = "keys";
-    public static final String valuesAttribute = "values";
+    public static final String TARGET_ATTRIBUTE = "column";
+    public static final String KEYS_ATTRIBUTE = "keys";
+    public static final String VALUES_ATTRIBUTE = "values";
 
     @Override
     public Object transformRow(Map<String, Object> row, Context context) {
         List<Map<String, String>> fields = context.getAllEntityFields();
         for (Map<String, String> field : fields) {
-            if (field.containsKey(keysAttribute) && field.containsKey(valuesAttribute)) {
-                String keysField = field.get(keysAttribute);
-                String valuesField = field.get(valuesAttribute);
-                String targetField = field.get(targetAttribute);
+            if (field.containsKey(KEYS_ATTRIBUTE) && field.containsKey(VALUES_ATTRIBUTE)) {
+                String keysField = field.get(KEYS_ATTRIBUTE);
+                String valuesField = field.get(VALUES_ATTRIBUTE);
+                String targetField = field.get(TARGET_ATTRIBUTE);
                 row = transformField(row, keysField, valuesField, targetField);
             }
         }

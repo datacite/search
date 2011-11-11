@@ -16,9 +16,9 @@ public class KeyValueTransformerTest {
     
     KeyValueTransformer transformer = new KeyValueTransformer();
     
-    String keysField = "keysField";
-    String valuesField = "valuesField";
-    String targetField = "targetField";
+    final String KEYS_FIELD = "keysField";
+    final String VALUES_FIELD = "valuesField";
+    final String TARGET_FIELD = "targetField";
     
     @Test
     public void test() {
@@ -58,19 +58,19 @@ public class KeyValueTransformerTest {
 
     private void assertTransformRow(List target, Object keys, Object values) {
         HashMap<String, Object> row = new HashMap<String, Object>();
-        row.put(keysField, keys);
-        row.put(valuesField, values);
+        row.put(KEYS_FIELD, keys);
+        row.put(VALUES_FIELD, values);
         HashMap<String, Object> origRow = (HashMap<String, Object>) row.clone();
         
         Context context = createMockContext();
         row = (HashMap<String, Object>) transformer.transformRow(row, context);
         EasyMock.verify(context);
 
-        List targetActual = (List) row.get(targetField);
+        List targetActual = (List) row.get(TARGET_FIELD);
         Assert.assertEquals(target, targetActual);
         
         //check if other fields have changed
-        row.remove(targetField);
+        row.remove(TARGET_FIELD);
         Assert.assertEquals(origRow, row);
     }
     
@@ -78,9 +78,9 @@ public class KeyValueTransformerTest {
         Context context = EasyMock.createNiceMock(Context.class);
         List<Map<String, String>> fields = new ArrayList<Map<String,String>>();
         Map<String, String> field = new HashMap<String, String>();
-        field.put(transformer.keysAttribute, keysField);
-        field.put(transformer.targetAttribute, targetField);
-        field.put(transformer.valuesAttribute, valuesField);
+        field.put(transformer.KEYS_ATTRIBUTE, KEYS_FIELD);
+        field.put(transformer.TARGET_ATTRIBUTE, TARGET_FIELD);
+        field.put(transformer.VALUES_ATTRIBUTE, VALUES_FIELD);
         fields.add(field);
         EasyMock.expect(context.getAllEntityFields()).andReturn(fields);
         EasyMock.replay(context);
