@@ -37,6 +37,14 @@ public class KeyValueTransformerTest {
     }
     
     @Test
+    public void testMissingKeyOrValueAttribute() {
+        List keys = Arrays.asList("foo");
+        List values = Arrays.asList("bar");
+        assertTransformRow(null, keys, values, true, false);
+        assertTransformRow(null, keys, values, false, true);
+    }
+    
+    @Test
     public void testNullKeys() {
         assertTransformRow(null, null, ListUtils.EMPTY_LIST);
     }
@@ -55,14 +63,15 @@ public class KeyValueTransformerTest {
     public void testWrongValuesType() {
         assertTransformRow(null, ListUtils.EMPTY_LIST, "this is not a multivalued field");
     }
+    
 
-    private void assertTransformRow(List target, Object keys, Object values) {
+    private void assertTransformRow(List target, Object keys, Object values, boolean setKeysAttribute, boolean setValuesAttribue) {
         HashMap<String, Object> row = new HashMap<String, Object>();
         row.put(KEYS_FIELD, keys);
         row.put(VALUES_FIELD, values);
         HashMap<String, Object> origRow = (HashMap<String, Object>) row.clone();
         
-        Context context = createMockContext();
+        Context context = createMockContext(setKeysAttribute, setValuesAttribue);
         row = (HashMap<String, Object>) transformer.transformRow(row, context);
         EasyMock.verify(context);
 
@@ -74,13 +83,19 @@ public class KeyValueTransformerTest {
         Assert.assertEquals(origRow, row);
     }
     
-    private Context createMockContext() {
+    private void assertTransformRow(List target, Object keys, Object values) {
+        assertTransformRow(target, keys, values, true, true);
+    }
+    
+    private Context createMockContext(boolean setKeysAttribute, boolean setValuesAttribue) {
         Context context = EasyMock.createNiceMock(Context.class);
         List<Map<String, String>> fields = new ArrayList<Map<String,String>>();
         Map<String, String> field = new HashMap<String, String>();
-        field.put(transformer.KEYS_ATTRIBUTE, KEYS_FIELD);
         field.put(transformer.TARGET_ATTRIBUTE, TARGET_FIELD);
-        field.put(transformer.VALUES_ATTRIBUTE, VALUES_FIELD);
+        if (setKeysAttribute)
+            field.put(transformer.KEYS_ATTRIBUTE, KEYS_FIELD);
+        if (setValuesAttribue)
+            field.put(transformer.VALUES_ATTRIBUTE, VALUES_FIELD);
         fields.add(field);
         EasyMock.expect(context.getAllEntityFields()).andReturn(fields);
         EasyMock.replay(context);
