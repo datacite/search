@@ -57,14 +57,21 @@ public class KeyValueTransformerTest {
     }
 
     private void assertTransformRow(List target, Object keys, Object values) {
-        Context context = createMockContext();
-        Map<String, Object> row = new HashMap<String, Object>();
+        HashMap<String, Object> row = new HashMap<String, Object>();
         row.put(keysField, keys);
         row.put(valuesField, values);
-        row = (Map<String, Object>) transformer.transformRow(row, context);
-        List targetActual = (List) row.get(targetField);
+        HashMap<String, Object> origRow = (HashMap<String, Object>) row.clone();
+        
+        Context context = createMockContext();
+        row = (HashMap<String, Object>) transformer.transformRow(row, context);
         EasyMock.verify(context);
+
+        List targetActual = (List) row.get(targetField);
         Assert.assertEquals(target, targetActual);
+        
+        //check if other fields have changed
+        row.remove(targetField);
+        Assert.assertEquals(origRow, row);
     }
     
     private Context createMockContext() {
