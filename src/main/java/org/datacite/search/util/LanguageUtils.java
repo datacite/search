@@ -65,4 +65,8 @@ public class LanguageUtils {
             lang = languageCodeByISO6392B.get(lang);
         return lang;
     }
+    
+    public static String toName(String code) {
+        return ULocale.getDisplayLanguage(code, "en");
+    }
 }
