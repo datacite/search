@@ -34,9 +34,9 @@ function post {
   url=$SOLR_URL/$1
   echo $url 1>&2
   if [ -z "$2" ]; then
-    curl -u $SOLR_ADMIN:$SOLR_PASS -H "Content-Type: text/xml" --data-binary @- $url < /dev/stdin
+    curl -s -u $SOLR_ADMIN:$SOLR_PASS -H "Content-Type: text/xml" --data-binary @- $url < /dev/stdin
   else
-    curl -u $SOLR_ADMIN:$SOLR_PASS -H "Content-Type: text/xml" --data-binary $2 $url
+    curl -s -u $SOLR_ADMIN:$SOLR_PASS -H "Content-Type: text/xml" --data-binary $2 $url
   fi
 
 }
@@ -45,7 +45,7 @@ function get {
   check_env
   url=$SOLR_URL/$1
   echo $url 1>&2
-  curl -u $SOLR_ADMIN:$SOLR_PASS $url
+  curl -s -u $SOLR_ADMIN:$SOLR_PASS $url
 }
 
 function check_env {
