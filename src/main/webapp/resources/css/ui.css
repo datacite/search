@@ -115,7 +115,7 @@ h1,h2,h3 {
   padding: 2px;
 }
 
-.doc .info {
+.info, .version {
   font-size: small;
 }
 
@@ -264,7 +264,7 @@ ul {
     margin: 5pt;
 }
 
-.short, .info {
+.short, .info, .version {
     color: #666
 }
 
