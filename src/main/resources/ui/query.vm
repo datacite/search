@@ -1,6 +1,6 @@
 <form id="query_form" action="">
   <p>
-    <input id="query_input" name="q" value="#q()" />
+    <input id="query_input" name="q" value="$esc.html("#q()")" />
     <input type="submit" value="Search"/>
   </p>
 </form>
