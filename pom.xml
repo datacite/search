@@ -104,9 +104,7 @@
             excluding is not enough
           -->
           <packagingExcludes>
-            WEB-INF/lib/slf4j-jdk14-*,
-            WEB-INF/lib/velocity-1.6.1.jar,
-            WEB-INF/lib/velocity-tools-2.0-beta3.jar
+            WEB-INF/lib/slf4j-jdk14-*
           </packagingExcludes>
         </configuration>
       </plugin>
