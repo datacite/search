@@ -701,6 +701,9 @@
        <str name="facet.field">has_metadata</str>
        
        <str name="hl">true</str>
+       <!--  fix for #88 -->
+       <str name="hl.simple.pre">{!!!}</str>
+       <str name="hl.simple.post">{/!!!}</str>
      </lst>
      <lst name="invariants">
        <str name="defType">edismax</str>
