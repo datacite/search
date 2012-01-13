@@ -813,6 +813,8 @@
       <str name="testprefix">${mds.testprefix}</str>
     </lst> 
   </requestHandler>
+  
+  <queryResponseWriter name="velocity" class="solr.VelocityResponseWriter"/>
 
   <!-- Legacy config for the admin interface -->
   <admin>
