@@ -16,6 +16,7 @@
                     m.xml,
                     m.xml IS NOT NULL as has_metadata,
                     m.created AS uploaded,
+                    d.created AS created,
                     m.namespace,
                     d.is_ref_quality AS refQuality,
                     mt.dataset IS NOT NULL AS has_media,
