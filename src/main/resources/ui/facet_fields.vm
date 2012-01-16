@@ -22,7 +22,7 @@
               #break
             #end
           #end
-          #if(!$fq_applied) 
+          #if(!$fq_applied && $facet.count > 0)
             #if($field.name.matches("(allocator|datacentre)_facet"))
               #set($arr = $facet.name.split(" ",3))
               #set($symbol = $arr.get(0))
@@ -40,7 +40,7 @@
                   <span class="value">$esc.html($facet.name)</span>
                   <span class="count">($facet.count)</span>
                 </a>
-              #elseif($facet.count > 0)
+              #else
                 <a href="#url_for_facet_filter_missing($field.name)">
                   <span class="value">&lt;not supplied&gt;</span>
                   <span class="count">($facet.count)</span>
