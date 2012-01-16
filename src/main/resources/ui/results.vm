@@ -38,7 +38,7 @@
   #end
   
   <div id="next_page_loading">
-    <img src="resources/img/tango/32x32/animations/process-working.gif" class="loading"/>
+    <img src="resources/img/tango/32x32/animations/process-working.gif" class="loading" alt="spinning wheel"/>
     Loading next page
   </div>
     
