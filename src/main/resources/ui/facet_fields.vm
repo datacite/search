@@ -35,17 +35,23 @@
               </li>
             #else
               <li>
+              #if($facet.name)
                 <a href="#url_for_facet_filter($field.name, $facet.name)">
                   <span class="value">$esc.html($facet.name)</span>
                   <span class="count">($facet.count)</span>
                 </a>
+              #elseif($facet.count > 0)
+                <a href="#url_for_facet_filter_missing($field.name)">
+                  <span class="value">&lt;not supplied&gt;</span>
+                  <span class="count">($facet.count)</span>
+              #end
               </li>
             #end
           #end
         #end
         </ul>
 
-      #if($count == $limit)
+      #if($count > $limit)
         #set($new_limit = $math.add($limit,5))
         <a class="more" href="#url_for_show_more_facet($field.name,$new_limit)">more</a>
       #end 
