@@ -718,7 +718,10 @@
      <lst name="appends">
        <str name="bf">has_metadata</str>
      </lst>
-    </requestHandler>
+     <arr name="first-components">
+       <str>wildcardconverter</str>
+     </arr>
+  </requestHandler>
     
   <requestHandler name="/ui-detail" class="solr.SearchHandler">
      <lst name="defaults">
@@ -742,6 +745,9 @@
        <str name="fl">dataset_id</str>
        <str name="wt">json</str>
      </lst>
+     <arr name="first-components">
+       <str>wildcardconverter</str>
+     </arr>
   </requestHandler>
   
   <requestHandler name="/ui-advanced" class="solr.SearchHandler">
@@ -781,6 +787,9 @@
      <lst name="appends">
        <str name="bf">has_metadata</str>
      </lst>
+     <arr name="first-components">
+       <str>wildcardconverter</str>
+     </arr>
   </requestHandler>
 
   <!-- Admin Handlers
@@ -814,6 +823,8 @@
       <str name="testprefix">${mds.testprefix}</str>
     </lst> 
   </requestHandler>
+  
+  <searchComponent name="wildcardconverter" class="org.datacite.search.handler.component.ConvertWildcardComponent" />
   
   <queryResponseWriter name="velocity" class="solr.VelocityResponseWriter"/>
 
