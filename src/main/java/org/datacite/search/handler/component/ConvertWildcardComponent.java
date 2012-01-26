@@ -36,25 +36,21 @@ public class ConvertWildcardComponent extends SearchComponent {
 
     @Override
     public String getDescription() {
-        // TODO Auto-generated method stub
-        return null;
+        return "Component to convert query '*' to '*:*'";
     }
 
     @Override
     public String getSource() {
-        // TODO Auto-generated method stub
-        return null;
+        return "https://github.com/datacite/search/blob/master/src/main/java/org/datacite/search/handler/component/ConvertWildcardComponent.java";
     }
 
     @Override
     public String getSourceId() {
-        // TODO Auto-generated method stub
-        return null;
+        return "0";
     }
 
     @Override
     public String getVersion() {
-        // TODO Auto-generated method stub
-        return null;
+        return "1.0";
     }
 }
