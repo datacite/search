@@ -9,7 +9,6 @@ import org.apache.solr.handler.component.SearchComponent;
 import org.apache.solr.search.QParser;
 
 public class ConvertWildcardComponent extends SearchComponent {
-    
 
     @Override
     public void prepare(ResponseBuilder rb) throws IOException {
@@ -22,16 +21,16 @@ public class ConvertWildcardComponent extends SearchComponent {
             setQuery(rb, "*:*");
         }
     }
-    
+
     private void setQuery(ResponseBuilder rb, String qstr) {
         try {
             QParser qParser = rb.getQparser();
             qParser.setString(qstr);
-            Query query  = qParser.parse();
+            Query query = qParser.parse();
             rb.setQueryString(query.toString());
             rb.setQuery(query);
         } catch (ParseException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

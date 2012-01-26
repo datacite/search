@@ -2,6 +2,8 @@ package org.datacite.search.handler.component;
 
 import static org.junit.Assert.assertEquals;
 
+import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.search.Query;
 import org.apache.solr.handler.component.ResponseBuilder;
 import org.datacite.search.test.DummyQParser;
 import org.datacite.search.test.DummyQuery;
@@ -36,6 +38,21 @@ public class ConvertWildcardComponentTest {
         component.process(rb);
         assertEquals(qstrOut, rb.getQueryString());
         assertEquals(qstrOut, rb.getQuery().toString());
+    }
+    
+    
+    @Test(expected = RuntimeException.class)
+    public void testException() throws Exception {
+        rb.setQparser(new DummyQParserWithException());
+        testQuery("*", "*");
+    }
+    
+    private class DummyQParserWithException extends DummyQParser {
+        @Override
+        public Query parse() throws ParseException {
+            throw new ParseException();
+        }
+        
     }
 
 }
