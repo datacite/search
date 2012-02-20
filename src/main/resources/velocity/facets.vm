@@ -1,7 +1,7 @@
 #if($response.facetFields)
 #foreach($field in $response.facetFields)
 #foreach($facet in $field.values)
-$facet.name.trim(); $facet.count
+#remove_linebreak($facet.name); $facet.count
 #end
 #end
 #end
