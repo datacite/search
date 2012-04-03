@@ -803,7 +803,7 @@
        <str name="facet.sort">index</str>
        <str name="facet.field">prefix</str>
        <str name="wt">velocity</str>
-       <str name="v.template">velocity/facets</str>
+       <str name="v.template">list/facets</str>
        <str name="v.properties">velocity.properties</str>
        <str name="v.contentType">text/plain;charset=UTF-8</str>
      </lst>
@@ -819,7 +819,7 @@
        <str name="facet.sort">index</str>
        <str name="facet.field">allocator_facet</str>
        <str name="wt">velocity</str>
-       <str name="v.template">velocity/facets</str>
+       <str name="v.template">list/facets</str>
        <str name="v.properties">velocity.properties</str>
        <str name="v.contentType">text/plain;charset=UTF-8</str>
      </lst>
@@ -835,7 +835,7 @@
        <str name="facet.sort">index</str>
        <str name="facet.field">datacentre_facet</str>
        <str name="wt">velocity</str>
-       <str name="v.template">velocity/facets</str>
+       <str name="v.template">list/facets</str>
        <str name="v.properties">velocity.properties</str>
        <str name="v.contentType">text/plain;charset=UTF-8</str>
      </lst>
