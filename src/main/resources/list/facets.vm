@@ -5,3 +5,10 @@
 #end
 #end
 #end
+#if($response.facetRanges)
+#foreach($field in $response.facetRanges)
+#foreach($facet in $field.counts)
+#remove_linebreak($facet.value); $facet.count
+#end
+#end
+#end
