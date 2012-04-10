@@ -847,6 +847,15 @@
     -->
   <requestHandler name="/admin/" 
                   class="solr.admin.AdminHandlers" />
+  <!-- This single handler is equivalent to the following... -->
+  <!--
+     <requestHandler name="/admin/luke"       class="solr.admin.LukeRequestHandler" />
+     <requestHandler name="/admin/system"     class="solr.admin.SystemInfoHandler" />
+     <requestHandler name="/admin/plugins"    class="solr.admin.PluginInfoHandler" />
+     <requestHandler name="/admin/threads"    class="solr.admin.ThreadDumpHandler" />
+     <requestHandler name="/admin/properties" class="solr.admin.PropertiesRequestHandler" />
+     <requestHandler name="/admin/file"       class="solr.admin.ShowFileRequestHandler" >
+    -->
   <!-- If you wish to hide files under ${solr.home}/conf, explicitly
        register the ShowFileRequestHandler using: 
     -->
@@ -859,6 +868,17 @@
        </lst>
      </requestHandler>
     -->
+      <!-- ping/healthcheck -->
+
+  <requestHandler name="/admin/ping" class="solr.PingRequestHandler">
+    <lst name="invariants">
+      <str name="qt">/api</str>
+      <str name="q">solrpingquery</str>
+    </lst>
+    <lst name="defaults">
+      <str name="echoParams">all</str>
+    </lst>
+  </requestHandler>
     
   <requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler">
     <lst name="defaults">
