@@ -671,6 +671,10 @@
        of SearchComponents (see below) and supports distributed
        queries across multiple shards
     -->
+
+  <!-- plain default search handler needed by /select -->
+  <requestHandler name="/admin/select" class="solr.SearchHandler" default="true">
+  </requestHandler>
     
   <requestHandler name="/ui" class="solr.SearchHandler">
      <lst name="defaults">
