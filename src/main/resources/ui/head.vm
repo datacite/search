@@ -28,7 +28,7 @@ if ( typeof window.JSON === 'undefined' ) {
   <link rel="stylesheet" type="text/css" href="resources/css/ui_ie.css" />
 <![endif]--> 
 
-<link rel="SHORTCUT ICON" href="resources/img/favicon.ico"/>
+<link rel="SHORTCUT ICON" href="favicon.ico"/>
 <link rel="search" href="opensearch_description.xml" 
       type="application/opensearchdescription+xml"
       title="DataCite Metadata Search" />
