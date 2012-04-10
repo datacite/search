@@ -37,6 +37,7 @@
                      OR GREATEST(d.updated,
                                  IFNULL(m.created,0),
                                  IFNULL(mt.updated,0),
+                                 IFNULL(al.updated,0),
                                  IFNULL(dc.updated,0))
                         > '${dataimporter.last_index_time}' )
              GROUP BY dataset_id
