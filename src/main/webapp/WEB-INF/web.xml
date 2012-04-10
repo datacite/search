@@ -145,6 +145,12 @@
     <mime-type>application/xslt+xml</mime-type>
   </mime-mapping>
 
+  <!--
+    Security restriction to some solr resources
+    
+    uncomment if not ensured otherwise (e.g. by an apache)   
+   -->
+  <!-- 
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>admin</web-resource-name>
@@ -168,5 +174,5 @@
     </description>
     <role-name>solradmin</role-name>
   </security-role>
-
+ -->
 </web-app>

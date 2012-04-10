@@ -55,10 +55,36 @@ Your usual log4j stuff.
     
 will create `target/search.war`, which is ready to be deployed. 
 
-## Configure servlet container
+## Securing Solr
 
-All resources with write access to the index are secured. You need role `solradmin` to access them.
-If you are using tomcat you can use the following content for `tomcat-users.xml`: 
+It is very important to restrict access to some solr resource
+(see [Solr Wiki](http://wiki.apache.org/solr/SolrSecurity)). These are:
+
+* /admin
+* /select
+* /update
+
+This can be ensured via HTTP Authentication by the servlet container
+or more flexible by using an Apache in front of your servlet container.
+
+### Configure Apache (preferred)
+
+Add and adjust the following snippet to your apache configuration:
+
+    <LocationMatch /(admin|select|update)>
+      Order Deny,Allow
+      Allow from localhost
+      Deny from all
+    </LocationMatch>
+
+This allows access to the admin resources without password, but only only from localhost.
+
+### Configure Servlet Container (alternative)
+
+Uncomment the `<security-constraint>` section in `src/main/webapp/WEB-INF/web.xml`.
+
+Now you need to login with role `solradmin` to access the admin resources.
+If you are using tomcat you can use the following content for `tomcat-users.xml`:
 
     <tomcat-users>
       <user username="<user>" password="<pass>" roles="solradmin"/>
