@@ -151,7 +151,6 @@
       <url-pattern>/admin/*</url-pattern>
       <url-pattern>/select/*</url-pattern>
       <url-pattern>/update/*</url-pattern>
-      <url-pattern>/dataimport/*</url-pattern>
     </web-resource-collection>
     <auth-constraint>
       <role-name>solradmin</role-name>

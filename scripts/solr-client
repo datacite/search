@@ -16,9 +16,9 @@ function main {
     "import" )
       sub=$1;shift
       case "$sub" in
-        "status" ) get "dataimport?$fmt";echo;; 
-        "full" ) get "dataimport?command=full-import&clean=true&commit=true&$fmt";echo;; 
-        "delta" ) get "dataimport?command=full-import&clean=false&commit=true&$fmt";echo;; 
+        "status" ) get "admin/dataimport?$fmt";echo;;
+        "full" ) get "admin/dataimport?command=full-import&clean=true&commit=true&$fmt";echo;;
+        "delta" ) get "admin/dataimport?command=full-import&clean=false&commit=true&$fmt";echo;;
         * )
           echo unknown command \"$cmd $sub\"
           help;;
