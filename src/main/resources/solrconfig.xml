@@ -879,7 +879,8 @@
   
   <requestHandler name="/status" class="solr.PingRequestHandler">
     <lst name="invariants">
-      <str name="qt">/admin/ping</str>
+      <str name="qt">/api</str>
+      <str name="q">solrpingquery</str>
       <str name="wt">velocity</str>
       <str name="v.template">velocity/status</str>
       <str name="v.properties">velocity.properties</str>
