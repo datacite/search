@@ -44,6 +44,7 @@
                 <a href="#url_for_facet_filter_missing($field.name)">
                   <span class="value">&lt;not supplied&gt;</span>
                   <span class="count">($facet.count)</span>
+                </a>
               #end
               </li>
             #end
