@@ -17,8 +17,8 @@ function main {
       sub=$1;shift
       case "$sub" in
         "status" ) get "admin/dataimport?$fmt";echo;;
-        "full" ) get "admin/dataimport?command=full-import&clean=true&commit=true&$fmt";echo;;
-        "delta" ) get "admin/dataimport?command=full-import&clean=false&commit=true&$fmt";echo;;
+        "full" ) get "admin/dataimport?command=full-import&clean=true&commit=true&optimize=false&$fmt";echo;;
+        "delta" ) get "admin/dataimport?command=full-import&clean=false&commit=true&optimize=false&$fmt";echo;;
         * )
           echo unknown command \"$cmd $sub\"
           help;;
