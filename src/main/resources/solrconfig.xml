@@ -681,7 +681,6 @@
 <!--       <str name="echoParams">explicit</str>-->
 <!--       <str name="debugQuery">on</str>-->
        <str name="fl">*</str>
-       <str name="q">-*:*</str>
        <int name="rows">10</int>
        
        <str name="v.template">ui/index</str>
@@ -775,7 +774,6 @@
      
   <requestHandler name="/api" class="solr.SearchHandler">
      <lst name="defaults">
-       <str name="q">-*:*</str>
        <str name="fl">*</str>
        <int name="rows">10</int>
      </lst>
