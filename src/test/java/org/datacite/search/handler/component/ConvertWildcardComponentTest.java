@@ -19,7 +19,7 @@ public class ConvertWildcardComponentTest {
     @Before
     public void init() throws Exception {
         component = new ConvertWildcardComponent();
-        rb = new ResponseBuilder();
+        rb = new ResponseBuilder(null, null, null);
         rb.setQparser(new DummyQParser());
     }
     
