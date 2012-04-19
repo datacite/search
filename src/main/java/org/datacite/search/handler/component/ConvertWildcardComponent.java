@@ -17,7 +17,7 @@ public class ConvertWildcardComponent extends SearchComponent {
     @Override
     public void process(ResponseBuilder rb) throws IOException {
         String qstr = rb.getQueryString();
-        if (qstr.equals("*")) {
+        if (qstr != null && qstr.equals("*")) {
             setQuery(rb, "*:*");
         }
     }

@@ -33,6 +33,8 @@ public class ConvertWildcardComponentTest {
 
     @Test
     public void test() throws Exception {
+        testQuery(null, null);
+        testQuery("", "");
         testQuery("term", "term");
         testQuery("*:*", "*:*");
         testQuery("*", "*:*");
