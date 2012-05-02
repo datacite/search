@@ -21,7 +21,7 @@
                     d.is_ref_quality AS refQuality,
                     mt.dataset IS NOT NULL AS has_media,
                     if(d.is_active,null,'true') AS $skipDoc,
-                    if(d.is_active,null,d.doi) AS $deleteDocById
+                    if(d.is_active,null,d.id) AS $deleteDocById
              FROM dataset AS d
              LEFT JOIN metadata AS m
                ON m.dataset = d.id
