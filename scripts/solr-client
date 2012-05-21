@@ -35,7 +35,7 @@ function post {
   echo $url 1>&2
   
   if [ -n "$SOLR_ADMIN" ]; then
-    credentials=-u $SOLR_ADMIN:$SOLR_PASS
+    credentials="-u $SOLR_ADMIN:$SOLR_PASS"
   fi
   
   if [ -z "$2" ]; then
