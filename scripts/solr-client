@@ -17,6 +17,7 @@ function main {
       sub=$1;shift
       case "$sub" in
         "status" ) get "admin/dataimport?$fmt";echo;;
+        "abort" ) get "admin/dataimport?command=abort&$fmt";echo;;
         "full" ) get "admin/dataimport?command=full-import&clean=true&commit=true&optimize=false&$fmt";echo;;
         "delta" ) get "admin/dataimport?command=full-import&clean=false&commit=true&optimize=false&$fmt";echo;;
         * )
@@ -85,8 +86,9 @@ function help {
                              post <body> or read from stdin if <body> is missing
 
     import status        - status of DataImportHandler
-    import full          - do full backup
-    import delta         - do delta backup
+    import full          - do full import
+    import delta         - do delta import
+    import abort         - abort data import
     
   environment variables:
   
