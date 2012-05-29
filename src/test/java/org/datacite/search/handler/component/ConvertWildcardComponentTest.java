@@ -19,7 +19,7 @@ public class ConvertWildcardComponentTest {
     @Before
     public void init() throws Exception {
         component = new ConvertWildcardComponent();
-        rb = new ResponseBuilder();
+        rb = new ResponseBuilder(null, null, null);
         rb.setQparser(new DummyQParser());
     }
     
@@ -33,6 +33,8 @@ public class ConvertWildcardComponentTest {
 
     @Test
     public void test() throws Exception {
+        testQuery(null, null);
+        testQuery("", "");
         testQuery("term", "term");
         testQuery("*:*", "*:*");
         testQuery("*", "*:*");
