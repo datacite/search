@@ -82,7 +82,7 @@
         <field column="size" xpath="//size" />
         <field column="format" xpath="//format" />
         <field column="version" xpath="//version" />
-        <field column="rights" xpath="//right" />
+        <field column="rights" xpath="//rights" />
         <field column="description" xpath="//description" />
       </entity>
       </entity>
