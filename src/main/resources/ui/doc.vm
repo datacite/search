@@ -29,6 +29,9 @@
   </div>
   <div class="short">
     #field_et_al("creator",5)
+    #if(! $doc.getFieldValue("has_metadata"))
+      [no metadata registered]
+    #end
   </div>
   <div class="full"></div>
   <div class="hl">
