@@ -381,7 +381,7 @@ homepage_mode = {
 var options = {
 	opts : new Array(),
 	init : function() {
-		this.add("instant", true, null, "Instant Search", "load results immediately without clicking 'search' button");
+		this.add("instant", false, null, "Instant Search", "load results immediately without clicking 'search' button");
 		this.add("continous", false, reload_results, "Continous Scrolling", "load next results automatically when hitting the bottom of the page");
 		this.add("filter_preview", false, null, "Filter Preview", "show preview of filter on mouse hover");
 		options.menu.init();
