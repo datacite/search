@@ -200,8 +200,10 @@ function load_detail(doc) {
 			$.get('api', { fl: "xml", wt: "csv", q: "doi:" + doi, rows: 1, "csv.header" :false},
 					function(data) {
 				var xml = $.base64Decode(data);
-				var pre = $("<pre>").text(xml);
-				detail.append(pre);
+				if (xml.length != 0) {
+					var pre = $("<pre>").text(xml);
+					detail.append(pre);
+				}
 			});
 		});
 	};
