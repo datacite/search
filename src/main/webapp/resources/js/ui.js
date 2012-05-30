@@ -148,6 +148,21 @@ function fixUrl(url) {
 	return url;
 }
 
+function makeFooterSticky() {
+	var footer = $(".footer");
+	var footer2 = footer.clone();
+	footer2.css("position", "fixed").css("bottom","0px").css("padding-bottom", "8px");
+	footer2.insertAfter(footer);
+	function refresh() {
+		footer2.show();
+		footer2.toggle(footer.position().top > footer2.position().top);
+		footer2.width(footer.width());
+	}
+	$(window).scroll(refresh);
+	$(window).resize(refresh);
+	refresh();
+}
+
 /******************
  * functions for loading content
  ******************/
@@ -231,6 +246,8 @@ function process_results() {
 	process_facets();
 	process_filters();
 	pagination.process();
+	if (options.get("continous"))
+		makeFooterSticky();
 	if (homepage_mode.isQueryEmpty())
 		$("#main").hide();
 }

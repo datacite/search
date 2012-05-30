@@ -34,7 +34,7 @@
   </div>
 
   #if($page.results_found > $page.results_per_page)
-    <div id="next_page"/>
+    <div id="next_page"></div>
   #end
   
   <div id="next_page_loading">
@@ -42,7 +42,7 @@
     Loading next page
   </div>
     
-  <div id="footer">
+  <div class="footer">
     #parse("ui/footer.vm")
   </div>
 </div>
