@@ -1,7 +1,10 @@
 #set($hl = $response.highlighting.get($id))
-#foreach($field in $hl)
-  #foreach($str in $field)
+#foreach($field in $hl.keySet())
+  <div>
+    <span class="field">$field:</span>
+  #foreach($str in $hl.get($field))
     ## fix for #88
     $esc.html($str).replaceAll("\{!!!\}", "<em>").replaceAll("\{/!!!\}", "</em>")
   #end
+  </div>
 #end

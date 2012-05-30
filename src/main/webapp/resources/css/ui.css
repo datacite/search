@@ -278,6 +278,11 @@ ul {
     background: #FF0;
 }
 
+.hl .field {
+    color: #666;
+    font-style: italic;
+}
+
 code {
     background: #DDD;
 }
