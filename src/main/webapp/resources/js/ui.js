@@ -94,11 +94,8 @@ function setup_history() {
 			var State = History.getState();
 			load_results(State.url);
 
-			// parse q from result if necessary (e.g. for html4-browser)
-			var q = $("#query_input");
-			if (q.val() == "") {
-				q.val($("#q").text());
-			}
+			var q = $("#q").text();
+			$("#query_input").val(q);
 
 			homepage_mode.exit();
 		}
