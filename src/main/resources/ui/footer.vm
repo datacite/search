@@ -1,3 +1,9 @@
 <span class="title">DataCite Metadata Search</span>
 &bull;
 <span class="qtime">Query Time: $response.getHeader().get("QTime")ms</span>
+&bull;
+#macro(api)api#url_for_lens()&fl=doi,creator,title,publisher,publicationYear,datacentre#end
+<span>API Query: <a href="#api&wt=xml&indent=true">xml</a>,
+  <a href="#api&wt=json&indent=true">json</a>,
+  <a href="#api&wt=csv">csv</a>
+</span>
