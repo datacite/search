@@ -159,7 +159,9 @@ function makeFooterSticky() {
  ******************/
 
 function submit_query() {
-	reload_results();
+	var q = $("#query_input").val();
+	if (q != "")
+		reload_results();
 }
 
 function reload_results() {
