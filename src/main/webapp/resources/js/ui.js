@@ -18,8 +18,6 @@ function init() {
 	
 	process_results();
 	
-	homepage_mode.init();
-
 	// fix for #57
 	if (History.getHash())
 		History.Adapter.trigger(window,'statechange');
@@ -96,18 +94,14 @@ function setup_history() {
 
 			var q = $("#q").text();
 			$("#query_input").val(q);
-
-			homepage_mode.exit();
 		}
     });
 	History.pushStateWithoutReloadingResults = function (data, title, url) {
 		var old_url = History.getState().url;
-		if (old_url != url) 
-			// if state has not changed, event changestate is not fired,
-			// so setting skipReloadingResults=true will not be reset and
-			// would bite us at next popstate event.
+		if (old_url != url) {
 			History.skipReloadingResults = true;
-		History.pushState(data, title, url);
+			History.pushState(data, title, url);
+		}
 	}
 }
 
@@ -165,7 +159,6 @@ function makeFooterSticky() {
  ******************/
 
 function submit_query() {
-	homepage_mode.exit();
 	reload_results();
 }
 
@@ -245,8 +238,7 @@ function process_results() {
 	pagination.process();
 	if (options.get("continous"))
 		makeFooterSticky();
-	if (homepage_mode.isQueryEmpty())
-		$("#main").hide();
+	check_page_layout();
 }
 	
 function process_docs() {
@@ -365,30 +357,14 @@ filter_preview = {
 }
 
 /******************
- * Homepage Mode
+ * Layout: Welcome Page or Result List
  ******************/
 
-homepage_mode = {
-		enabled : false,
-		init : function() {
-			if (this.isQueryEmpty()) {
-				this.enabled = true;
-				$("#header *").addClass("homepage");
-				$("#main").hide();
-			}
-		},
-		exit : function() {
-			if (this.enabled && ! this.isQueryEmpty()) {
-				this.enabled = false;
-				$("#header *").removeClass("homepage");
-				$("#main").show();
-			}
-		},
-		isQueryEmpty : function() {
-			var q = $("#query_input").val();
-			return q == "";
-		}
-	}
+check_page_layout = function() {
+	is_welcome_page = window.location.search === "" && window.location.hash === "";
+	$("#header *").toggleClass("homepage", is_welcome_page);
+	$("#main").toggle(!is_welcome_page);
+}
 
 /******************
  * Options
