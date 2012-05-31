@@ -160,14 +160,14 @@ function makeFooterSticky() {
 
 function submit_query() {
 	var q = $("#query_input").val();
-	if (q != "")
-		reload_results();
+	if (q != "") {
+		url = get_lens_without_q() + "&q=" + encodeURIComponent(q);
+		load_results(url);
+	}
 }
 
 function reload_results() {
-	var q = $("#query_input").val();
-	url = get_lens_without_q() + "&q=" + encodeURIComponent(q);
-	load_results(url);
+	load_results(window.location.href);
 }
 
 function load_results(query) {
