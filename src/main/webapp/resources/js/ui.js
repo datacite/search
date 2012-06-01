@@ -154,6 +154,10 @@ function makeFooterSticky() {
 	refresh();
 }
 
+function throbber() {
+ 	return $('<img src="resources/img/throbber-transparent.gif" class="loading" alt="spinning wheel"/>');
+}
+
 /******************
  * functions for loading content
  ******************/
@@ -219,6 +223,8 @@ function load_detail(doc) {
 function load_more_facet(query, facet_field) {
 	var facet = $("#facet-" + facet_field);
 	var div = $(".facet_data",facet);
+    $(".more", div).append(throbber());
+
 	div.load_sync(query + " .facet_data", {
 		"v.template" : "ui/facet_fields",
 		"facet.field" : facet_field,
