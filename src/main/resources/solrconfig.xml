@@ -802,6 +802,7 @@
        <str name="facet">on</str>
        <str name="facet.sort">index</str>
        <str name="facet.field">prefix</str>
+       <str name="facet.limit">-1</str>
        <str name="wt">velocity</str>
        <str name="v.template">list/facets</str>
        <str name="v.properties">velocity.properties</str>
@@ -818,6 +819,7 @@
        <str name="facet">on</str>
        <str name="facet.sort">index</str>
        <str name="facet.field">allocator_facet</str>
+       <str name="facet.limit">-1</str>
        <str name="wt">velocity</str>
        <str name="v.template">list/facets</str>
        <str name="v.properties">velocity.properties</str>
@@ -834,6 +836,7 @@
        <str name="facet">on</str>
        <str name="facet.sort">index</str>
        <str name="facet.field">datacentre_facet</str>
+       <str name="facet.limit">-1</str>
        <str name="wt">velocity</str>
        <str name="v.template">list/facets</str>
        <str name="v.properties">velocity.properties</str>
@@ -852,6 +855,7 @@
        <str name="facet.range.start">2010-01-01T0:00:00Z</str>
        <str name="facet.range.end">NOW/DAY</str>
        <str name="facet.sort">index</str>
+       <str name="facet.limit">-1</str>
        <str name="wt">velocity</str>
        <str name="v.template">list/facets</str>
        <str name="v.properties">velocity.properties</str>
