@@ -244,9 +244,17 @@ function process_results() {
 	process_facets();
 	process_filters();
 	pagination.process();
+	updateOaiLink();
 	if (options.get("continous"))
 		makeFooterSticky();
 	check_page_layout();
+}
+
+function updateOaiLink() {
+	var lens = $("#lens").attr("href");
+	var oai_url = $("#oai").attr("href");
+	oai_url += "&set=!" + $.base64Encode(lens);
+	$("#oai").attr("href", oai_url);
 }
 	
 function process_docs() {

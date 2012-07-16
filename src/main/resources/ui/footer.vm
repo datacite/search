@@ -7,3 +7,5 @@
   <a href="#api&wt=json&indent=true">json</a>,
   <a href="#api&wt=csv">csv</a>
 </span>
+&bull;
+<span><a id="oai" href="http://oai.datacite.org/oai?verb=ListRecords&metadataPrefix=oai_datacite">OAI-PMH</a></span>
