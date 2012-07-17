@@ -17,6 +17,14 @@ $.fn.inputChange = function(handler) {
 	});
 }
 
+$.extend({
+	base64urlEncode: function(input) {
+		var base64 = $.base64Encode(input);
+		var base64url = base64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=*$/g, "");
+		return base64url;
+	}
+});
+
 $.fn.modalDialog = function(title, width_auto, height_auto) {
 	var height = $(window).height() * 0.8;
 	var width = $(window).width() * 0.8;
