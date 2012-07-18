@@ -253,7 +253,7 @@ function process_results() {
 function process_oailink() {
 	var lens = $("#lens").attr("href");
 	var oai_url = $("#oai").attr("href");
-	oai_url += "&set=!" + $.base64urlEncode(lens);
+	oai_url += "&set=~" + $.base64urlEncode(lens);
 	$("#oai").attr("href", oai_url);
 }
 	
