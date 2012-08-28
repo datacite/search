@@ -19,6 +19,7 @@ public class LanguageCodeFilterTest extends BaseTokenTestCase {
     @Test
     public void test() {
         assertFilter("en", "en");
+        assertFilter("GER", "de");
         assertFilter("deu", "de");
         assertFilter("chinese", "zh");
         assertFilter("foobar", "foobar");
