@@ -157,8 +157,9 @@
    <field name="refQuality" type="boolean" indexed="true" stored="true" default="false"/>
    <field name="dataset_id" type="string" indexed="true" stored="true"/>
    <field name="created" type="date" indexed="true" stored="true"/>
-   <field name="uploaded" type="date" indexed="true" stored="true"/>
    <field name="minted" type="date" indexed="true" stored="true"/>
+   <field name="updated" type="date" indexed="true" stored="true"/>
+   <field name="uploaded" type="date" indexed="true" stored="true"/>
    <field name="xml" type="binary" indexed="false" stored="true"/>
    <field name="namespace" type="string" indexed="true" stored="true"/>
    <field name="schema_version" type="string" indexed="true" stored="true" default="2.0"/>
