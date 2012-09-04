@@ -1,3 +1,5 @@
 #foreach($doc in $response.results)
+  #parse("ui/doc_quicklinks.vm")
+  <br/>
   #parse("ui/doc_full.vm")
 #end
