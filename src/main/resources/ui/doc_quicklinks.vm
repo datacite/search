@@ -3,3 +3,5 @@
 <a href="#esc("http://oai.datacite.org/oai?verb=GetRecord&metadataPrefix=oai_datacite&identifier=oai:oai.datacite.org"):#f("dataset_id")">OAI</a>
 &nbsp;|&nbsp;
 <a href='http://data.datacite.org/#f("doi")'>Content Service</a>
+&nbsp;|&nbsp;
+<a href='https://mds.datacite.org/datasets/#f("dataset_id")'>MDS</a>
