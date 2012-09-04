@@ -1,11 +1,38 @@
-<table>
-  #set($fields = $sort.sort($doc.getFieldNames()))
+#set($fieldsAll = $sort.sort($doc.getFieldNames()))
+#set($fieldsCustom = [
+  "created", "minted", "updated", "uploaded", "indexed", 
+  "",
+  "allocator_symbol", "allocator", "datacentre_symbol", "datacentre", "dataset_id", "prefix", "doi", "schema_version",
+  "",
+  "has_media", "has_metadata", "refQuality",
+  ""
+])
+
+#macro(row $field)
+<tr>
+  <td class="field_name">$field</td>
+  <td class="field_value">#field_ul($field)</td>
+</tr>
+#end
+
+#macro(divider)
+<tr><td colspan="2">&nbsp;</td></tr>
+#end
+
+#macro(rows $fields)
   #foreach($field in $fields)
     #if($field != "xml")
-    <tr>
-      <td class="field_name">$field</td>
-      <td class="field_value">#field_ul($field)</td>
-    </tr>
+      #if($field == "")
+        #divider
+      #else
+        #row($field)
+        #set($void = $fieldsAll.remove($field))
+      #end
     #end
   #end
+#end 
+
+<table>
+  #rows($fieldsCustom)
+  #rows($fieldsAll.clone())
 </table>
