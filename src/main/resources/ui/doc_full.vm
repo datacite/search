@@ -1,3 +1,5 @@
+<a href='http://hdl.handle.net/#f("doi")?noredirect'>Handle</a>
+&nbsp;|&nbsp;
 <a href="#esc("http://oai.datacite.org/oai?verb=GetRecord&metadataPrefix=oai_datacite&identifier=oai:oai.datacite.org"):#f("dataset_id")">OAI</a>
 &nbsp;|&nbsp;
 <a href='http://data.datacite.org/#f("doi")'>Content Service</a>
