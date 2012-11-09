@@ -3,7 +3,7 @@ package org.datacite.search.handler.component;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.search.Query;
 import org.apache.solr.handler.component.ResponseBuilder;
 import org.datacite.search.test.DummyQParser;
@@ -26,7 +26,6 @@ public class ConvertWildcardComponentTest {
     @Test 
     public void testSolrInfoMBean() {
         assertNotNull(component.getDescription());
-        assertNotNull(component.getSourceId());
         assertNotNull(component.getSource());
         assertNotNull(component.getVersion());
     }

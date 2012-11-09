@@ -7,12 +7,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.BooleanUtils;
-import org.apache.lucene.analysis.KeywordTokenizer;
+import org.apache.lucene.analysis.core.KeywordTokenizer;
+import org.apache.lucene.analysis.BaseTokenStreamTestCase;
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.solr.analysis.BaseTokenTestCase;
 import org.junit.Test;
 
-public class LanguageCodeFilterTest extends BaseTokenTestCase {
+public class LanguageCodeFilterTest extends BaseTokenStreamTestCase {
 
     LanguageCodeFilterFactory filterFactory = new LanguageCodeFilterFactory();
 
