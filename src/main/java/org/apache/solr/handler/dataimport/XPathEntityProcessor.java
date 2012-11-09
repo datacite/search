@@ -21,7 +21,7 @@ import static org.apache.solr.handler.dataimport.DataImportHandlerException.wrap
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.common.ResourceLoader;
 import org.apache.solr.common.util.ContentStream;
-import org.apache.solr.common.util.SystemIdResolver;
+import org.apache.solr.util.SystemIdResolver;
 import org.apache.solr.common.util.XMLErrorLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
