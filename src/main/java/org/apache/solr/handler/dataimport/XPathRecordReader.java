@@ -1,4 +1,4 @@
-/**
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
  * /a//b...
  * /a/b/c
  * </pre>
- * A record is a Map<String,Object> . The key is the provided name
+ * A record is a Map&lt;String,Object&gt; . The key is the provided name
  * and the value is a String or a List<String>
  *
  * This class is thread-safe for parsing xml. But adding fields is not
@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * <p/>
  * <b>This API is experimental and may change in the future.</b>
  * <p>
- * @version $Id: XPathRecordReader.java 1075090 2011-02-27 17:20:30Z uschindler $
+ *
  * @since solr 1.3
  */
 public class XPathRecordReader {
@@ -98,14 +98,14 @@ public class XPathRecordReader {
   }
 
   /**
-   * A wrapper around {@link #addField0 addField0()} to create a series of  
+   * A wrapper around <code>addField0</code> to create a series of  
    * Nodes based on the supplied Xpath and a given fieldName. The created  
    * nodes are inserted into a Node tree.
    *
    * @param name The name for this field in the emitted record
    * @param xpath The xpath expression for this field
    * @param multiValued If 'true' then the emitted record will have values in 
-   *                    a List<String>
+   *                    a List&lt;String&gt;
    */
   public synchronized XPathRecordReader addField(String name, String xpath, boolean multiValued) {
     addField0(xpath, name, multiValued, false, 0);
@@ -113,15 +113,15 @@ public class XPathRecordReader {
   }
 
   /**
-   * A wrapper around {@link #addField0 addField0()} to create a series of  
+   * A wrapper around <code>addField0</code> to create a series of  
    * Nodes based on the supplied Xpath and a given fieldName. The created  
    * nodes are inserted into a Node tree.
    *
    * @param name The name for this field in the emitted record
    * @param xpath The xpath expression for this field
    * @param multiValued If 'true' then the emitted record will have values in 
-   *                    a List<String>
-   * @param flags FLATTEN: Recursivly combine text from all child XML elements
+   *                    a List&lt;String&gt;
+   * @param flags FLATTEN: Recursively combine text from all child XML elements
    */
   public synchronized XPathRecordReader addField(String name, String xpath, boolean multiValued, int flags) {
     addField0(xpath, name, multiValued, false, flags);
@@ -136,7 +136,7 @@ public class XPathRecordReader {
    * @param xpath The xpath expression for this field
    * @param name The name for this field in the emitted record
    * @param multiValued If 'true' then the emitted record will have values in 
-   *                    a List<String>
+   *                    a List&lt;String&gt;
    * @param isRecord Flags that this XPATH is from a forEach statement
    * @param flags The only supported flag is 'FLATTEN'
    */
