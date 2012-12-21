@@ -530,7 +530,7 @@
        handleSelect="true" is not recommended for new users, but is the default
        for backwards compatibility
     -->
-  <requestDispatcher handleSelect="true" >
+  <requestDispatcher handleSelect="false" >
     <!-- Request Parsing
 
          These settings indicate how Solr Requests may be parsed, and
@@ -636,9 +636,7 @@
        of SearchComponents (see below) and supports distributed
        queries across multiple shards
     -->
-
-  <!-- plain default search handler needed by /select -->
-  <requestHandler name="/admin/select" class="solr.SearchHandler" default="true">
+  <requestHandler name="/select" class="solr.SearchHandler">
   </requestHandler>
     
   <requestHandler name="/ui" class="solr.SearchHandler">
