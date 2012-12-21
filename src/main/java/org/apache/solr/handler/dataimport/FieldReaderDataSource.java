@@ -1,4 +1,4 @@
-/**
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -45,7 +45,6 @@ import java.util.Properties;
  * <p/>
  * Supports String, BLOB, CLOB data types and there is an extra field (in the entity) 'encoding' for BLOB types
  *
- * @version $Id: FieldReaderDataSource.java 1065312 2011-01-30 16:08:25Z rmuir $
  * @since 1.4
  */
 public class FieldReaderDataSource extends DataSource<ContentStream> {
