@@ -639,7 +639,7 @@
   <requestHandler name="/select" class="solr.SearchHandler">
   </requestHandler>
     
-  <requestHandler name="/ui" class="solr.SearchHandler">
+  <requestHandler name="/public/ui" class="solr.SearchHandler">
      <lst name="defaults">
 <!--       <str name="echoParams">explicit</str>-->
 <!--       <str name="debugQuery">on</str>-->
@@ -688,7 +688,7 @@
      </arr>
   </requestHandler>
     
-  <requestHandler name="/ui-detail" class="solr.SearchHandler">
+  <requestHandler name="/public/ui-detail" class="solr.SearchHandler">
      <lst name="defaults">
      </lst>
      <lst name="invariants">
@@ -701,7 +701,7 @@
      </lst>
   </requestHandler>
 
-  <requestHandler name="/ui-ids" class="solr.SearchHandler">
+  <requestHandler name="/public/ui-ids" class="solr.SearchHandler">
      <lst name="defaults">
      </lst>
      <lst name="invariants">
@@ -715,7 +715,7 @@
      </arr>
   </requestHandler>
   
-  <requestHandler name="/ui-advanced" class="solr.SearchHandler">
+  <requestHandler name="/public/ui-advanced" class="solr.SearchHandler">
      <lst name="defaults">
      </lst>
      <lst name="invariants">
@@ -738,7 +738,7 @@
   </requestHandler>
   
      
-  <requestHandler name="/api" class="solr.SearchHandler">
+  <requestHandler name="/public/api" class="solr.SearchHandler">
      <lst name="defaults">
        <str name="fl">*</str>
        <int name="rows">10</int>
@@ -757,7 +757,7 @@
      </arr>
   </requestHandler>
   
-  <requestHandler name="/list/prefixes" class="solr.SearchHandler">
+  <requestHandler name="/public/list/prefixes" class="solr.SearchHandler">
      <lst name="defaults">
      </lst>
      <lst name="invariants">
@@ -774,7 +774,7 @@
      </lst>
   </requestHandler>
   
-    <requestHandler name="/list/allocators" class="solr.SearchHandler">
+    <requestHandler name="/public/list/allocators" class="solr.SearchHandler">
      <lst name="defaults">
      </lst>
      <lst name="invariants">
@@ -791,7 +791,7 @@
      </lst>
   </requestHandler>
   
-  <requestHandler name="/list/datacentres" class="solr.SearchHandler">
+  <requestHandler name="/public/list/datacentres" class="solr.SearchHandler">
      <lst name="defaults">
      </lst>
      <lst name="invariants">
@@ -808,7 +808,7 @@
      </lst>
   </requestHandler>
   
-  <requestHandler name="/list/generic" class="solr.SearchHandler">
+  <requestHandler name="/public/list/generic" class="solr.SearchHandler">
      <lst name="defaults">
        <str name="facet.range.gap">+1MONTH</str>
      </lst>
@@ -827,7 +827,7 @@
      </lst>
   </requestHandler>
   
-  <requestHandler name="/list/filters-html" class="solr.SearchHandler">
+  <requestHandler name="/public/list/filters-html" class="solr.SearchHandler">
      <lst name="defaults">
      </lst>
      <lst name="invariants">
@@ -973,7 +973,7 @@
   <!-- ping/healthcheck -->
   <requestHandler name="/admin/ping" class="solr.PingRequestHandler">
     <lst name="invariants">
-      <str name="qt">/api</str>
+      <str name="qt">/public/api</str>
       <str name="q">solrpingquery</str>
     </lst>
     <lst name="defaults">
@@ -987,9 +987,9 @@
     <!-- <str name="healthcheckFile">server-enabled.txt</str> -->
   </requestHandler>
   
-  <requestHandler name="/status" class="solr.PingRequestHandler">
+  <requestHandler name="/public/status" class="solr.PingRequestHandler">
     <lst name="invariants">
-      <str name="qt">/api</str>
+      <str name="qt">/public/api</str>
       <str name="q">solrpingquery</str>
       <str name="wt">velocity</str>
       <str name="v.template">status</str>
