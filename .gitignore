@@ -3,6 +3,6 @@ target/
 .classpath
 .settings
 src/main/webapp/META-INF/context.xml
-solr_home/conf/solrcore.properties
+solr_home/collection1/conf/solrcore.properties
 src/main/resources/log4j.properties
 src/main/resources/log4j.xml

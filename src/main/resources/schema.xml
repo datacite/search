@@ -27,6 +27,7 @@
     <!-- The StrField type is not analyzed, but indexed/stored verbatim. -->
     <fieldType name="string" class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
     <fieldType name="int" class="solr.TrieIntField" precisionStep="0" omitNorms="true" positionIncrementGap="0"/>
+    <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
     <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true" omitNorms="true"/>
 
     <!--Binary data type. The data should be sent/retrieved in as Base64 encoded Strings -->
@@ -168,6 +169,7 @@
    
    <!-- Solr fields -->
    <field name="indexed" type="date" indexed="true" stored="true" default="NOW"/>
+   <field name="_version_" type="long" indexed="true" stored="true"/>
 
    <!-- Dynamic field definitions.  If a field name is not found, dynamicFields
         will be used if the name matches any of the patterns.

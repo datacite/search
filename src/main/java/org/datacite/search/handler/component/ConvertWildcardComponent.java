@@ -2,7 +2,7 @@ package org.datacite.search.handler.component;
 
 import java.io.IOException;
 
-import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.search.Query;
 import org.apache.solr.handler.component.ResponseBuilder;
 import org.apache.solr.handler.component.SearchComponent;
@@ -42,11 +42,6 @@ public class ConvertWildcardComponent extends SearchComponent {
     @Override
     public String getSource() {
         return "https://github.com/datacite/search/blob/master/src/main/java/org/datacite/search/handler/component/ConvertWildcardComponent.java";
-    }
-
-    @Override
-    public String getSourceId() {
-        return "0";
     }
 
     @Override

@@ -3,9 +3,9 @@ package org.datacite.search.filter;
 import java.util.Map;
 
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.solr.analysis.BaseTokenFilterFactory;
+import org.apache.lucene.analysis.util.TokenFilterFactory;
 
-public class LanguageCodeFilterFactory extends BaseTokenFilterFactory {
+public class LanguageCodeFilterFactory extends TokenFilterFactory {
     
     public final static String LANGUAGE_NAME_ATTRIBUTE = "languageName"; 
     

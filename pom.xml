@@ -9,9 +9,16 @@
   <url>http://maven.apache.org</url>
   <properties>
     <java.version>1.6</java.version>
-    <solr.version>3.6.0</solr.version>
+    <solr.version>4.0.0</solr.version>
   </properties>
   <dependencies>
+    <dependency>
+      <groupId>org.apache.solr</groupId>
+      <artifactId>solr-test-framework</artifactId>
+      <version>${solr.version}</version>
+      <type>jar</type>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.apache.solr</groupId>
       <artifactId>solr</artifactId>
@@ -45,13 +52,6 @@
           <artifactId>slf4j-jdk14</artifactId>
         </exclusion>
       </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.solr</groupId>
-      <artifactId>solr-test-framework</artifactId>
-      <version>${solr.version}</version>
-      <type>jar</type>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>mysql</groupId>
