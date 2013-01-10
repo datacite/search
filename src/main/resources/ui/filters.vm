@@ -1,5 +1,6 @@
 #macro(make_filter_human_readable $value)
   #set($value = $value.replaceFirst("\[NOW/YEAR TO \*\]", "this year"))
+  #set($value = $value.replaceFirst("\[NOW-1YEAR/YEAR TO NOW/YEAR\]", "last year"))
   #set($value = $value.replaceFirst("\[NOW-(\d+)DAYS(/DAY)? TO \*\]", "last $1 days"))
   #set($value = $value.replaceFirst("\[((\d\d\d\d-\d\d)-01T00:00:00Z) TO \1\+1MONTH\]", "$2"))
   #set($value = $value.replaceFirst("\[\* TO ((\d\d\d\d-\d\d)-01T00:00:00Z)\+1MONTH\]", "&le; $2"))
