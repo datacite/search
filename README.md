@@ -27,7 +27,7 @@ All other required files will be in the war-file.
 
 ## Configure the source code
 
-The git repository has a bunch of *.template files. 
+The git repository has a bunch of `*.template` files. 
 Those files are templates for the various configuration files which
 are machine specific i.e. passwords, IP addresses etc.
 
@@ -37,7 +37,7 @@ file name.
 Now in such created file you need to adjust values according to your
 local environment.
 
-### solr_home/conf/solrcore.properties
+### solr_home/collection1/conf/solrcore.properties
 
 MDS database specific properties.
 
@@ -57,45 +57,20 @@ will create `target/search.war`, which is ready to be deployed.
 
 ## Securing Solr
 
-It is very important to restrict access to some solr resource
-(see [Solr Wiki](http://wiki.apache.org/solr/SolrSecurity)). These are:
+Public access should only be granted for the `/public` path.
 
-* /admin
-* /select
-* /update
+### Configure Apache as forward proxy
 
-This can be ensured via HTTP Authentication by the servlet container
-or more flexible by using an Apache in front of your servlet container.
-
-### Configure Apache (preferred)
-
-Add and adjust the following snippet to your apache configuration:
-
-    <LocationMatch /(admin|select|update)>
-      Order Deny,Allow
-      Allow from localhost
-      Deny from all
-    </LocationMatch>
-
-This allows access to the admin resources without password, but only only from localhost.
-
-### Configure Servlet Container (alternative)
-
-Uncomment the `<security-constraint>` section in `src/main/webapp/WEB-INF/web.xml`.
-
-Now you need to login with role `solradmin` to access the admin resources.
-If you are using tomcat you can use the following content for `tomcat-users.xml`:
-
-    <tomcat-users>
-      <user username="<user>" password="<pass>" roles="solradmin"/>
-    </tomcat-users>
+    RedirectMatch ^/?$ /ui
+    ProxyPassMatch ^/?$ !
+    ProxyPass / ajp://localhost:<port>/search/public
 
 # Running
 
 After deploying the following resources are of interest:
 
-* `/ui` - search user interface
-* `/admin` - admin interface
+* `/public/ui` - search user interface
+* `/` - admin interface
 
 Data from MDS is imported via Solr's DataImportHandler. You can access it via admin interface.
 Another option especially useful for cron jobs is `scripts/solr-client`. Simply try
