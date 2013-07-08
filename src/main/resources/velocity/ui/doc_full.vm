@@ -11,7 +11,7 @@
 #macro(row $field)
 <tr>
   <td class="field_name">$field</td>
-  <td class="field_value">#field_ul($field)</td>
+  <td class="field_value">#if_has_field($field, "#field_ul($field)")</td>
 </tr>
 #end
 
