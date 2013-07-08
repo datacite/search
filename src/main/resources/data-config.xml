@@ -22,8 +22,7 @@
                     m.namespace,
                     d.is_ref_quality AS refQuality,
                     mt.dataset IS NOT NULL AS has_media,
-                    if(d.is_active,null,'true') AS $skipDoc,
-                    if(d.is_active,null,d.id) AS $deleteDocById
+                    d.is_active
              FROM dataset AS d
              LEFT JOIN metadata AS m
                ON m.dataset = d.id
@@ -54,6 +53,7 @@
       <field column="prefix" regex="([^/]*)/" sourceColName="doi"/>
       <field column="schema_version" regex="-(\d+(.\d+)*)$" sourceColName="namespace"/>
 
+      <entity name="if_isactive" hasField="dataset.is_active" processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor">
       <entity name="if_metadata" hasField="dataset.has_metadata" processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor">
       <entity name="xml" dataSource="field" dataField="dataset.xml"
         forEach="/resource" processor="XPathEntityProcessor" onError="skip"
@@ -88,6 +88,7 @@
         <field column="version" xpath="//version" />
         <field column="rights" xpath="//rights" />
         <field column="description" xpath="//description" />
+      </entity>
       </entity>
       </entity>
  
