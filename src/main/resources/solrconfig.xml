@@ -662,7 +662,6 @@
        <str name="facet.field">publisher_facet</str>
        <str name="facet.field">language_facet</str>
        <str name="facet.field">refQuality</str>
-       <str name="facet.field">has_metadata</str>
        
        <str name="hl">true</str>
        <str name="hl.fl">*</str>
@@ -681,7 +680,8 @@
        <str name="v.contentType">text/html;charset=UTF-8</str>
      </lst> 
      <lst name="appends">
-       <str name="bf">has_metadata</str>
+       <str name="fq">has_metadata:true</str>
+       <str name="fq">is_active:true</str>
      </lst>
      <arr name="first-components">
        <str>wildcardconverter</str>

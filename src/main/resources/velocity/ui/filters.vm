@@ -10,7 +10,7 @@
 #end
 #set($filters = [])
 #foreach($filter in $request.params.getParams('fq'))
-  #if($filter != "")
+  #if($filter != "" and !$filter.startsWith("has_metadata:") and !$filter.startsWith("is_active:"))
     #set($null = $filters.add($filter))
   #end
 #end
