@@ -13,7 +13,7 @@
                     CONCAT(dc.symbol, ' - ', dc.name) AS datacentre,
                     al.symbol AS allocator_symbol,
                     CONCAT(al.symbol, ' - ', al.name) AS allocator,
-                    m.xml,
+                    IF(d.is_active, m.xml, NULL) as xml,
                     m.xml IS NOT NULL as has_metadata,
                     d.created AS created,
                     d.minted AS minted,
