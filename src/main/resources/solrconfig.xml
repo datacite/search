@@ -661,7 +661,6 @@
        <str name="facet.field">publicationYear</str>
        <str name="facet.field">publisher_facet</str>
        <str name="facet.field">language_facet</str>
-       <str name="facet.field">refQuality</str>
        
        <str name="hl">true</str>
        <str name="hl.fl">*</str>
