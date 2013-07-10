@@ -2,9 +2,11 @@
 #set($fieldsCustom = [
   "created", "minted", "updated", "uploaded", "indexed", 
   "",
-  "allocator_symbol", "allocator", "datacentre_symbol", "datacentre", "dataset_id", "prefix", "doi", "schema_version",
+  "allocator_symbol", "allocator", "datacentre_symbol", "datacentre", "dataset_id", "prefix", "doi",
   "",
-  "has_media", "has_metadata", "refQuality",
+  "is_active", "has_metadata", "has_media", "refQuality",
+  "",
+  "schema_version", "namespace",
   ""
 ])
 
