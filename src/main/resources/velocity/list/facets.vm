@@ -1,7 +1,18 @@
+#set($stats_field = $request.params.get("stats.field"))
+#set($stats_facet = $request.params.get("stats.facet"))
+#set($stats_list = $response.fieldStatsInfo.get("$stats_field").facets.get("$stats_facet"))
+#set($stats = {})
+#foreach($stat in $stats_list)
+  #set($null = $stats.put("$stat.name", $stat))
+#end
 #if($response.facetFields)
 #foreach($field in $response.facetFields)
 #foreach($facet in $field.values)
-#remove_linebreak($facet.name); $facet.count
+#set($stat = $stats.get("$facet.name"))
+#remove_linebreak($facet.name); $facet.count;#if($stats_list)
+#if($stat)$stat.min; $stat.max#else;;#end
+#end
+
 #end
 #end
 #end
