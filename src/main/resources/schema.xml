@@ -142,7 +142,7 @@
    <field name="relatedIdentifier" type="identifiers" indexed="true" stored="true" multiValued="true"/>
    <field name="size" type="textgen" indexed="true" stored="true" multiValued="true"/>
    <field name="format" type="text" indexed="true" stored="true" multiValued="true"/>
-   <field name="rights" type="text" indexed="true" stored="true"/>
+   <field name="rights" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="version" type="string" indexed="true" stored="true"/>
    <field name="description" type="textgen" indexed="true" stored="true" multiValued="true"/>
    
