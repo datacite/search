@@ -44,17 +44,18 @@
                                  IFNULL(dc.updated,0))
                         > '${dataimporter.last_index_time}' )
              GROUP BY dataset_id
-            "
-      transformer="RegexTransformer">
+            ">
       <!-- 
         using delta import as proposed in
         http://wiki.apache.org/solr/DataImportHandlerDeltaQueryViaFullImport
        -->
       <field column="prefix" regex="([^/]*)/" sourceColName="doi"/>
-      <field column="schema_version" regex="-(\d+(.\d+)*)$" sourceColName="namespace"/>
 
       <entity name="if_isactive" hasField="dataset.is_active" processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor">
-      <entity name="if_metadata" hasField="dataset.has_metadata" processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor">
+      <entity name="if_metadata" hasField="dataset.has_metadata" processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor" transformer="TemplateTransformer,RegexTransformer"> 
+      <!-- order of transformer is important! -->
+      <field column="namespace" template="${dataset.namespace}"/> <!-- copy namespace to this entity; hack for regextransformer for schema_version -->
+      <field column="schema_version" regex="-(\d+(.\d+)*)$" sourceColName="namespace" template="2.0"/>  <!-- extract schema_version from namespace; defaults to 2.0 if no namespace present -->
       <entity name="xml" dataSource="field" dataField="dataset.xml"
         forEach="/resource" processor="XPathEntityProcessor" onError="skip"
         transformer="org.datacite.search.handler.dataimport.KeyValueTransformer,org.datacite.search.handler.dataimport.TrimTransformer">

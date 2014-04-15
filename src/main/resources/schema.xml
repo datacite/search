@@ -156,7 +156,7 @@
    <field name="uploaded" type="date" indexed="true" stored="true"/>
    <field name="xml" type="binary" indexed="false" stored="true"/>
    <field name="namespace" type="string" indexed="true" stored="true"/>
-   <field name="schema_version" type="string" indexed="true" stored="true" default="2.0"/>
+   <field name="schema_version" type="string" indexed="true" stored="true"/>
 
    <field name="media" type="identifiers" indexed="true" stored="true" multiValued="true"/>
    
