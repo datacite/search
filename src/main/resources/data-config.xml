@@ -7,6 +7,7 @@
   <dataSource name="field" type="FieldReaderDataSource" />
   <document>
     <!-- SOLR-2104 -->
+    <!-- using delta import as proposed in http://wiki.apache.org/solr/DataImportHandlerDeltaQueryViaFullImport -->
     <entity name="dataset" dataSource="db"
       query="SELECT d.doi AS doi,
                     d.id AS dataset_id,
@@ -46,7 +47,7 @@
                         > '${dataimporter.last_index_time}' )
              GROUP BY dataset_id
             ">
-      <!-- using delta import as proposed in http://wiki.apache.org/solr/DataImportHandlerDeltaQueryViaFullImport -->
+
       <field column="prefix" regex="([^/]*)/" sourceColName="doi" />
 
       <entity name="if_isactive" hasField="dataset.is_active"
@@ -56,6 +57,14 @@
           transformer="TemplateTransformer,RegexTransformer">
           <!-- order of transformer is important! -->
           
+          <!-- schema_version detection table:
+
+              has_metadata   namespace | schema_version
+              -------------------------+---------------
+              false          <null>    | <null>
+              true           <null>    | 2.0
+              true           ...-x.y   | x.y
+           -->
           <field column="namespace" template="${dataset.namespace}" />
               <!-- copy namespace to this entity; 
                    hack for regextransformer for schema_version -->
