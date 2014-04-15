@@ -57,37 +57,37 @@
       <entity name="if_metadata" hasField="dataset.has_metadata" processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor">
       <entity name="xml" dataSource="field" dataField="dataset.xml"
         forEach="/resource" processor="XPathEntityProcessor" onError="skip"
-        transformer="org.datacite.search.handler.dataimport.KeyValueTransformer">
-        <field column="title" xpath="//title" />
-        <field column="creator" xpath="//creatorName" />
-        <field column="publisher" xpath="//publisher" />
-        <field column="publicationYear" xpath="//publicationYear" />
-        <field column="subject" xpath="//subject" />
-        <field column="contributor" xpath="//contributorName" />
-        <field column="date" xpath="//date" />
-        <field column="language" xpath="//language" />
+        transformer="org.datacite.search.handler.dataimport.KeyValueTransformer,org.datacite.search.handler.dataimport.TrimTransformer">
+        <field column="title" xpath="//title" trim="true"/>
+        <field column="creator" xpath="//creatorName" trim="true"/>
+        <field column="publisher" xpath="//publisher" trim="true"/>
+        <field column="publicationYear" xpath="//publicationYear" trim="true"/>
+        <field column="subject" xpath="//subject" trim="true"/>
+        <field column="contributor" xpath="//contributorName" trim="true"/>
+        <field column="date" xpath="//date" trim="true"/>
+        <field column="language" xpath="//language" trim="true"/>
         <field column="resourceTypeGeneral" xpath="//resourceType/@resourceTypeGeneral" />
-        <field column="resourceType" xpath="//resourceType" />
+        <field column="resourceType" xpath="//resourceType" trim="true"/>
         
         <field column="ignored_alternateIdentifier_type" xpath="//alternateIdentifier/@alternateIdentifierType" />
-        <field column="ignored_alternateIdentifier" xpath="//alternateIdentifier" />
+        <field column="ignored_alternateIdentifier" xpath="//alternateIdentifier" trim="true"/>
         <field column="alternateIdentifier" keys="ignored_alternateIdentifier_type" values="ignored_alternateIdentifier" />
         
         <field column="ignored_relatedIdentifier_type" xpath="//relatedIdentifier/@relatedIdentifierType" />
         <field column="ignored_relatedIdentifier_relation" xpath="//relatedIdentifier/@relationType" />
-        <field column="ignored_relatedIdentifier" xpath="//relatedIdentifier" />
+        <field column="ignored_relatedIdentifier" xpath="//relatedIdentifier" trim="true"/>
         <field column="ignored_relatedIdentifier_relation_and_type" keys="ignored_relatedIdentifier_relation" values="ignored_relatedIdentifier_type" />
         <field column="relatedIdentifier" keys="ignored_relatedIdentifier_relation_and_type" values="ignored_relatedIdentifier" />
         
         <field column="ignored_nameIdentifier_scheme" xpath="//nameIdentifier/@nameIdentifierScheme" />
-        <field column="ignored_nameIdentifier" xpath="//nameIdentifier" />
+        <field column="ignored_nameIdentifier" xpath="//nameIdentifier" trim="true"/>
         <field column="nameIdentifier" keys="ignored_nameIdentifier_scheme" values="ignored_nameIdentifier" />
         
-        <field column="size" xpath="//size" />
-        <field column="format" xpath="//format" />
-        <field column="version" xpath="//version" />
-        <field column="rights" xpath="//rights" />
-        <field column="description" xpath="//description" />
+        <field column="size" xpath="//size" trim="true"/>
+        <field column="format" xpath="//format" trim="true"/>
+        <field column="version" xpath="//version" trim="true"/>
+        <field column="rights" xpath="//rights" trim="true"/>
+        <field column="description" xpath="//description" trim="true"/>
       </entity>
       </entity>
       </entity>
