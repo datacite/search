@@ -36,24 +36,17 @@
     <!-- The format for this date field is of the form 1995-12-31T23:59:59Z -->
     <fieldType name="date" class="solr.TrieDateField" omitNorms="true" precisionStep="0" positionIncrementGap="0"/>
 
+    <!-- A general unstemmed text field - good if one does not know the language of the field -->
     <fieldType name="text" class="solr.TextField" positionIncrementGap="100" autoGeneratePhraseQueries="true">
       <analyzer>
+        <charFilter class="solr.HTMLStripCharFilterFactory"/>
+        <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
         <tokenizer class="solr.WhitespaceTokenizerFactory"/>
         <filter class="solr.WordDelimiterFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="1" catenateNumbers="1" catenateAll="0" splitOnCaseChange="1"/>
         <filter class="solr.LowerCaseFilterFactory"/>
-        <filter class="solr.PorterStemFilterFactory"/>
       </analyzer>
     </fieldType>
 
-    <!-- A general unstemmed text field - good if one does not know the language of the field -->
-    <fieldType name="textgen" class="solr.TextField" positionIncrementGap="100">
-      <analyzer>
-        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
-        <filter class="solr.WordDelimiterFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="1" catenateNumbers="1" catenateAll="0" splitOnCaseChange="0"/>
-        <filter class="solr.LowerCaseFilterFactory"/>
-      </analyzer>
-    </fieldType>
-    
     <!-- lowercases the entire field value, keeping it as a single token.  -->
     <fieldType name="lowercase" class="solr.TextField" positionIncrementGap="100">
       <analyzer>
@@ -125,34 +118,34 @@
    
    <!-- DataCite mandatory fields -->
    <field name="doi" type="lowercase" indexed="true" stored="true" required="true" /> 
-   <field name="creator" type="textgen" indexed="true" stored="true" multiValued="true"/> 
-   <field name="title" type="textgen" indexed="true" stored="true" multiValued="true"/> 
-   <field name="publisher" type="textgen" indexed="true" stored="true"/> 
+   <field name="creator" type="text" indexed="true" stored="true" multiValued="true"/> 
+   <field name="title" type="text" indexed="true" stored="true" multiValued="true"/> 
+   <field name="publisher" type="text" indexed="true" stored="true"/> 
    <field name="publicationYear" type="string" indexed="true" stored="true"/> 
 
    <!-- DataCite optional fields -->
-   <field name="subject" type="textgen" indexed="true" stored="true" multiValued="true"/> 
-   <field name="contributor" type="textgen" indexed="true" stored="true" multiValued="true"/>
+   <field name="subject" type="text" indexed="true" stored="true" multiValued="true"/> 
+   <field name="contributor" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="date" type="string" indexed="true" stored="true" multiValued="true"/>
    <field name="language" type="langcode" indexed="true" stored="true"/>
    <field name="language_facet" type="langname" indexed="true" stored="false"/>
-   <field name="resourceType" type="textgen" indexed="true" stored="true"/>
+   <field name="resourceType" type="text" indexed="true" stored="true"/>
    <field name="resourceTypeGeneral" type="lowercase" indexed="true" stored="true"/>
    <field name="alternateIdentifier" type="identifiers" indexed="true" stored="true" multiValued="true"/>
    <field name="relatedIdentifier" type="identifiers" indexed="true" stored="true" multiValued="true"/>
-   <field name="size" type="textgen" indexed="true" stored="true" multiValued="true"/>
+   <field name="size" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="format" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="rights" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="version" type="string" indexed="true" stored="true"/>
-   <field name="description" type="textgen" indexed="true" stored="true" multiValued="true"/>
+   <field name="description" type="text" indexed="true" stored="true" multiValued="true"/>
    
    <field name="nameIdentifier" type="identifiers" indexed="true" stored="true" multiValued="true"/>
    
    
    <!-- MDS fields -->
-   <field name="allocator" type="textgen" indexed="true" stored="true"/>
+   <field name="allocator" type="text" indexed="true" stored="true"/>
    <field name="allocator_symbol" type="symbol" indexed="true" stored="true"/>
-   <field name="datacentre" type="textgen" indexed="true" stored="true"/>
+   <field name="datacentre" type="text" indexed="true" stored="true"/>
    <field name="datacentre_symbol" type="symbol" indexed="true" stored="true"/>
    <field name="prefix" type="string" indexed="true" stored="true"/>
    <field name="refQuality" type="boolean" indexed="true" stored="true" default="false"/>
