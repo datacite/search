@@ -60,7 +60,7 @@
           <!-- schema_version detection table:
 
               has_metadata   namespace | schema_version
-              -------------------------+---------------
+              =========================================
               false          <null>    | <null>
               true           <null>    | 2.0
               true           ...-x.y   | x.y
