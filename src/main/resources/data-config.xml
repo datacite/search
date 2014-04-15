@@ -1,8 +1,9 @@
 <dataConfig>
   <dataSource name="db" type="JdbcDataSource" driver="com.mysql.jdbc.Driver"
-    url="${dataimporter.request.db.url}" user="${dataimporter.request.db.user}" password="${dataimporter.request.db.password}" readonly="true"
+    url="${dataimporter.request.db.url}" user="${dataimporter.request.db.user}"
+    password="${dataimporter.request.db.password}" readonly="true"
     batchSize="-1" />
-    <!-- for batchSize=-1 see DIH FAQ -->
+  <!-- for batchSize=-1 see DIH FAQ -->
   <dataSource name="field" type="FieldReaderDataSource" />
   <document>
     <!-- SOLR-2104 -->
@@ -45,61 +46,69 @@
                         > '${dataimporter.last_index_time}' )
              GROUP BY dataset_id
             ">
-      <!-- 
-        using delta import as proposed in
-        http://wiki.apache.org/solr/DataImportHandlerDeltaQueryViaFullImport
-       -->
-      <field column="prefix" regex="([^/]*)/" sourceColName="doi"/>
+      <!-- using delta import as proposed in http://wiki.apache.org/solr/DataImportHandlerDeltaQueryViaFullImport -->
+      <field column="prefix" regex="([^/]*)/" sourceColName="doi" />
 
-      <entity name="if_isactive" hasField="dataset.is_active" processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor">
-      <entity name="if_metadata" hasField="dataset.has_metadata" processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor" transformer="TemplateTransformer,RegexTransformer"> 
-      <!-- order of transformer is important! -->
-      <field column="namespace" template="${dataset.namespace}"/> <!-- copy namespace to this entity; hack for regextransformer for schema_version -->
-      <field column="schema_version" regex="-(\d+(.\d+)*)$" sourceColName="namespace" template="2.0"/>  <!-- extract schema_version from namespace; defaults to 2.0 if no namespace present -->
-      <entity name="xml" dataSource="field" dataField="dataset.xml"
-        forEach="/resource" processor="XPathEntityProcessor" onError="skip"
-        transformer="org.datacite.search.handler.dataimport.KeyValueTransformer,org.datacite.search.handler.dataimport.TrimTransformer">
-        <field column="title" xpath="//title" trim="true"/>
-        <field column="creator" xpath="//creatorName" trim="true"/>
-        <field column="publisher" xpath="//publisher" trim="true"/>
-        <field column="publicationYear" xpath="//publicationYear" trim="true"/>
-        <field column="subject" xpath="//subject" trim="true"/>
-        <field column="contributor" xpath="//contributorName" trim="true"/>
-        <field column="date" xpath="//date" trim="true"/>
-        <field column="language" xpath="//language" trim="true"/>
-        <field column="resourceTypeGeneral" xpath="//resourceType/@resourceTypeGeneral" />
-        <field column="resourceType" xpath="//resourceType" trim="true"/>
-        
-        <field column="ignored_alternateIdentifier_type" xpath="//alternateIdentifier/@alternateIdentifierType" />
-        <field column="ignored_alternateIdentifier" xpath="//alternateIdentifier" trim="true"/>
-        <field column="alternateIdentifier" keys="ignored_alternateIdentifier_type" values="ignored_alternateIdentifier" />
-        
-        <field column="ignored_relatedIdentifier_type" xpath="//relatedIdentifier/@relatedIdentifierType" />
-        <field column="ignored_relatedIdentifier_relation" xpath="//relatedIdentifier/@relationType" />
-        <field column="ignored_relatedIdentifier" xpath="//relatedIdentifier" trim="true"/>
-        <field column="ignored_relatedIdentifier_relation_and_type" keys="ignored_relatedIdentifier_relation" values="ignored_relatedIdentifier_type" />
-        <field column="relatedIdentifier" keys="ignored_relatedIdentifier_relation_and_type" values="ignored_relatedIdentifier" />
-        
-        <field column="ignored_nameIdentifier_scheme" xpath="//nameIdentifier/@nameIdentifierScheme" />
-        <field column="ignored_nameIdentifier" xpath="//nameIdentifier" trim="true"/>
-        <field column="nameIdentifier" keys="ignored_nameIdentifier_scheme" values="ignored_nameIdentifier" />
-        
-        <field column="size" xpath="//size" trim="true"/>
-        <field column="format" xpath="//format" trim="true"/>
-        <field column="version" xpath="//version" trim="true"/>
-        <field column="rights" xpath="//rights" trim="true"/>
-        <field column="description" xpath="//description" trim="true"/>
+      <entity name="if_isactive" hasField="dataset.is_active"
+        processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor">
+        <entity name="if_metadata" hasField="dataset.has_metadata"
+          processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor"
+          transformer="TemplateTransformer,RegexTransformer">
+          <!-- order of transformer is important! -->
+          
+          <field column="namespace" template="${dataset.namespace}" />
+              <!-- copy namespace to this entity; 
+                   hack for regextransformer for schema_version -->
+          <field column="schema_version" regex="-(\d+(.\d+)*)$" sourceColName="namespace" template="2.0" />
+              <!-- extract schema_version from namespace; 
+                   defaults to 2.0 if no namespace present -->
+          
+          <entity name="xml" dataSource="field" dataField="dataset.xml"
+            forEach="/resource" processor="XPathEntityProcessor" onError="skip"
+            transformer="org.datacite.search.handler.dataimport.KeyValueTransformer,org.datacite.search.handler.dataimport.TrimTransformer">
+            
+            <field column="title" xpath="//title" trim="true" />
+            <field column="creator" xpath="//creatorName" trim="true" />
+            <field column="publisher" xpath="//publisher" trim="true" />
+            <field column="publicationYear" xpath="//publicationYear" trim="true" />
+            <field column="subject" xpath="//subject" trim="true" />
+            <field column="contributor" xpath="//contributorName" trim="true" />
+            <field column="date" xpath="//date" trim="true" />
+            <field column="language" xpath="//language" trim="true" />
+            <field column="resourceTypeGeneral" xpath="//resourceType/@resourceTypeGeneral" />
+            <field column="resourceType" xpath="//resourceType" trim="true" />
+
+            <field column="ignored_alternateIdentifier_type" xpath="//alternateIdentifier/@alternateIdentifierType" />
+            <field column="ignored_alternateIdentifier" xpath="//alternateIdentifier" trim="true" />
+            <field column="alternateIdentifier" keys="ignored_alternateIdentifier_type" values="ignored_alternateIdentifier" />
+
+            <field column="ignored_relatedIdentifier_type" xpath="//relatedIdentifier/@relatedIdentifierType" />
+            <field column="ignored_relatedIdentifier_relation" xpath="//relatedIdentifier/@relationType" />
+            <field column="ignored_relatedIdentifier" xpath="//relatedIdentifier" trim="true" />
+            <field column="ignored_relatedIdentifier_relation_and_type" keys="ignored_relatedIdentifier_relation" values="ignored_relatedIdentifier_type" />
+            <field column="relatedIdentifier" keys="ignored_relatedIdentifier_relation_and_type" values="ignored_relatedIdentifier" />
+
+            <field column="ignored_nameIdentifier_scheme" xpath="//nameIdentifier/@nameIdentifierScheme" />
+            <field column="ignored_nameIdentifier" xpath="//nameIdentifier" trim="true" />
+            <field column="nameIdentifier" keys="ignored_nameIdentifier_scheme" values="ignored_nameIdentifier" />
+
+            <field column="size" xpath="//size" trim="true" />
+            <field column="format" xpath="//format" trim="true" />
+            <field column="version" xpath="//version" trim="true" />
+            <field column="rights" xpath="//rights" trim="true" />
+            <field column="description" xpath="//description" trim="true" />
+          </entity>
+        </entity>
       </entity>
-      </entity>
-      </entity>
- 
-      <entity name="if_media" hasField="dataset.has_media" processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor">
-      <entity name="media" dataSource="db"
-        query="SELECT CONCAT(media_type,':',url) AS media
+
+      <entity name="if_media" hasField="dataset.has_media"
+        processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor">
+        <entity name="media" dataSource="db"
+          query="SELECT CONCAT(media_type,':',url) AS media
                FROM media AS m
                WHERE m.dataset = '${dataset.dataset_id}'
               ">
-      </entity>
+        </entity>
       </entity>
     </entity>
   </document>
