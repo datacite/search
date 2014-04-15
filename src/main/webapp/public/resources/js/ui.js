@@ -175,6 +175,7 @@ function reload_results() {
 }
 
 function load_results(query) {
+	query = query.replace("%20", "+"); // fix for #133
 	History.pushStateWithoutReloadingResults(null, null, fixUrl(query));
 	$("#results").fadeTo(0,0.3);
 	$("#results").load_sync(query, {
