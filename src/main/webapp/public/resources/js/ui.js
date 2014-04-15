@@ -251,6 +251,17 @@ function process_results() {
 	check_page_layout();
 }
 
+function process_apilinks() {                    
+    var rows = $(".doc").length;
+    $(".footer a.api").each(function() {
+        var a = $(this);
+        var href = a.attr("href");
+        console.log("replace for", href);
+        href = href.replace(/&rows=[0-9]+/, "&rows=" + rows);
+        a.attr("href", href);
+    });
+}
+
 function process_oailink() {
 	var lens = $("#lens").attr("href");
 	var oai_url = $("#oai").attr("href");
@@ -509,6 +520,7 @@ pagination.next_page = {
 				} else {
 					$("#docs").append(data);
 					process_docs();
+	                process_apilinks();
 				}
 				$("#next_page_loading").hide();
 				pagination.next_page.loading = false;
