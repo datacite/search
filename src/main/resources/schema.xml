@@ -57,14 +57,14 @@
     
     <fieldType name="langcode" class="solr.TextField" positionIncrementGap="100" autoGeneratePhraseQueries="true">
       <analyzer>
-        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
         <filter class="org.datacite.search.filter.LanguageCodeFilterFactory"/>
       </analyzer>
     </fieldType>
     
     <fieldType name="langname" class="solr.TextField" positionIncrementGap="100" autoGeneratePhraseQueries="true">
       <analyzer>
-        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
         <filter class="org.datacite.search.filter.LanguageCodeFilterFactory" languageName="true"/>
       </analyzer>
     </fieldType>

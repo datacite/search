@@ -31,6 +31,7 @@ public class LanguageCodeFilterTest extends BaseTokenStreamTestCase {
         assertFilter("en", "English");
         assertFilter("deu", "German");
         assertFilter("chinese", "Chinese");
+        assertFilter("ancient Greek", "Ancient Greek");
         assertFilter("foobar", "foobar");
     }
 
