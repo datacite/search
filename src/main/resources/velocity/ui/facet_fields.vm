@@ -52,7 +52,7 @@
         #end
         </ul>
 
-      #if($count > $limit)
+      #if($count >= $limit)
         #set($new_limit = $math.add($limit,5))
         <a class="more" href="#url_for_show_more_facet($field.name,$new_limit)">more</a>
       #end 
