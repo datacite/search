@@ -174,6 +174,11 @@ function reload_results() {
 	load_results(window.location.href);
 }
 
+function reload_results_from_beginning() {
+    url = window.location.href.replace(/&start=[0-9]+/, "");
+    load_results(url);
+}
+
 function load_results(query) {
 	query = query.replace("%20", "+"); // fix for #133
 	History.pushStateWithoutReloadingResults(null, null, fixUrl(query));
@@ -402,7 +407,7 @@ var options = {
 	opts : new Array(),
 	init : function() {
 		this.add("instant", false, null, "Instant Search", "load results immediately without clicking 'search' button");
-		this.add("continous", false, reload_results, "Continous Scrolling", "load next results automatically when hitting the bottom of the page");
+		this.add("continous", false, reload_results_from_beginning, "Continous Scrolling", "load next results automatically when hitting the bottom of the page");
 		this.add("filter_preview", false, null, "Filter Preview", "show preview of filter on mouse hover");
 		options.menu.init();
 	},
