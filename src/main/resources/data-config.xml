@@ -46,7 +46,8 @@
                                  IFNULL(dc.updated,0))
                         > '${dataimporter.last_index_time}' )
              GROUP BY dataset_id
-            ">
+            "
+      transformer="RegexTransformer">
 
       <field column="prefix" regex="([^/]*)/" sourceColName="doi" />
 
