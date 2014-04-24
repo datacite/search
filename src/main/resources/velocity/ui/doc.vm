@@ -17,7 +17,7 @@
     </div>
   </div>
   <div class="title">
-    <a href='http://data.datacite.org/#esc_doi("#f('doi')")'>#field("title")</a>
+    <a href='http://data.datacite.org/#esc_doi("#f('doi')")'>#field_br("title")</a>
     <span class="version">
       #if_has_field("version", "[version #field('version')]")
     </span>
