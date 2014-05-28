@@ -54,21 +54,33 @@
         <filter class="solr.LowerCaseFilterFactory" />
       </analyzer>
     </fieldType>
-    
+
     <fieldType name="langcode" class="solr.TextField" positionIncrementGap="100" autoGeneratePhraseQueries="true">
       <analyzer>
         <tokenizer class="solr.KeywordTokenizerFactory"/>
         <filter class="org.datacite.search.filter.LanguageCodeFilterFactory"/>
       </analyzer>
     </fieldType>
-    
+
     <fieldType name="langname" class="solr.TextField" positionIncrementGap="100" autoGeneratePhraseQueries="true">
       <analyzer>
         <tokenizer class="solr.KeywordTokenizerFactory"/>
         <filter class="org.datacite.search.filter.LanguageCodeFilterFactory" languageName="true"/>
       </analyzer>
     </fieldType>
-    
+
+    <fieldType name="doi" class="solr.TextField" positionIncrementGap="100">
+        <analyzer type="index">
+            <tokenizer class="solr.KeywordTokenizerFactory"/>
+            <filter class="solr.LowerCaseFilterFactory" />
+        </analyzer>
+        <analyzer type="query">
+            <tokenizer class="solr.KeywordTokenizerFactory"/>
+            <filter class="solr.LowerCaseFilterFactory" />
+            <filter class="solr.PatternReplaceFilterFactory" pattern="#.*$" replacement="" />
+        </analyzer>
+    </fieldType>
+
     <!-- lowercases the entire field value, keeping it as a single token.  -->
     <fieldType name="symbol" class="solr.TextField" positionIncrementGap="100">
       <analyzer>
@@ -121,7 +133,7 @@
    -->
    
    <!-- DataCite mandatory fields -->
-   <field name="doi" type="lowercase" indexed="true" stored="true" required="true" /> 
+   <field name="doi" type="doi" indexed="true" stored="true" required="true" />
    <field name="creator" type="text" indexed="true" stored="true" multiValued="true"/> 
    <field name="title" type="text" indexed="true" stored="true" multiValued="true"/> 
    <field name="publisher" type="text" indexed="true" stored="true"/> 
