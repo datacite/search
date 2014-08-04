@@ -1,9 +1,9 @@
 <div class="hidden">
-  ## static link to the current result 
+  ## static link to the current result
   <a id="lens" href="#url_for_lens">&nbsp;</a>
   <a id="lens_without_q" href="#url_for_lens_without_q">&nbsp;</a>
   <span id="start">$page.start</span>
-  <span id="q">#q</span>
+  <span id="q">$esc.html("#q")</span>
 </div>
 
 <div id="sidebar">
@@ -20,11 +20,11 @@
   <div id="stats">
     #parse("ui/stats.vm")
   </div>
-  
+
   <div class="pagination">
     #parse("ui/pagination.vm")
   </div>
-  
+
   <div id="docs">
     #parse("ui/docs.vm")
   </div>
@@ -36,12 +36,12 @@
   #if($page.results_found > $page.results_per_page)
     <div id="next_page"></div>
   #end
-  
+
   <div id="next_page_loading">
     <img src="resources/img/tango/32x32/animations/process-working.gif" class="loading" alt="spinning wheel"/>
     Loading next page
   </div>
-    
+
   <div class="footer">
     #parse("ui/footer.vm")
   </div>
