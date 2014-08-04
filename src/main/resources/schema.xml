@@ -141,6 +141,7 @@
 
    <!-- DataCite optional fields -->
    <field name="subject" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="subjectScheme" type="lowercase" indexed="true" stored="true" multiValued="true"/>
    <field name="contributor" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="date" type="string" indexed="true" stored="true" multiValued="true"/>
    <field name="language" type="langcode" indexed="true" stored="true"/>
@@ -152,6 +153,7 @@
    <field name="size" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="format" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="rights" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="rightsURI" type="string" indexed="true" stored="true" multiValued="true"/>
    <field name="version" type="string" indexed="true" stored="true"/>
    <field name="description" type="text" indexed="true" stored="true" multiValued="true"/>
 
@@ -193,6 +195,7 @@
 
    <dynamicField name="ignored_*" type="ignored" multiValued="true"/>
    <dynamicField name="*_facet" type="string" indexed="true" stored="false" multiValued="true"/>
+   <dynamicField name="*Type" type="lowercase" indexed="true" stored="true" multiValued="true"/>
    <dynamicField name="has_*" type="boolean" indexed="true" stored="true" />
    <dynamicField name="is_*" type="boolean" indexed="true" stored="true" />
 

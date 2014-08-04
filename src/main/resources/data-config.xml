@@ -55,7 +55,7 @@
         processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor"
         transformer="TemplateTransformer,RegexTransformer">
         <!-- order of transformer is important! -->
-        
+
         <!-- schema_version detection table:
 
             has_metadata   namespace | schema_version
@@ -65,26 +65,30 @@
             true           ...-x.y   | x.y
          -->
         <field column="namespace" template="${dataset.namespace}" />
-            <!-- copy namespace to this entity; 
+            <!-- copy namespace to this entity;
                  hack for regextransformer for schema_version -->
         <field column="schema_version" regex="-(\d+(.\d+)*)$" sourceColName="namespace" template="2.0" />
-            <!-- extract schema_version from namespace; 
+            <!-- extract schema_version from namespace;
                  defaults to 2.0 if no namespace present -->
-          
+
         <entity name="if_isactive" hasField="dataset.is_active"
           processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor">
           <!-- index xml only for active datasets -->
           <entity name="xml" dataSource="field" dataField="dataset.xml"
             forEach="/resource" processor="XPathEntityProcessor" onError="skip"
             transformer="org.datacite.search.handler.dataimport.KeyValueTransformer,org.datacite.search.handler.dataimport.TrimTransformer">
-            
+
             <field column="title" xpath="//title" trim="true" />
+            <field column="titleType" xpath="//title/@titleType"/>
             <field column="creator" xpath="//creatorName" trim="true" />
             <field column="publisher" xpath="//publisher" trim="true" />
             <field column="publicationYear" xpath="//publicationYear" trim="true" />
             <field column="subject" xpath="//subject" trim="true" />
-            <field column="contributor" xpath="//contributorName" trim="true" />
+            <field column="subjectScheme" xpath="//subject/@subjectScheme" />
+            <field column="contributor" xpath="//contributor/contributorName" trim="true" />
+            <field column="contributorType" xpath="//contributor/@contributorType" />
             <field column="date" xpath="//date" trim="true" />
+            <field column="dateType" xpath="//date/@dateType" />
             <field column="language" xpath="//language" trim="true" />
             <field column="resourceTypeGeneral" xpath="//resourceType/@resourceTypeGeneral" />
             <field column="resourceType" xpath="//resourceType" trim="true" />
@@ -107,7 +111,9 @@
             <field column="format" xpath="//format" trim="true" />
             <field column="version" xpath="//version" trim="true" />
             <field column="rights" xpath="//rights" trim="true" />
+            <field column="rightsURI" xpath="//rights/@rightsURI" trim="true" />
             <field column="description" xpath="//description" trim="true" />
+            <field column="descriptionType" xpath="//description/@descriptionType" />
           </entity>
         </entity>
       </entity>
