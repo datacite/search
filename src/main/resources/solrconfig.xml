@@ -741,12 +741,8 @@
      <lst name="defaults">
        <str name="fl">*</str>
        <int name="rows">10</int>
-     </lst>
-     <lst name="invariants">
        <str name="defType">edismax</str>
        <xi:include href="solrconfig-qf.xml"/>
-       <str name="facet">off</str>
-       <str name="hl">off</str>
      </lst>
      <lst name="appends">
        <str name="bf">has_metadata</str>
