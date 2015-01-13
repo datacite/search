@@ -64,6 +64,7 @@ will create `target/search.war`, which is ready to be deployed.
 
 This command will run _packaged_ (i.e. not dynamic) war:
 
+    export MAVEN_OPTS="-Xmx2048m -Xms2048m"
     mvn clean tomcat:run-war
 
 The application can be accessed at:
