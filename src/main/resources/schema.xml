@@ -81,15 +81,17 @@
         </analyzer>
     </fieldType>
 
-    <!-- lowercases the entire field value, keeping it as a single token.  -->
     <fieldType name="symbol" class="solr.TextField" positionIncrementGap="100">
-      <analyzer>
+      <analyzer type="index">
         <tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter="." reverse="true"/>
+        <filter class="solr.LowerCaseFilterFactory" />
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.KeywordTokenizerFactory" delimiter="." reverse="true"/>
         <filter class="solr.LowerCaseFilterFactory" />
       </analyzer>
     </fieldType>
 
-    <!-- lowercases the entire field value, keeping it as a single token.  -->
     <fieldType name="identifiers" class="solr.TextField" positionIncrementGap="100">
       <analyzer type="index">
         <tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter=":" reverse="true"/>
