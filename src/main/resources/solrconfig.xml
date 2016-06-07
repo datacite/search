@@ -656,8 +656,6 @@
        <str name="facet.field">datacentre_facet</str>
        <str name="facet.field">prefix</str>
        <str name="facet.field">resourceType_facet</str>
-       <str name="facet.field">contributor_facet</str>
-       <str name="facet.field">creator_facet</str>
        <str name="facet.field">publicationYear</str>
        <str name="facet.field">publisher_facet</str>
        <str name="facet.field">language_facet</str>
