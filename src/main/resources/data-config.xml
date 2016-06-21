@@ -19,7 +19,7 @@
                     m.xml IS NOT NULL as has_metadata,
                     d.created AS created,
                     d.minted AS minted,
-                    MIN(mm.created) AS uploaded,
+                    m.created AS uploaded,
                     CAST(GREATEST(d.updated, IFNULL(m.created,0)) AS DATETIME) AS updated,
                     m.namespace,
                     d.is_ref_quality AS refQuality,
@@ -32,7 +32,6 @@
                      (SELECT MAX(metadata_version) AS max_version
                       FROM metadata AS mm
                       WHERE mm.dataset = d.id)
-             LEFT JOIN metadata AS mm ON mm.dataset = d.id
              LEFT JOIN media AS mt ON mt.dataset = d.id
              JOIN datacentre AS dc ON d.datacentre = dc.id
              JOIN allocator AS al ON dc.allocator = al.id
