@@ -30,8 +30,8 @@
                ON m.dataset = d.id
                  AND m.metadata_version =
                      (SELECT MAX(metadata_version) AS max_version
-                      FROM metadata AS mm
-                      WHERE mm.dataset = d.id)
+                      FROM metadata AS m2
+                      WHERE m2.dataset = d.id)
              LEFT JOIN media AS mt ON mt.dataset = d.id
              JOIN datacentre AS dc ON d.datacentre = dc.id
              JOIN allocator AS al ON dc.allocator = al.id
