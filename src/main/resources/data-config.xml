@@ -32,7 +32,12 @@
                      (SELECT MAX(metadata_version) AS max_version
                       FROM metadata AS m2
                       WHERE m2.dataset = d.id)
-             LEFT JOIN media AS mt ON mt.dataset = d.id
+             LEFT JOIN media AS mt
+               ON mt.dataset = d.id
+                 AND mt.updated =
+                     (SELECT MAX(mt2.updated) AS max_updated
+                      FROM media AS mt2
+                      WHERE mt2.dataset = d.id)
              JOIN datacentre AS dc ON d.datacentre = dc.id
              JOIN allocator AS al ON dc.allocator = al.id
              WHERE d.doi not like '${dataimporter.request.testprefix}/%'
@@ -44,7 +49,6 @@
                                  IFNULL(al.updated,0),
                                  IFNULL(dc.updated,0))
                         > '${dataimporter.last_index_time}' )
-             GROUP BY dataset_id
             "
       transformer="RegexTransformer">
 
