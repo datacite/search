@@ -27,16 +27,20 @@
                     d.is_active
              FROM dataset AS d
              LEFT JOIN metadata AS m
+               USE INDEX (dataset_version)
                ON m.dataset = d.id
                  AND m.metadata_version =
                      (SELECT MAX(metadata_version) AS max_version
                       FROM metadata AS m2
+                      USE INDEX (dataset_version)
                       WHERE m2.dataset = d.id)
              LEFT JOIN media AS mt
+               USE INDEX (dataset_updated)
                ON mt.dataset = d.id
                  AND mt.updated =
                      (SELECT MAX(mt2.updated) AS max_updated
                       FROM media AS mt2
+                      USE INDEX (dataset_updated)
                       WHERE mt2.dataset = d.id)
              JOIN datacentre AS dc ON d.datacentre = dc.id
              JOIN allocator AS al ON dc.allocator = al.id
