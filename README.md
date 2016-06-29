@@ -85,6 +85,13 @@ Public access should only be granted for the `/public` path.
     ProxyPassMatch ^/?$ !
     ProxyPass / ajp://localhost:<port>/search/public
 
+# Database Requirements
+
+The following indexes are required on the MDS database:
+
+    create index dataset_version on metadata (dataset, metadata_version);
+    create index dataset_updated on media (dataset, updated);
+
 # Running
 
 After deploying the following resources are of interest:
