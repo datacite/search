@@ -1,5 +1,7 @@
 # DataCite Search
 
+[![Build Status](https://travis-ci.org/datacite/search.svg?branch=master)](https://travis-ci.org/datacite/search)
+
 This is Search for metadata uploaded to DataCite's Metadata Store ([MDS](https://mds.datacite.org)).
 It is based on [Solr](http://lucene.apache.org/solr/).
 
