@@ -999,7 +999,7 @@
       <str name="db.url">jdbc:mysql://{{ .Env.DB_HOST }}:{{ default .Env.DB_PORT "3306" }}/{{ .Env.DB_NAME }}?useUnicode=true&amp;amp;characterEncoding=UTF8</str>
       <str name="db.user">{{ .Env.DB_USERNAME }}</str>
       <str name="db.password">{{ .Env.DB_PASSWORD }}</str>
-      <str name="testprefix">{{ .Env.TEST_PREFIX }}</str>
+      <str name="testprefix">{{ default .Env.TEST_PREFIX "10.5072" }}</str>
     </lst>
   </requestHandler>
 
