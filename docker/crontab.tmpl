@@ -4,8 +4,8 @@ SOLR_URL={{ .Env.SOLR_URL }}
 DATACITE_MYSQL="-h {{ .Env.DB_HOST }} -u {{ .Env.DB_USERNAME }} -p{{ .Env.DB_PASSWORD }}"
 
 # m h  dom mon dow   command
-0 0 * * * solr-client import status
-1 1 * * * add-missing-dois-to-search
-0 2 * * * solr-client import status
-1 2 * * * solr-client import delta
-0 6 * * * solr-client import status
+# 0 0 * * * solr-client import status
+# 1 1 * * * add-missing-dois-to-search
+# 0 2 * * * solr-client import status
+# 1 2 * * * solr-client import delta
+# 0 6 * * * solr-client import status
