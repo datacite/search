@@ -4,13 +4,8 @@ cache:
   directories:
     - $HOME/.m2
 
-env:
-  - DB=mysql
-  - DB_USERNAME=root
-  - DB_PASSWORD=
-  - DB_URL=db/mds
-  - SOLR_HOME=solr_home
-  - TEST_PREFIX=10.5072
+services:
+  - mysql
 
 before_install:
   - wget https://github.com/jwilder/dockerize/releases/download/v0.2.0/dockerize-linux-amd64-v0.2.0.tar.gz
@@ -19,6 +14,9 @@ before_install:
   - ./dockerize -template docker/solrcore.properties.tmpl:olr_home/collection1/conf/solrcore.properties
   - ./dockerize -template docker/solrconfig.xml.tmpl:src/main/resources/solrconfig.xml
   - ./dockerize -template docker/log4j.xml.tmpl:src/main/resources/log4j.xml
+
+before_script:
+  - mysql -e 'create database search_test;'
 
 script:
   - mvn clean test
