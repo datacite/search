@@ -1,0 +1,4 @@
+mds.db.url=jdbc:mysql://{{ .Env.DB_HOST }}:{{ default .Env.DB_PORT "3306" }}/{{ .Env.DB_NAME }}?useUnicode=true&characterEncoding=UTF8
+mds.db.user={{ .Env.DB_USER }}
+mds.db.password={{ .Env.DB_PASSWORD }}
+mds.testprefix=10.5072

@@ -10,6 +10,7 @@ ENV CATALINA_PID /var/run/tomcat7.pid
 ENV CATALINA_SH /usr/share/tomcat7/bin/catalina.sh
 ENV CATALINA_TMPDIR /tmp/tomcat7-tomcat7-tmp
 ENV DOCKERIZE_VERSION v0.2.0
+ENV SOLR_HOME /usr/share/solr
 
 # Use baseimage-docker's init process
 CMD ["/sbin/my_init"]
@@ -53,12 +54,12 @@ COPY docker/ntp.conf /etc/ntp.conf
 COPY . /home/app/
 WORKDIR /home/app
 
-# Copy server configuration (for context path)
-COPY docker/server.xml /etc/tomcat7/server.xml
-
 # Add Runit script for tomcat
 RUN mkdir /etc/service/tomcat
 COPY docker/tomcat.sh /etc/service/tomcat/run
+
+# Copy server configuration (for context path)
+COPY docker/server.xml /etc/tomcat7/server.xml
 
 # Run additional scripts during container startup (i.e. not at build time)
 # Process templates using ENV variables

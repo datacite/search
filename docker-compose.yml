@@ -8,7 +8,7 @@ services:
       - "8080:8080"
     volumes:
       - ~/.m2:/root/.m2
-      - ./solr_home:/home/app/solr_home
+      - ~/.solr:/usr/share/solr
   db:
     env_file: .env
     image: mysql:5.6
