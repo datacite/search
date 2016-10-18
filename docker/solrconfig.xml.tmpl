@@ -294,11 +294,12 @@
          "dir" - the target directory for transaction logs, defaults to the
             solr data directory.  -->
     <updateLog>
-      <str name="dir">${solr.data.dir:}</str>
+      <str name="dir">{{ .Env.SOLR_DATA }}</str>
     </updateLog>
 
 
   </updateHandler>
+  <dataDir>{{ .Env.SOLR_DATA }}</dataDir>
 
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
        Query section - these settings control query time things like caches

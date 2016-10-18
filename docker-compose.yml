@@ -3,12 +3,14 @@ version: '2'
 services:
   search:
     env_file: .env
-    image: datacite/search
+    # image: datacite/search
+    build: .
     ports:
       - "8080:8080"
     volumes:
       - ~/.m2:/root/.m2
-      - ~/.solr:/usr/share/solr
+      # - ~/.solr:/data/solr/
+      - ./docker:/home/app/docker
   db:
     env_file: .env
     image: mysql:5.6

@@ -1,0 +1,11 @@
+SHELL=/bin/bash
+PATH=/usr/local/bin:/usr/bin:/bin:/home/ubuntu/bin
+SOLR_URL=http://localhost:8080/search
+DATACITE_MYSQL="-h db -u root -p"
+
+# m h  dom mon dow   command
+# 0 0 * * * solr-client import status
+# 1 1 * * * add-missing-dois-to-search
+# 0 2 * * * solr-client import status
+# 1 2 * * * solr-client import delta
+# 0 6 * * * solr-client import status

@@ -10,7 +10,11 @@ ENV CATALINA_PID /var/run/tomcat7.pid
 ENV CATALINA_SH /usr/share/tomcat7/bin/catalina.sh
 ENV CATALINA_TMPDIR /tmp/tomcat7-tomcat7-tmp
 ENV DOCKERIZE_VERSION v0.2.0
-ENV SOLR_HOME /usr/share/solr
+ENV SOLR_HOME /data/solr
+ENV SOLR_DATA /data/solr/collection1/data
+ENV SOLR_URL http://localhost:8080/search
+ENV SHELL /bin/bash
+ENV TERM xterm-256color
 
 # Use baseimage-docker's init process
 CMD ["/sbin/my_init"]
@@ -54,8 +58,14 @@ COPY docker/ntp.conf /etc/ntp.conf
 COPY . /home/app/
 WORKDIR /home/app
 
+# Add solr-client script
+COPY scripts/solr-client /usr/local/bin/solr-client
+
 # Add Runit script for tomcat
-RUN mkdir /etc/service/tomcat
+RUN mkdir /data && \
+    mkdir /data/solr && \
+    mkdir /etc/service/tomcat && \
+    chown tomcat7. /data/solr -R
 COPY docker/tomcat.sh /etc/service/tomcat/run
 
 # Copy server configuration (for context path)

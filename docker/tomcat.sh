@@ -1,4 +1,4 @@
 #!/bin/sh
 exec 2>&1
-
-exec $CATALINA_HOME/bin/catalina.sh run
+cd /data
+exec /sbin/setuser tomcat7 $CATALINA_HOME/bin/catalina.sh run
