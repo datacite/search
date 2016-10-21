@@ -3,8 +3,7 @@ version: '2'
 services:
   search:
     env_file: .env
-    # image: datacite/search
-    build: .
+    image: datacite/search:labs
     ports:
       - "8080:8080"
     volumes:
