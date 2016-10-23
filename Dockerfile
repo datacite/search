@@ -12,7 +12,7 @@ ENV CATALINA_TMPDIR /tmp/tomcat7-tomcat7-tmp
 ENV DOCKERIZE_VERSION v0.2.0
 ENV SOLR_HOME /data/solr
 ENV SOLR_DATA /data/solr/collection1/data
-ENV SOLR_URL http://localhost:8080/search
+ENV SOLR_URL http://solr.datacite.org:8080/search
 ENV SHELL /bin/bash
 ENV TERM xterm-256color
 
