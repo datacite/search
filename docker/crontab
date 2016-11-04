@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 PATH=/usr/local/bin:/usr/bin:/bin:/home/ubuntu/bin
-SOLR_URL=http://localhost:8080/search
+SOLR_URL=http://localhost:8080
 DATACITE_MYSQL="-h db -u root -p"
 
 # m h  dom mon dow   command
