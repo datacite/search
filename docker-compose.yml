@@ -9,7 +9,7 @@ services:
     volumes:
       - ~/.m2:/root/.m2
       # - ~/.solr:/data/solr/
-      - ./docker:/home/app/docker
+      # - ./docker:/home/app/docker
   db:
     env_file: .env
     image: mysql:5.6
