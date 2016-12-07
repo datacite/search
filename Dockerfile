@@ -60,11 +60,13 @@ WORKDIR /home/app
 # Add solr-client script
 COPY scripts/solr-client /usr/local/bin/solr-client
 
-# Add Runit script for tomcat
-RUN mkdir /data && \
-    mkdir /data/solr && \
-    mkdir /etc/service/tomcat && \
-    chown tomcat7. /data/solr -R
+# # Add Runit script for tomcat
+# RUN mkdir /data && \
+#     mkdir /data/solr && \
+#     mkdir /etc/service/tomcat && \
+#     chown tomcat7. /data/solr -R
+RUN    mkdir /etc/service/tomcat
+
 COPY docker/tomcat.sh /etc/service/tomcat/run
 
 # Copy server configuration (for context path)
