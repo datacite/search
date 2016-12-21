@@ -61,8 +61,8 @@ WORKDIR /home/app
 COPY scripts/solr-client /usr/local/bin/solr-client
 
 # # Add Runit script for tomcat
-# RUN mkdir /data && \
-#     mkdir /data/solr && \
+RUN mkdir /data && \
+    mkdir /data/solr 
 #     mkdir /etc/service/tomcat && \
 #     chown tomcat7. /data/solr -R
 RUN    mkdir /etc/service/tomcat
