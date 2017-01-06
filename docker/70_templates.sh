@@ -11,9 +11,20 @@ dockerize -template /home/app/docker/solrcore.properties.tmpl:/home/app/solr_hom
 dockerize -template /home/app/docker/dataimport.properties.tmpl:/home/app/solr_home/collection1/conf/dataimport.properties
 
 
-cp /home/app/src/main/resources/*xml /home/app/solr_home/collection1/conf/
-cp -r /home/app/solr_home/* /data/solr/
+# cp /home/app/src/main/resources/schema.xml /home/app/solr_home/collection1/conf/schema.xml
+# cp /home/app/src/main/resources/solrconfig.xml /home/app/solr_home/collection1/conf/solrconfig.xml
+# cp /home/app/solr_home/*.properties /data/solr/collection1/conf/
+# cp /home/app/solr_home/*.xml /data/solr/collection1/conf/
 # chown tomcat7. /data/solr/* -R
+# chmod a+w /data/solr/* -R
+
+cp /home/app/src/main/resources/schema.xml /home/app/solr_home/collection1/conf/schema.xml
+cp /home/app/src/main/resources/solrconfig.xml /home/app/solr_home/collection1/conf/solrconfig.xml
+mkdir /data/solr/collection1/conf
+cp /home/app/solr_home/collection1/conf/*.properties /data/solr/collection1/conf/
+cp /home/app/solr_home/collection1/conf/*.xml /data/solr/collection1/conf/
+
+chown tomcat7. /data/solr/* -R
 # chmod a+w /data/solr/* -R
 
 crontab /home/app/docker/crontab
