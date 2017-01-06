@@ -11,8 +11,8 @@ dockerize -template /home/app/docker/solrcore.properties.tmpl:/home/app/solr_hom
 dockerize -template /home/app/docker/dataimport.properties.tmpl:/home/app/solr_home/collection1/conf/dataimport.properties
 
 
-# cp /home/app/src/main/resources/*xml /home/app/solr_home/collection1/conf/
-# cp -r /home/app/solr_home/* /data/solr/
+cp /home/app/src/main/resources/*xml /home/app/solr_home/collection1/conf/
+cp -r /home/app/solr_home/* /data/solr/
 # chown tomcat7. /data/solr/* -R
 # chmod a+w /data/solr/* -R
 
