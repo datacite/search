@@ -1,7 +1,7 @@
 SHELL=/bin/bash
 PATH=/usr/local/bin:/usr/bin:/bin:/home/ubuntu/bin
 SOLR_URL={{ .Env.SOLR_URL }}
-DATACITE_MYSQL="-h {{ .Env.READ_DB_HOST }} -u {{ .Env.READ_DB_USERNAME }} -p{{ .Env.READ_DB_PASSWORD }}"
+DATACITE_MYSQL="-h {{ .Env.DB_HOST }} -u {{ .Env.DB_USERNAME }} -p{{ .Env.DB_PASWWORD }}"
 
 # m h  dom mon dow   command
 # 0 0 * * * solr-client import status
