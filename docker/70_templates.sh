@@ -9,6 +9,7 @@ dockerize -template /home/app/docker/context.xml.tmpl:/home/app/src/main/webapp/
 dockerize -template /home/app/docker/log4j.properties.tmpl:/home/app/src/main/resources/log4j.properties
 dockerize -template /home/app/docker/solrcore.properties.tmpl:/home/app/solr_home/collection1/conf/solrcore.properties
 dockerize -template /home/app/docker/dataimport.properties.tmpl:/home/app/solr_home/collection1/conf/dataimport.properties
+dockerize -template /home/app/docker/db_check.tmpl:/usr/local/bin/db_check
 
 
 # cp /home/app/src/main/resources/schema.xml /home/app/solr_home/collection1/conf/schema.xml
@@ -24,8 +25,9 @@ cp /home/app/src/main/resources/data-config.xml /home/app/solr_home/collection1/
 mkdir /data/solr/collection1/conf
 cp /home/app/solr_home/collection1/conf/*.properties /data/solr/collection1/conf/
 cp /home/app/solr_home/collection1/conf/*.xml /data/solr/collection1/conf/
-
-chown tomcat7. /data/solr/* -R
-chmod a+w /data/solr/* -R
+# 
+# chown tomcat7. /data/solr/* -R
+# chmod a+w /data/solr/* -R
+chmod a+xr /usr/local/bin/db_check
 
 crontab /home/app/docker/crontab

@@ -14,6 +14,7 @@ ENV SOLR_HOME /data/solr
 ENV SOLR_DATA /data/solr/collection1/data
 ENV SHELL /bin/bash
 ENV TERM xterm-256color
+ENV SOLR_USER tomcat7
 
 # Use baseimage-docker's init process
 CMD ["/sbin/my_init"]
@@ -26,6 +27,7 @@ RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true 
     apt-get update && \
     apt-get install -yqq oracle-java8-installer && \
     apt-get install -yqq oracle-java8-set-default && \
+    apt-get install -y mysql-client && \
     apt-get -yqq install tomcat7 maven && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
@@ -64,6 +66,8 @@ COPY scripts/solr-client /usr/local/bin/solr-client
 RUN mkdir /data && \
     mkdir /data/solr \
     mkdir /data/solr/collection1
+RUN chown -R $SOLR_USER:$SOLR_USER /data/solr
+
 #     mkdir /etc/service/tomcat && \
 #     chown tomcat7. /data/solr -R
 RUN    mkdir /etc/service/tomcat
@@ -79,5 +83,7 @@ COPY docker/server.xml /etc/tomcat7/server.xml
 RUN mkdir -p /etc/my_init.d
 COPY docker/70_templates.sh /etc/my_init.d/70_templates.sh
 COPY docker/80_install.sh /etc/my_init.d/80_install.sh
+
+RUN echo "alias ls='ls -AlhF --color=auto'" >> ~/.bashrc
 
 EXPOSE 8080
