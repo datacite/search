@@ -70,7 +70,7 @@ RUN chown -R $SOLR_USER:$SOLR_USER /data/solr
 
 #     mkdir /etc/service/tomcat && \
 #     chown tomcat7. /data/solr -R
-RUN    mkdir /etc/service/tomcat
+RUN  mkdir /etc/service/tomcat
 
 COPY docker/tomcat.sh /etc/service/tomcat/run
 

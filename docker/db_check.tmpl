@@ -1,2 +1,2 @@
 #!/bin/bash
-mysql -u {{ .Env.DB_USERNAME }}  -h {{ .Env.DB_HOST }} -e 'show databases;'
+mysql -u {{ .Env.DB_USERNAME }}  -h {{ .Env.DB_HOST }} -e 'show databases;' -p {{ .Env.DB_PASSWORD }}
