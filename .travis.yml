@@ -29,8 +29,8 @@ after_success:
   - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
   - export REPO=datacite/search
   - docker build -f Dockerfile -t $REPO:$COMMIT .
-  - docker tag $REPO:$COMMIT
-  - docker push $REPO
+  - docker tag $REPO:$COMMIT $REPO:$COMMIT
+  - docker push $REPO:$COMMIT
 
 notifications:
   slack: datacite:Wt8En0ALoTA6Kjc5EOKNDWxN
