@@ -1,5 +1,6 @@
 language: java
 jdk: oraclejdk8
+sudo: required
 cache:
   directories:
     - $HOME/.m2
@@ -9,6 +10,7 @@ env:
 
 services:
   - mysql
+  - docker
 
 before_install:
   - wget https://github.com/jwilder/dockerize/releases/download/v0.2.0/dockerize-linux-amd64-v0.2.0.tar.gz
