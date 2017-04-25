@@ -26,11 +26,13 @@ script:
   - mvn clean test
 
 after_success:
-  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-  - export REPO=datacite/search
-  - docker build -f Dockerfile -t $REPO:$COMMIT .
-  - docker tag $REPO:$COMMIT $REPO:$COMMIT
-  - docker push $REPO:$COMMIT
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -u="$DOCKER_USER" -p="$DOCKER_PASS";
+    export REPO=datacite/search;
+    docker build -f Dockerfile -t $REPO:$COMMIT .;
+    docker tag $REPO:$COMMIT $REPO:$COMMIT;
+    docker push $REPO:$COMMIT;
+    fi
 
 notifications:
   slack: datacite:Wt8En0ALoTA6Kjc5EOKNDWxN
