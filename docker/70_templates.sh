@@ -10,7 +10,7 @@ dockerize -template /home/app/docker/log4j.properties.tmpl:/home/app/src/main/re
 dockerize -template /home/app/docker/solrcore.properties.tmpl:/home/app/solr_home/collection1/conf/solrcore.properties
 dockerize -template /home/app/docker/dataimport.properties.tmpl:/home/app/solr_home/collection1/conf/dataimport.properties
 dockerize -template /home/app/docker/db_check.tmpl:/usr/local/bin/db_check
-
+dockerize -template /home/app/docker/head.vm.tmpl:src/main/resources/velocity/ui/head.vm
 
 cp /home/app/src/main/resources/schema.xml /home/app/solr_home/collection1/conf/schema.xml
 dockerize -template /home/app/docker/solrconfig.xml.tmpl:/home/app/solr_home/collection1/conf/solrconfig.xml
