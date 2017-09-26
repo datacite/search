@@ -6,3 +6,4 @@ src/main/webapp/META-INF/context.xml
 solr_home/collection1/conf/solrcore.properties
 src/main/resources/log4j.properties
 src/main/resources/log4j.xml
+.env

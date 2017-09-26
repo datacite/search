@@ -1,0 +1,140 @@
+<dataConfig>
+  <dataSource name="db" type="JdbcDataSource" driver="com.mysql.jdbc.Driver"
+    url="jdbc:mysql://{{ .Env.DB_HOST }}:{{ default .Env.DB_PORT "3306" }}/{{ .Env.DB_NAME }}" user="{{ .Env.DB_USERNAME }}"
+    password="{{ .Env.DB_PASSWORD }}" readonly="true"
+    batchSize="-1" />
+  <!-- for batchSize=-1 see DIH FAQ -->
+  <dataSource name="field" type="FieldReaderDataSource" />
+  <document>
+    <!-- SOLR-2104 -->
+    <!-- using delta import as proposed in http://wiki.apache.org/solr/DataImportHandlerDeltaQueryViaFullImport -->
+    <entity name="dataset" dataSource="db"
+      query="SELECT d.doi AS doi,
+                    d.id AS dataset_id,
+                    dc.symbol AS datacentre_symbol,
+                    CONCAT(dc.symbol, ' - ', dc.name) AS datacentre,
+                    al.symbol AS allocator_symbol,
+                    CONCAT(al.symbol, ' - ', al.name) AS allocator,
+                    IF(d.is_active, m.xml, NULL) as xml,
+                    m.xml IS NOT NULL as has_metadata,
+                    d.created AS created,
+                    d.minted AS minted,
+                    d.url AS url,
+                    m.created AS uploaded,
+                    CAST(GREATEST(d.updated, IFNULL(m.created,0)) AS DATETIME) AS updated,
+                    m.namespace,
+                    d.is_ref_quality AS refQuality,
+                    mt.dataset IS NOT NULL AS has_media,
+                    d.is_active
+             FROM dataset AS d
+             LEFT JOIN metadata AS m
+               USE INDEX (dataset_version)
+               ON m.dataset = d.id
+                 AND m.metadata_version =
+                     (SELECT MAX(metadata_version) AS max_version
+                      FROM metadata AS m2
+                      USE INDEX (dataset_version)
+                      WHERE m2.dataset = d.id)
+             LEFT JOIN media AS mt
+               USE INDEX (dataset_updated)
+               ON mt.dataset = d.id
+                 AND mt.updated =
+                     (SELECT MAX(mt2.updated) AS max_updated
+                      FROM media AS mt2
+                      USE INDEX (dataset_updated)
+                      WHERE mt2.dataset = d.id)
+             JOIN datacentre AS dc ON d.datacentre = dc.id
+             JOIN allocator AS al ON dc.allocator = al.id
+             WHERE d.doi not like '${dataimporter.request.testprefix}/%'
+               AND d.minted IS NOT NULL
+               AND ( '${dataimporter.request.clean}' != 'false'
+                     OR GREATEST(d.updated,
+                                 IFNULL(m.created,0),
+                                 IFNULL(mt.updated,0),
+                                 IFNULL(al.updated,0),
+                                 IFNULL(dc.updated,0))
+                        > '${dataimporter.last_index_time}' )
+            "
+      transformer="RegexTransformer">
+
+      <field column="prefix" regex="([^/]*)/" sourceColName="doi" />
+
+      <entity name="if_metadata" hasField="dataset.has_metadata"
+        processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor"
+        transformer="TemplateTransformer,RegexTransformer">
+        <!-- order of transformer is important! -->
+
+        <!-- schema_version detection table:
+
+            has_metadata   namespace | schema_version
+            =========================================
+            false          <null>    | <null>
+            true           <null>    | 2.0
+            true           ...-x.y   | x.y
+         -->
+        <field column="namespace" template="${dataset.namespace}" />
+            <!-- copy namespace to this entity;
+                 hack for regextransformer for schema_version -->
+        <field column="schema_version" regex="-(\d+(.\d+)*)$" sourceColName="namespace" template="2.0" />
+            <!-- extract schema_version from namespace;
+                 defaults to 2.0 if no namespace present -->
+
+        <entity name="if_isactive" hasField="dataset.is_active"
+          processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor">
+          <!-- index xml only for active datasets -->
+          <entity name="xml" dataSource="field" dataField="dataset.xml"
+            forEach="/resource" processor="XPathEntityProcessor" onError="skip"
+            transformer="org.datacite.search.handler.dataimport.KeyValueTransformer,org.datacite.search.handler.dataimport.TrimTransformer">
+
+            <field column="title" xpath="//title" trim="true" />
+            <field column="titleType" xpath="//title/@titleType"/>
+            <field column="creator" xpath="//creatorName" trim="true" />
+            <field column="publisher" xpath="//publisher" trim="true" />
+            <field column="publicationYear" xpath="//publicationYear" trim="true" />
+            <field column="subject" xpath="//subject" trim="true" />
+            <field column="subjectScheme" xpath="//subject/@subjectScheme" />
+            <field column="contributor" xpath="//contributor/contributorName" trim="true" />
+            <field column="contributorType" xpath="//contributor/@contributorType" />
+            <field column="date" xpath="//date" trim="true" />
+            <field column="dateType" xpath="//date/@dateType" />
+            <field column="language" xpath="//language" trim="true" />
+            <field column="resourceTypeGeneral" xpath="//resourceType/@resourceTypeGeneral" />
+            <field column="resourceType" xpath="//resourceType" trim="true" />
+
+            <field column="ignored_alternateIdentifier_type" xpath="//alternateIdentifier/@alternateIdentifierType" />
+            <field column="ignored_alternateIdentifier" xpath="//alternateIdentifier" trim="true" />
+            <field column="alternateIdentifier" keys="ignored_alternateIdentifier_type" values="ignored_alternateIdentifier" />
+
+            <field column="ignored_relatedIdentifier_type" xpath="//relatedIdentifier/@relatedIdentifierType" />
+            <field column="ignored_relatedIdentifier_relation" xpath="//relatedIdentifier/@relationType" />
+            <field column="ignored_relatedIdentifier" xpath="//relatedIdentifier" trim="true" />
+            <field column="ignored_relatedIdentifier_relation_and_type" keys="ignored_relatedIdentifier_relation" values="ignored_relatedIdentifier_type" />
+            <field column="relatedIdentifier" keys="ignored_relatedIdentifier_relation_and_type" values="ignored_relatedIdentifier" />
+
+            <field column="ignored_nameIdentifier_scheme" xpath="//nameIdentifier/@nameIdentifierScheme" />
+            <field column="ignored_nameIdentifier" xpath="//nameIdentifier" trim="true" />
+            <field column="nameIdentifier" keys="ignored_nameIdentifier_scheme" values="ignored_nameIdentifier" />
+
+            <field column="size" xpath="//size" trim="true" />
+            <field column="format" xpath="//format" trim="true" />
+            <field column="version" xpath="//version" trim="true" />
+            <field column="rights" xpath="//rights" trim="true" />
+            <field column="rightsURI" xpath="//rights/@rightsURI" trim="true" />
+            <field column="description" xpath="//description" trim="true" />
+            <field column="descriptionType" xpath="//description/@descriptionType" />
+          </entity>
+        </entity>
+      </entity>
+
+      <entity name="if_media" hasField="dataset.has_media"
+        processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor">
+        <entity name="media" dataSource="db"
+          query="SELECT CONCAT(media_type,':',url) AS media
+               FROM media AS m
+               WHERE m.dataset = '${dataset.dataset_id}'
+              ">
+        </entity>
+      </entity>
+    </entity>
+  </document>
+</dataConfig>
