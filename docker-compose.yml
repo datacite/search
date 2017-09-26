@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  # search-ui:
+  #   env_file: .env_double
+  #   image: datacite/search:test
+  #   ports:
+  #     - "8090:8080"
+  #   volumes:
+  #     - ~/.m2:/root/.m2
+  #     - ~/efsmock:/data/solr/collection1
+  #     # - ./docker:/home/app/docker
+  search:
+    env_file: .env
+    image: datacite/search:test
+    ports:
+      - "8080:8080"
+    volumes:
+      - ~/.m2:/root/.m2
+      # - ~/efsmock2:/data/solr/collection1
+      # - ./docker:/home/app/docker
+  db:
+    env_file: .env
+    image: mysql:5.6
+    ports:
+      - "3307:3306"

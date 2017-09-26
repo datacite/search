@@ -6,4 +6,8 @@ src/main/webapp/META-INF/context.xml
 solr_home/collection1/conf/solrcore.properties
 src/main/resources/log4j.properties
 src/main/resources/log4j.xml
+.DS_Store
 .env
+.env.*
+!.env.example
+!.env.travis
