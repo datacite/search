@@ -87,6 +87,14 @@ Data from MDS is imported via Solr's DataImportHandler. You can access it via th
 
 for a delta import of MDS metadata. See `solr-client help` for usage.
 
+### Memory and CPU monitoring
+
+You can monitor memory and CPU using JConsole and a remote connection on the following host:
+
+```
+localhost:7776
+```
+
 ### Note on Patches/Pull Requests
 
 * Fork the project
