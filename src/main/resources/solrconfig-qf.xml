@@ -9,9 +9,9 @@
   nameIdentifier rightsURI
 
   <!-- MDS fields -->
-  allocator datacentre prefix
+  allocator datacentre prefix state
 
   <!-- not used by default:
-  indexed uploaded dataset_id refQuality
+  indexed uploaded dataset_id
   -->
 </str>

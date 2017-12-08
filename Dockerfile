@@ -15,6 +15,7 @@ ENV SOLR_DATA /data/solr/collection1/data
 ENV SHELL /bin/bash
 ENV TERM xterm-256color
 ENV SOLR_USER tomcat7
+ENV JMX_PORT 7776
 
 # Use baseimage-docker's init process
 CMD ["/sbin/my_init"]
@@ -72,6 +73,7 @@ RUN chown -R $SOLR_USER:$SOLR_USER /data/solr
 #     chown tomcat7. /data/solr -R
 RUN  mkdir /etc/service/tomcat
 
+COPY docker/setenv.sh /usr/share/tomcat7/bin/setenv.sh
 COPY docker/tomcat.sh /etc/service/tomcat/run
 
 # Copy server configuration (for context path)
