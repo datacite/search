@@ -78,7 +78,7 @@
             <!-- extract schema_version from namespace;
                  defaults to 2.0 if no namespace present -->
 
-        <entity name="if_isactive" hasField="dataset.xml"
+        <entity name="if_isactive" hasField="dataset.is_active"
           processor="org.datacite.search.handler.dataimport.ConditionalEntityProcessor">
           <!-- index xml only for active datasets -->
           <entity name="xml" dataSource="field" dataField="dataset.xml"
