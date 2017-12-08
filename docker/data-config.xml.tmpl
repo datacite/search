@@ -15,7 +15,7 @@
                     CONCAT(dc.symbol, ' - ', dc.name) AS datacentre,
                     al.symbol AS allocator_symbol,
                     CONCAT(al.symbol, ' - ', al.name) AS allocator,
-                    IF(d.is_active, m.xml, NULL) as xml,
+                    m.xml as xml,
                     m.xml IS NOT NULL as has_metadata,
                     d.created AS created,
                     d.minted AS minted,
@@ -23,9 +23,9 @@
                     m.created AS uploaded,
                     CAST(GREATEST(d.updated, IFNULL(m.created,0)) AS DATETIME) AS updated,
                     m.namespace,
-                    d.is_ref_quality AS refQuality,
                     mt.dataset IS NOT NULL AS has_media,
-                    d.is_active
+                    d.is_active,
+                    d.state
              FROM dataset AS d
              LEFT JOIN metadata AS m
                USE INDEX (dataset_version)
@@ -45,8 +45,7 @@
                       WHERE mt2.dataset = d.id)
              JOIN datacentre AS dc ON d.datacentre = dc.id
              JOIN allocator AS al ON dc.allocator = al.id
-             WHERE d.doi not like '${dataimporter.request.testprefix}/%'
-               AND d.minted IS NOT NULL
+             WHERE d.minted IS NOT NULL
                AND ( '${dataimporter.request.clean}' != 'false'
                      OR GREATEST(d.updated,
                                  IFNULL(m.created,0),
