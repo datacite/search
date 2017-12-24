@@ -2,15 +2,18 @@ version: '2'
 
 services:
   search:
-    env_file: .env
-    image: datacite/search 
+    image: datacite/search
     ports:
       - "8080:8080"
       - "7776:7776"
     volumes:
       - ~/.m2:/root/.m2
-  db:
-    env_file: .env
-    image: mysql:5.6
+  mysql:
+    environment:
+      MYSQL_DATABASE: datacite
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ""
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    image: mysql:5.7
     ports:
       - "3307:3306"

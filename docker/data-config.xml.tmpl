@@ -1,7 +1,7 @@
 <dataConfig>
   <dataSource name="db" type="JdbcDataSource" driver="com.mysql.jdbc.Driver"
-    url="jdbc:mysql://{{ .Env.DB_HOST }}:{{ default .Env.DB_PORT "3306" }}/{{ .Env.DB_NAME }}" user="{{ .Env.DB_USERNAME }}"
-    password="{{ .Env.DB_PASSWORD }}" readonly="true"
+    url="jdbc:mysql://{{ default .Env.MYSQL_HOST "mysql" }}:{{ default .Env.MYSQL_PORT "3306" }}/{{ .Env.MYSQL_DATABASE "datacite" }}" user="{{ .Env.MYSQL_USER }}"
+    password="{{ .Env.MYSQL_PASSWORD }}" readonly="true"
     batchSize="-1" />
   <!-- for batchSize=-1 see DIH FAQ -->
   <dataSource name="field" type="FieldReaderDataSource" />

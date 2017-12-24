@@ -1,4 +1,4 @@
-mds.db.url=jdbc:mysql://{{ .Env.DB_HOST }}:{{ default .Env.DB_PORT "3306" }}/{{ .Env.DB_NAME }}?useUnicode=true&characterEncoding=UTF8
-mds.db.user={{ .Env.DB_USERNAME }}
-mds.db.password={{ .Env.DB_PASSWORD }}
+mds.db.url=jdbc:mysql://{{ default .Env.MYSQL_HOST "mysql" }}:{{ default .Env.MYSQL_PORT "3306" }}/{{ default .Env.MYSQL_DATABASE "datacite" }}?useUnicode=true&characterEncoding=UTF8
+mds.db.user={{ .Env.MYSQL_USERNAME }}
+mds.db.password={{ .Env.MYSQL_PASSWORD }}
 mds.testprefix=10.5072

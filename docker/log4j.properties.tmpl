@@ -1,4 +1,4 @@
-log4j.rootLogger={{ .Env.LOG_LEVEL }}, R
+log4j.rootLogger={{ default .Env.LOG_LEVEL "INFO" }}, R
 
 #
 # Enables debug output for Probe classes.
