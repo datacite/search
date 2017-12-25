@@ -4,9 +4,8 @@ services:
   search:
     environment:
       MYSQL_DATABASE: datacite
-      MYSQL_USER: root
-      MYSQL_PASSWORD: ""
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_USER: datacite
+      MYSQL_PASSWORD: secret
       SOLR_USER: admin
       SOLR_PASSWORD: secret
     image: datacite/search
@@ -18,9 +17,9 @@ services:
   mysql:
     environment:
       MYSQL_DATABASE: datacite
-      MYSQL_USER: root
-      MYSQL_PASSWORD: ""
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_USER: datacite
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
     image: mysql:5.7
     ports:
       - "3307:3306"
