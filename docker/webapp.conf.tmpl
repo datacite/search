@@ -13,6 +13,8 @@ server {
          proxy_set_header X-Forwarded-Host $host;
          proxy_set_header X-Forwarded-Server $host;
          proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;
+
+         include /etc/nginx/conf.d/cors;
     }
 
     location /probe {
