@@ -20,7 +20,7 @@ ENV JMX_PORT 7776
 # Use baseimage-docker's init process
 CMD ["/sbin/my_init"]
 
-# Install Java and Tomcat
+# Install Java, Tomcat, Maven and Nginx
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
     apt-get update && apt-get install -y wget apt-utils && \
     apt-get install -yqq software-properties-common && \
@@ -30,6 +30,7 @@ RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true 
     apt-get install -yqq oracle-java8-set-default && \
     apt-get install -y mysql-client && \
     apt-get -yqq install tomcat7 maven && \
+    apt-get install -y nginx nano && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     rm -rf /var/cache/oracle-jdk8-installer
@@ -45,13 +46,22 @@ RUN ln -s /var/lib/tomcat7/common $CATALINA_HOME/common && \
 RUN rm -rf /var/lib/tomcat7/webapps/docs* && \
     rm -rf /var/lib/tomcat7/webapps/examples* && \
     rm -rf /var/lib/tomcat7/webapps/ROOT*
+COPY docker/server.xml /etc/tomcat7/server.xml
 
-# install dockerize
+# Install dockerize
 RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && \
     tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
 # Remove unused SSH service
 RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
+
+# configure nginx
+# forward request and error logs to docker log collector
+# RUN ufw allow 'Nginx HTTP' && \
+RUN rm /etc/nginx/sites-enabled/default && \
+    ln -sf /dev/stdout /var/log/nginx/access.log && \
+	  ln -sf /dev/stderr /var/log/nginx/error.log
+COPY docker/cors /etc/nginx/conf.d/cors
 
 # Use Amazon NTP servers
 COPY docker/ntp.conf /etc/ntp.conf
@@ -84,6 +94,7 @@ COPY docker/server.xml /etc/tomcat7/server.xml
 RUN mkdir -p /etc/my_init.d
 COPY docker/70_templates.sh /etc/my_init.d/70_templates.sh
 COPY docker/80_install.sh /etc/my_init.d/80_install.sh
+COPY docker/90_nginx.sh /etc/my_init.d/90_nginx.sh
 
 RUN echo "alias ls='ls -AlhF --color=auto'" >> ~/.bashrc
 

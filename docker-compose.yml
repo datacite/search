@@ -7,9 +7,11 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: ""
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      SOLR_USER: admin
+      SOLR_PASSWORD: secret
     image: datacite/search
     ports:
-      - "8080:8080"
+      - "8080:80"
       - "7776:7776"
     volumes:
       - ~/.m2:/root/.m2
