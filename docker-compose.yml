@@ -2,6 +2,11 @@ version: '2'
 
 services:
   search:
+    environment:
+      MYSQL_DATABASE: datacite
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ""
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     image: datacite/search
     ports:
       - "8080:8080"
