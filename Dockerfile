@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.9.19
+FROM phusion/baseimage:0.9.22
 MAINTAINER Martin Fenner "mfenner@datacite.org"
 
 # Set correct environment variables
@@ -9,7 +9,7 @@ ENV CATALINA_BASE /var/lib/tomcat7
 ENV CATALINA_PID /var/run/tomcat7.pid
 ENV CATALINA_SH /usr/share/tomcat7/bin/catalina.sh
 ENV CATALINA_TMPDIR /tmp/tomcat7-tomcat7-tmp
-ENV DOCKERIZE_VERSION v0.2.0
+ENV DOCKERIZE_VERSION v0.6.0
 ENV SOLR_HOME /data/solr
 ENV SOLR_DATA /data/solr/collection1/data
 ENV SHELL /bin/bash
