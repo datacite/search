@@ -168,6 +168,7 @@
    <field name="datacentre" type="text" indexed="true" stored="true"/>
    <field name="datacentre_symbol" type="symbol" indexed="true" stored="true"/>
    <field name="prefix" type="string" indexed="true" stored="true"/>
+   <field name="url" type="string" indexed="true" stored="true"/>
    <field name="refQuality" type="boolean" indexed="true" stored="true" default="false"/>
    <field name="dataset_id" type="string" indexed="true" stored="true"/>
    <field name="created" type="date" indexed="true" stored="true"/>
