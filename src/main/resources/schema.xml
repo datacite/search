@@ -16,7 +16,7 @@
  limitations under the License.
 -->
 
-<schema name="mds" version="1.3">
+<schema name="mds" version="1.4">
 
   <types>
     <!--
@@ -169,6 +169,7 @@
    <field name="datacentre_symbol" type="symbol" indexed="true" stored="true"/>
    <field name="prefix" type="string" indexed="true" stored="true"/>
    <field name="url" type="string" indexed="true" stored="true"/>
+   <field name="state" type="string" indexed="true" stored="true"/>
    <field name="dataset_id" type="string" indexed="true" stored="true"/>
    <field name="created" type="date" indexed="true" stored="true"/>
    <field name="minted" type="date" indexed="true" stored="true"/>
