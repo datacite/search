@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <str name="qf">
   <!-- DataCite mandatory fields -->
-  doi creator title publisher publicationYear
+  doi creator title publisher publicationYear resourceTypeGeneral
 
   <!-- DataCite optional fields -->
-  subject contributor date language resourceType resourceTypeGeneral
+  subject contributor date language resourceType
   alternateIdentifier relatedIdentifier size format rights description
   nameIdentifier rightsURI
 
   <!-- MDS fields -->
-  allocator datacentre prefix
+  allocator datacentre prefix state
 
   <!-- not used by default:
-  indexed uploaded dataset_id refQuality
+  indexed uploaded dataset_id
   -->
 </str>

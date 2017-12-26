@@ -8,7 +8,7 @@
 <link rel="SHORTCUT ICON" href="resources/img/favicon.ico" />
 </head>
 <body class="help">
-<div id="title"><a href="ui" class="title"> 
+<div id="title"><a href="ui" class="title">
   <img src="resources/img/dc-logo.gif" alt="DataCite Logo" /> Metadata Search <small>beta</small></a>
 </div>
 <h1>DataCite Metadata Search Help</h1>
@@ -44,7 +44,7 @@ submitted in the last 24h.
 <h2>Fields</h2>
 
 <p>Most of the fields in the <a href="http://schema.datacite.org">DataCite Metadata Schema</a>
-are searchable. Have a look at the Schema documentation for the details.</p> 
+are searchable. Have a look at the Schema documentation for the details.</p>
 
 <h3>DataCite's mandatory fields</h3>
 <ul>
@@ -78,13 +78,12 @@ are searchable. Have a look at the Schema documentation for the details.</p>
   <li>datacentre: symbol of the datacentre, which uploaded the metadata (e.g. BL.ADS = Archeology Data Service)</li>
   <li>indexed: datestamp of indexing</li>
   <li>prefix: DOI prefix (e.g. 10.5284)</li>
-  <li>refQuality: reference quality flag (1 or 0)</li>
   <li>uploaded: datestamp of metadata uploading</li>
 </ul>
 
 <h2>Query syntax</h2>
 
-<p>Our search is Solr/Lucene based. For more please see 
+<p>Our search is Solr/Lucene based. For more please see
 <a href="http://lucene.apache.org/java/2_9_1/queryparsersyntax.html">Lucene Syntax</a> and
 <a href="http://wiki.apache.org/solr/SolrQuerySyntax">Solr Syntax</a>.</p>
 
@@ -95,12 +94,12 @@ e.g. <code>laser -medical</code> would match documents containg <em>laser</em> b
 
 <h3>Boolean queries</h3>
 
-<p>By default all search term are combined by <code>AND</code>. You could construct or-query by using <code>OR</code> between the terms. 
-Also grouping by phrases is possible, e.g. <code>laser AND (red OR blue)</code>.</p> 
+<p>By default all search term are combined by <code>AND</code>. You could construct or-query by using <code>OR</code> between the terms.
+Also grouping by phrases is possible, e.g. <code>laser AND (red OR blue)</code>.</p>
 
 <h3>Phrases</h3>
 
-<p>Searches for complete phrases have to be enclosed in quotation marks, 
+<p>Searches for complete phrases have to be enclosed in quotation marks,
 e.g. <code>"wind turbines"</code>.</p>
 
 <h3>Wildcards</h3>

@@ -16,7 +16,7 @@
  limitations under the License.
 -->
 
-<schema name="mds" version="1.3">
+<schema name="mds" version="1.4">
 
   <types>
     <!--
@@ -156,11 +156,15 @@
    <field name="format" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="rights" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="rightsURI" type="string" indexed="true" stored="true" multiValued="true"/>
+   <field name="spdx" type="string" indexed="true" stored="true" multiValued="true"/>
    <field name="version" type="string" indexed="true" stored="true"/>
    <field name="description" type="text" indexed="true" stored="true" multiValued="true"/>
 
    <field name="nameIdentifier" type="identifiers" indexed="true" stored="true" multiValued="true"/>
 
+   <field name="geoLocationPlace" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="funderIdentifier" type="string" indexed="true" stored="true" multiValued="true"/>
+   <field name="awardNumber" type="string" indexed="true" stored="true" multiValued="true"/>
 
    <!-- MDS fields -->
    <field name="allocator" type="text" indexed="true" stored="true"/>
@@ -168,7 +172,8 @@
    <field name="datacentre" type="text" indexed="true" stored="true"/>
    <field name="datacentre_symbol" type="symbol" indexed="true" stored="true"/>
    <field name="prefix" type="string" indexed="true" stored="true"/>
-   <field name="refQuality" type="boolean" indexed="true" stored="true" default="false"/>
+   <field name="url" type="string" indexed="true" stored="true"/>
+   <field name="state" type="string" indexed="true" stored="true"/>
    <field name="dataset_id" type="string" indexed="true" stored="true"/>
    <field name="created" type="date" indexed="true" stored="true"/>
    <field name="minted" type="date" indexed="true" stored="true"/>

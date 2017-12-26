@@ -6,6 +6,8 @@ server {
     root /var/lib/tomcat7/webapps/search/;
     index index.jsp index.html;
 
+    access_log off;
+
     # serve static files with nginx
     location /resources {
          root /var/lib/tomcat7/webapps/search/public/;
@@ -50,6 +52,8 @@ server {
     }
 
     location /ui {
+         access_log /var/log/nginx/access.log;
+
          proxy_pass $backend;
          proxy_set_header Host $host;
          proxy_set_header X-Real-IP $remote_addr;
@@ -87,6 +91,8 @@ server {
 
     # everything else is protected by authentication
     location / {
+        access_log /var/log/nginx/access.log;
+
         proxy_pass $admin_backend;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;

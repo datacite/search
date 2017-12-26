@@ -17,14 +17,15 @@
                     CONCAT(al.symbol, ' - ', al.name) AS allocator,
                     IF(d.is_active, m.xml, NULL) as xml,
                     m.xml IS NOT NULL as has_metadata,
+                    d.url AS url,
                     d.created AS created,
                     d.minted AS minted,
                     m.created AS uploaded,
                     CAST(GREATEST(d.updated, IFNULL(m.created,0)) AS DATETIME) AS updated,
                     m.namespace,
-                    d.is_ref_quality AS refQuality,
                     mt.dataset IS NOT NULL AS has_media,
-                    d.is_active
+                    d.is_active,
+                    d.aasm_state AS state
              FROM dataset AS d
              LEFT JOIN metadata AS m
                USE INDEX (dataset_version)
@@ -83,7 +84,7 @@
           <!-- index xml only for active datasets -->
           <entity name="xml" dataSource="field" dataField="dataset.xml"
             forEach="/resource" processor="XPathEntityProcessor" onError="skip"
-            transformer="org.datacite.search.handler.dataimport.KeyValueTransformer,org.datacite.search.handler.dataimport.TrimTransformer">
+            transformer="org.datacite.search.handler.dataimport.KeyValueTransformer,org.datacite.search.handler.dataimport.TrimTransformer,org.datacite.search.handler.dataimport.LicenseTransformer">
 
             <field column="title" xpath="//title" trim="true" />
             <field column="titleType" xpath="//title/@titleType"/>
@@ -119,8 +120,18 @@
             <field column="version" xpath="//version" trim="true" />
             <field column="rights" xpath="//rights" trim="true" />
             <field column="rightsURI" xpath="//rights/@rightsURI" trim="true" />
+            <field column="spdx" xpath="//rights/@rightsURI" license="true" />
             <field column="description" xpath="//description" trim="true" />
             <field column="descriptionType" xpath="//description/@descriptionType" />
+            <field column="geoLocationPlace" xpath="//geoLocationPlace" trim="true" />
+            
+            <field column="ignored_funderIdentifier_type" xpath="//funderIdentifier/@funderIdentifierType" />
+            <field column="ignored_funderIdentifier" xpath="//funderIdentifier" trim="true" />
+            <field column="funderIdentifier" keys="ignored_funderIdentifier_type" values="ignored_funderIdentifier" />
+
+            <field column="ignored_awardURI" xpath="//awardNumber/@awardURI" />
+            <field column="ignored_awardNumber" xpath="//awardNumber" trim="true" />
+            <field column="awardNumber" keys="ignored_awardURI" values="ignored_awardNumber" />
           </entity>
         </entity>
       </entity>
