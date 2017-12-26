@@ -124,6 +124,14 @@
             <field column="description" xpath="//description" trim="true" />
             <field column="descriptionType" xpath="//description/@descriptionType" />
             <field column="geoLocationPlace" xpath="//geoLocationPlace" trim="true" />
+            
+            <field column="ignored_funderIdentifier_type" xpath="//funderIdentifier/@funderIdentifierType" />
+            <field column="ignored_funderIdentifier" xpath="//funderIdentifier" trim="true" />
+            <field column="funderIdentifier" keys="ignored_funderIdentifier_type" values="ignored_funderIdentifier" />
+
+            <field column="ignored_awardURI" xpath="//awardNumber/@awardURI" />
+            <field column="ignored_awardNumber" xpath="//awardNumber" trim="true" />
+            <field column="awardNumber" keys="ignored_awardURI" values="ignored_awardNumber" />
           </entity>
         </entity>
       </entity>
