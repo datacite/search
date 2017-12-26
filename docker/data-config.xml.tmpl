@@ -84,7 +84,7 @@
           <!-- index xml only for active datasets -->
           <entity name="xml" dataSource="field" dataField="dataset.xml"
             forEach="/resource" processor="XPathEntityProcessor" onError="skip"
-            transformer="org.datacite.search.handler.dataimport.KeyValueTransformer,org.datacite.search.handler.dataimport.TrimTransformer">
+            transformer="org.datacite.search.handler.dataimport.KeyValueTransformer,org.datacite.search.handler.dataimport.TrimTransformer,org.datacite.search.handler.dataimport.LicenseTransformer">
 
             <field column="title" xpath="//title" trim="true" />
             <field column="titleType" xpath="//title/@titleType"/>
@@ -120,6 +120,7 @@
             <field column="version" xpath="//version" trim="true" />
             <field column="rights" xpath="//rights" trim="true" />
             <field column="rightsURI" xpath="//rights/@rightsURI" trim="true" />
+            <field column="spdx" xpath="//rights/@rightsURI" license="true" />
             <field column="description" xpath="//description" trim="true" />
             <field column="descriptionType" xpath="//description/@descriptionType" />
           </entity>
