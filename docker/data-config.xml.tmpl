@@ -15,7 +15,8 @@
                     CONCAT(dc.symbol, ' - ', dc.name) AS datacentre,
                     al.symbol AS allocator_symbol,
                     CONCAT(al.symbol, ' - ', al.name) AS allocator,
-                    IF(d.is_active, m.xml, NULL) AS has_metadata,
+                    IF(d.is_active, m.xml, NULL) as xml,
+                    m.xml IS NOT NULL as has_metadata,
                     d.url AS url,
                     d.created AS created,
                     d.minted AS minted,
@@ -24,7 +25,7 @@
                     m.namespace,
                     mt.dataset IS NOT NULL AS has_media,
                     d.is_active,
-                    d.state
+                    d.aasm_state AS state
              FROM dataset AS d
              LEFT JOIN metadata AS m
                USE INDEX (dataset_version)
