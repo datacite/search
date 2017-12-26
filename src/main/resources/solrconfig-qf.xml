@@ -12,6 +12,6 @@
   allocator datacentre prefix
 
   <!-- not used by default:
-  indexed uploaded dataset_id refQuality
+  indexed uploaded dataset_id
   -->
 </str>
