@@ -79,8 +79,6 @@ RUN mkdir /data && \
     mkdir /data/solr/collection1
 RUN chown -R $SOLR_USER:$SOLR_USER /data/solr
 
-VOLUME /data
-
 #     mkdir /etc/service/tomcat && \
 #     chown tomcat7. /data/solr -R
 RUN  mkdir /etc/service/tomcat

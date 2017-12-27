@@ -10,10 +10,11 @@ services:
       SOLR_PASSWORD: secret
     image: datacite/search
     ports:
-      - "8080:80"
+      - "8020:80"
       - "7776:7776"
     volumes:
       - ~/.m2:/root/.m2
+      - data:/data
   mysql:
     environment:
       MYSQL_DATABASE: datacite
@@ -23,3 +24,5 @@ services:
     image: mysql:5.7
     ports:
       - "3307:3306"
+volumes:
+  data:
