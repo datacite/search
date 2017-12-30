@@ -92,7 +92,7 @@ for a delta import of MDS metadata. See `solr-client help` for usage.
 You can monitor memory and CPU using JConsole and a remote connection on the following host:
 
 ```
-localhost:7776
+localhost:17264
 ```
 
 ### Note on Patches/Pull Requests

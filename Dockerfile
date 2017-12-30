@@ -15,7 +15,7 @@ ENV SOLR_DATA /data/solr/collection1/data
 ENV SHELL /bin/bash
 ENV TERM xterm-256color
 ENV SOLR_USER tomcat7
-ENV JMX_PORT 7776
+ENV JMX_PORT 17264
 
 # Use baseimage-docker's init process
 CMD ["/sbin/my_init"]
