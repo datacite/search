@@ -1,4 +1,6 @@
 search_tags = {
   sha = "{{ .Env.GIT_SHA }}"
-  version = "{{ .Env.GIT_TAG }}"
+  green_version = "{{ .Env.GIT_GREEN_TAG }}"
+  blue_version = "{{ .Env.GIT_BLUE_TAG }}"
+  id = "{{ .Env.SOLR_ACTIVE_ID }}"
 }
