@@ -8,6 +8,7 @@ services:
       MYSQL_PASSWORD: secret
       SOLR_USER: admin
       SOLR_PASSWORD: secret
+      LOG_LEVEL: DEBUG
     image: datacite/search
     ports:
       - "8020:80"
