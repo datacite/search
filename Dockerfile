@@ -41,9 +41,8 @@ RUN ln -s /var/lib/tomcat7/common $CATALINA_HOME/common && \
     ln -s /var/lib/tomcat7/shared $CATALINA_HOME/shared && \
     ln -s /etc/tomcat7 $CATALINA_HOME/conf && \
     mkdir $CATALINA_HOME/temp && \
-    mkdir -p $CATALINA_TMPDIR
-
-RUN rm -rf /var/lib/tomcat7/webapps/docs* && \
+    mkdir -p $CATALINA_TMPDIR && \
+    rm -rf /var/lib/tomcat7/webapps/docs* && \
     rm -rf /var/lib/tomcat7/webapps/examples* && \
     rm -rf /var/lib/tomcat7/webapps/ROOT*
 COPY docker/server.xml /etc/tomcat7/server.xml
@@ -57,7 +56,6 @@ RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 
 # configure nginx
 # forward request and error logs to docker log collector
-# RUN ufw allow 'Nginx HTTP' && \
 RUN rm /etc/nginx/sites-enabled/default && \
     ln -sf /dev/stdout /var/log/nginx/access.log && \
 	  ln -sf /dev/stderr /var/log/nginx/error.log
@@ -75,13 +73,11 @@ COPY scripts/solr-client /usr/local/bin/solr-client
 
 # # Add Runit script for tomcat
 RUN mkdir /data && \
-    mkdir /data/solr \
-    mkdir /data/solr/collection1
-RUN chown -R $SOLR_USER:$SOLR_USER /data/solr
+    mkdir /data/solr && \
+    mkdir /data/solr/collection1 && \
+    chown -R $SOLR_USER:$SOLR_USER /data/solr && \
+    mkdir /etc/service/tomcat
 
-#     mkdir /etc/service/tomcat && \
-#     chown tomcat7. /data/solr -R
-RUN  mkdir /etc/service/tomcat
 COPY docker/setenv.sh /usr/share/tomcat7/bin/setenv.sh
 COPY docker/tomcat.sh /etc/service/tomcat/run
 
@@ -92,10 +88,11 @@ COPY docker/server.xml /etc/tomcat7/server.xml
 # Process templates using ENV variables
 # Compile project
 RUN mkdir -p /etc/my_init.d
+
 COPY docker/70_templates.sh /etc/my_init.d/70_templates.sh
 COPY docker/80_install.sh /etc/my_init.d/80_install.sh
 COPY docker/90_nginx.sh /etc/my_init.d/90_nginx.sh
 
 RUN echo "alias ls='ls -AlhF --color=auto'" >> ~/.bashrc
 
-EXPOSE 8080
+EXPOSE 80
