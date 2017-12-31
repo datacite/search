@@ -31,8 +31,8 @@ RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true 
     apt-get install -y mysql-client && \
     apt-get -yqq install tomcat7 maven && \
     apt-get install -y nginx nano && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    # apt-get clean && \
+    # rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     rm -rf /var/cache/oracle-jdk8-installer
 
 # Configure Tomcat

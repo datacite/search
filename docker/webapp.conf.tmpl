@@ -120,6 +120,7 @@ server {
          proxy_set_header X-Forwarded-Host $host;
          proxy_set_header X-Forwarded-Server $host;
          proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;
+         add_header X-Upstream $host;
 
          include /etc/nginx/conf.d/cors;
     }
