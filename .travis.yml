@@ -45,8 +45,7 @@ after_success:
 
   - if [ "$AUTO_DEPLOY" == "true" ]; then
       export GIT_SHA=$(git rev-parse --short HEAD);
-      # export SOLR_HOST=$(curl -I -s https://solr.datacite.org/status | awk 'BEGIN {FS=": "}/^X-Upstream/{print $2}');
-      SOLR_HOST=ecs1.datacite.org;
+      export SOLR_HOST=$(`curl -I -s https://solr.datacite.org/status | awk 'BEGIN {FS=": "}/^X-Upstream/{print $2}'`);
       printenv SOLR_HOST;
 
       - if [ "$SOLR_HOST" == "ecs2.datacite.org" ]; then
