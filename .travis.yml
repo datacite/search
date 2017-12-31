@@ -23,7 +23,6 @@ script:
   - mvn clean test
 
 after_success:
-  #- set -e
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
   - REPO=datacite/search;
   - AUTO_DEPLOY=false;
@@ -45,7 +44,8 @@ after_success:
 
   - if [ "$AUTO_DEPLOY" == "true" ]; then
       export GIT_SHA=$(git rev-parse --short HEAD);
-      export SOLR_HOST=$(`curl -I -s https://solr.datacite.org/status | awk 'BEGIN {FS=": "}/^X-Upstream/{print $2}'`);
+      # export SOLR_HOST=$(`curl -I -s https://solr.datacite.org/status | awk 'BEGIN {FS=": "}/^X-Upstream/{print $2}'`);
+      SOLR_HOST=ecs1.datacite.org;
       printenv SOLR_HOST;
 
       - if [ "$SOLR_HOST" == "ecs2.datacite.org" ]; then
