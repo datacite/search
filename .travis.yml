@@ -44,8 +44,8 @@ after_success:
     fi
 
   - export GIT_SHA=$(git rev-parse --short HEAD);
-      # export SOLR_HOST=$(`curl -I -s https://solr.datacite.org/status | awk 'BEGIN {FS=": "}/^X-Upstream/{print $2}'`);
-  - SOLR_HOST=ecs1.datacite.org;
+  - SOLR_HOST=$(curl -I -s https://solr.datacite.org/status | sed -En 's/^X-Upstream: (.*)/\1/p');
+  # - SOLR_HOST=ecs1.datacite.org;
   - if [ "$SOLR_HOST" == "ecs2.datacite.org" ]; then
       export GIT_0_TAG=$(git describe --abbrev=0 --tags `git rev-list --tags --skip=1 --max-count=1`);
       export GIT_1_TAG=$(git describe --abbrev=0 --tags `git rev-list --tags --max-count=1`);
