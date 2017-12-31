@@ -40,34 +40,31 @@ after_success:
       docker build -f Dockerfile -t $REPO:$TRAVIS_BRANCH .;
       docker push $REPO:$TRAVIS_BRANCH;
       echo "Pushed to" $REPO:$TRAVIS_BRANCH;
+      exit 0;
     fi
 
-  - if [ "$AUTO_DEPLOY" == "true" ]; then
-      export GIT_SHA=$(git rev-parse --short HEAD);
+  - export GIT_SHA=$(git rev-parse --short HEAD);
       # export SOLR_HOST=$(`curl -I -s https://solr.datacite.org/status | awk 'BEGIN {FS=": "}/^X-Upstream/{print $2}'`);
-      SOLR_HOST=ecs1.datacite.org;
-      printenv SOLR_HOST;
-
-      - if [ "$SOLR_HOST" == "ecs2.datacite.org" ]; then
-          export GIT_0_TAG=$(git describe --abbrev=0 --tags `git rev-list --tags --skip=1 --max-count=1`);
-          export GIT_1_TAG=$(git describe --abbrev=0 --tags `git rev-list --tags --max-count=1`);
-          export SOLR_ACTIVE_ID=0;
-        else
-          export GIT_0_TAG=$(git describe --abbrev=0 --tags `git rev-list --tags --max-count=1`);
-          export GIT_1_TAG=$(git describe --abbrev=0 --tags `git rev-list --tags --skip=1 --max-count=1`);
-          export SOLR_ACTIVE_ID=1;
-        fi
-
-      git clone "https://${TRAVIS_SECURE_TOKEN}@github.com/datacite/${TERRAFORM_REPO}.git";
-      ./dockerize -template docker/_search.auto.tfvars.tmpl:${TERRAFORM_REPO}/_search.auto.tfvars;
-      cd ${TERRAFORM_REPO};
-      git remote;
-      git config user.email ${DOCKER_EMAIL};
-      git config user.name ${DOCKER_USERNAME};
-      git add _search.auto.tfvars;
-      git commit -m "Adding search git variables for latest commit";
-      git push "https://${TRAVIS_SECURE_TOKEN}@github.com/datacite/${TERRAFORM_REPO}.git" master;
+  - SOLR_HOST=ecs1.datacite.org;
+  - if [ "$SOLR_HOST" == "ecs2.datacite.org" ]; then
+      export GIT_0_TAG=$(git describe --abbrev=0 --tags `git rev-list --tags --skip=1 --max-count=1`);
+      export GIT_1_TAG=$(git describe --abbrev=0 --tags `git rev-list --tags --max-count=1`);
+      export SOLR_ACTIVE_ID=0;
+    else
+      export GIT_0_TAG=$(git describe --abbrev=0 --tags `git rev-list --tags --max-count=1`);
+      export GIT_1_TAG=$(git describe --abbrev=0 --tags `git rev-list --tags --skip=1 --max-count=1`);
+      export SOLR_ACTIVE_ID=1;
     fi
+
+  - git clone "https://${TRAVIS_SECURE_TOKEN}@github.com/datacite/${TERRAFORM_REPO}.git";
+  - ./dockerize -template docker/_search.auto.tfvars.tmpl:${TERRAFORM_REPO}/_search.auto.tfvars;
+  - cd ${TERRAFORM_REPO};
+  - git remote;
+  - git config user.email ${DOCKER_EMAIL};
+  - git config user.name ${DOCKER_USERNAME};
+  - git add _search.auto.tfvars;
+  - git commit -m "Adding search git variables for latest commit";
+  - git push "https://${TRAVIS_SECURE_TOKEN}@github.com/datacite/${TERRAFORM_REPO}.git" master;
 
 notifications:
   slack: datacite:Wt8En0ALoTA6Kjc5EOKNDWxN
