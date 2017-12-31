@@ -45,17 +45,18 @@ after_success:
 
   - if [ "$AUTO_DEPLOY" == "true" ]; then
       export GIT_SHA=$(git rev-parse --short HEAD);
-      export SOLR_HOST=$(curl -I -s https://solr.datacite.org/status | awk 'BEGIN {FS=": "}/^X-Upstream/{print $2}');
+      # export SOLR_HOST=$(curl -I -s https://solr.datacite.org/status | awk 'BEGIN {FS=": "}/^X-Upstream/{print $2}');
+      SOLR_HOST=ecs1.datacite.org;
       printenv SOLR_HOST;
 
       - if [ "$SOLR_HOST" == "ecs2.datacite.org" ]; then
           export GIT_0_TAG=$(git describe --abbrev=0 --tags `git rev-list --tags --skip=1 --max-count=1`);
           export GIT_1_TAG=$(git describe --abbrev=0 --tags `git rev-list --tags --max-count=1`);
-          export SOLR_ACTIVE_ID=0
+          export SOLR_ACTIVE_ID=0;
         else
           export GIT_0_TAG=$(git describe --abbrev=0 --tags `git rev-list --tags --max-count=1`);
           export GIT_1_TAG=$(git describe --abbrev=0 --tags `git rev-list --tags --skip=1 --max-count=1`);
-          export SOLR_ACTIVE_ID=1
+          export SOLR_ACTIVE_ID=1;
         fi
 
       git clone "https://${TRAVIS_SECURE_TOKEN}@github.com/datacite/${TERRAFORM_REPO}.git";
