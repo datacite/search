@@ -45,7 +45,7 @@ after_success:
 
   - export GIT_SHA=$(git rev-parse --short HEAD);
   - export SOLR_HOST=$(curl -I -s https://solr.datacite.org/status | sed -En 's/^x-upstream: (.*)/\1/p');
-  - if [ "$SOLR_HOST" == "solr2.datacite.org" ]; then
+  - if [ "${SOLR_HOST}" == "solr2.datacite.org" ]; then
       export GIT_0_TAG=$(git describe --abbrev=0 --tags `git rev-list --tags --skip=1 --max-count=1`);
       export GIT_1_TAG=$(git describe --abbrev=0 --tags `git rev-list --tags --max-count=1`);
       export SOLR_ACTIVE_ID=0;
