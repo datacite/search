@@ -95,7 +95,6 @@ You can monitor memory and CPU using JConsole and a remote connection on the fol
 localhost:17264
 ```
 
-
 ### Note on Patches/Pull Requests
 
 * Fork the project
