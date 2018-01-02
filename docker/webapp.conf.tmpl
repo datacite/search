@@ -120,8 +120,14 @@ server {
          proxy_set_header X-Forwarded-Host $host;
          proxy_set_header X-Forwarded-Server $host;
          proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;
-         add_header X-Upstream {{ default .Env.SOLR_HOST "solr.local" }};
 
+         include /etc/nginx/conf.d/cors;
+    }
+
+    location /hostname {
+         return 200 '{{ default .Env.SOLR_HOST "solr.local" }}';
+         add_header Content-Type text/plain;
+         
          include /etc/nginx/conf.d/cors;
     }
 
