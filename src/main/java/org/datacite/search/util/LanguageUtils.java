@@ -9,6 +9,8 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 import com.ibm.icu.util.ULocale;
+import com.bugsnag.Bugsnag;
+Bugsnag bugsnag = new Bugsnag("1b3efa02302af32dc74e1a8f9285bc2c");
 
 public class LanguageUtils {
 
