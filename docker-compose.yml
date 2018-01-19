@@ -1,27 +1,29 @@
 version: '2'
 
 services:
-  # search-ui:
-  #   env_file: .env_double
-  #   image: datacite/search:test
-  #   ports:
-  #     - "8090:8080"
-  #   volumes:
-  #     - ~/.m2:/root/.m2
-  #     - ~/efsmock:/data/solr/collection1
-  #     # - ./docker:/home/app/docker
   search:
-    env_file: .env
+    environment:
+      MYSQL_DATABASE: datacite
+      MYSQL_USER: datacite
+      MYSQL_PASSWORD: secret
+      SOLR_USER: admin
+      SOLR_PASSWORD: secret
+      LOG_LEVEL: DEBUG
     image: datacite/search
     ports:
-      - "8080:8080"
-      - "7776:7776"
+      - "8020:80"
+      - "17264:17264"
     volumes:
       - ~/.m2:/root/.m2
-      # - ~/efsmock2:/data/solr/collection1
-      # - ./docker:/home/app/docker
-  db:
-    env_file: .env
-    image: mysql:5.6
+      - data:/data
+  mysql:
+    environment:
+      MYSQL_DATABASE: datacite
+      MYSQL_USER: datacite
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+    image: mysql:5.7
     ports:
       - "3307:3306"
+volumes:
+  data:

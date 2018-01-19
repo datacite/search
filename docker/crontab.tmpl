@@ -1,7 +1,7 @@
 SHELL=/bin/bash
 PATH=/usr/local/bin:/usr/bin:/bin:/home/ubuntu/bin
 SOLR_URL={{ .Env.SOLR_URL }}
-DATACITE_MYSQL="-h {{ .Env.DB_HOST }} -u {{ .Env.DB_USERNAME }} -p{{ .Env.DB_PASSWORD }}"
+DATACITE_MYSQL="-h {{ default .Env.MYSQL_HOST "mysql" }} -u {{ .Env.MYSQL_USER }} -p{{ .Env.MYSQL_PASSWORD }}"
 
 ### Uncomment for production
 # m h  dom mon dow   command

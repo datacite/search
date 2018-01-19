@@ -1,4 +1,0 @@
-mds.db.url=jdbc:mysql://<url>?useUnicode=true&characterEncoding=UTF8
-mds.db.user=<user>
-mds.db.password=<password>
-mds.testprefix=10.5072
