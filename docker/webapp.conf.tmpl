@@ -1,0 +1,151 @@
+server {
+    listen 80 default_server;
+    server_name _;
+    set $backend http://127.0.0.1:8080/public$request_uri;
+    set $admin_backend http://127.0.0.1:8080;
+    root /var/lib/tomcat7/webapps/search/;
+    index index.jsp index.html;
+
+    access_log off;
+
+    # serve static files with nginx
+    location /resources {
+         root /var/lib/tomcat7/webapps/search/public/;
+         include /etc/nginx/conf.d/cors;
+    }
+
+    # remove dangerous parameters from api exposing Solr
+    # adapted from https://github.com/o19s/solr_nginx
+    location /api {
+    		# Only allow GET requests
+        limit_except GET {
+      	    deny all;
+        }
+
+        # Limits on rows/start (by number of chars) to prevent deep paging craziness
+        if ($arg_start ~ ....+) {
+            return 403;
+        }
+        if ($arg_rows ~ ....+) {
+            return 403;
+        }
+
+        #Explicitly list args to disallow
+        #if ($arg_qt != "") {
+        #	  return 403;
+        #}
+
+      	# Disallow specific params that begin with a pattern, ie stream.file stream.body etc
+      	if ($args ~ [\&\?]stream.*?=(.*)) {
+      		  return 403;
+      	}
+
+        proxy_pass $backend;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Server $host;
+        proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;
+
+        include /etc/nginx/conf.d/cors;
+    }
+
+    location /select {
+    		# Only allow GET requests
+        limit_except GET {
+      	    deny all;
+        }
+
+        # Limits on rows/start (by number of chars) to prevent deep paging craziness
+        if ($arg_start ~ ....+) {
+            return 403;
+        }
+        if ($arg_rows ~ ....+) {
+            return 403;
+        }
+
+        #Explicitly list args to disallow
+        #if ($arg_qt != "") {
+        #	  return 403;
+        #}
+
+      	# Disallow specific params that begin with a pattern, ie stream.file stream.body etc
+      	if ($args ~ [\&\?]stream.*?=(.*)) {
+      		  return 403;
+      	}
+
+        proxy_pass $admin_backend;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Server $host;
+        proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;
+
+        include /etc/nginx/conf.d/cors;
+    }
+
+    location /ui {
+         access_log /var/log/nginx/access.log;
+
+         proxy_pass $backend;
+         proxy_set_header Host $host;
+         proxy_set_header X-Real-IP $remote_addr;
+         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+         proxy_set_header X-Forwarded-Host $host;
+         proxy_set_header X-Forwarded-Server $host;
+         proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;
+
+         include /etc/nginx/conf.d/cors;
+    }
+
+    location /list {
+         proxy_pass $backend;
+         proxy_set_header Host $host;
+         proxy_set_header X-Real-IP $remote_addr;
+         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+         proxy_set_header X-Forwarded-Host $host;
+         proxy_set_header X-Forwarded-Server $host;
+         proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;
+
+         include /etc/nginx/conf.d/cors;
+    }
+
+    location /status {
+         proxy_pass $backend;
+         proxy_set_header Host $host;
+         proxy_set_header X-Real-IP $remote_addr;
+         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+         proxy_set_header X-Forwarded-Host $host;
+         proxy_set_header X-Forwarded-Server $host;
+         proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;
+
+         include /etc/nginx/conf.d/cors;
+    }
+
+    location /hostname {
+         return 200 '{{ default .Env.SOLR_HOST "solr.local" }}';
+         add_header Content-Type text/plain;
+         
+         include /etc/nginx/conf.d/cors;
+    }
+
+    # everything else is protected by authentication
+    location / {
+        access_log /var/log/nginx/access.log;
+
+        proxy_pass $admin_backend;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Server $host;
+        proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;
+
+        auth_basic "Administration";
+        auth_basic_user_file /etc/nginx/.htpasswd;
+
+        include /etc/nginx/conf.d/cors;
+    }
+}
