@@ -23,9 +23,9 @@ server {
         }
 
         # Limits on rows/start (by number of chars) to prevent deep paging craziness
-        if ($arg_start ~ ....+) {
-            return 403;
-        }
+        # if ($arg_start ~ ....+) {
+        #    return 403;
+        # }
         if ($arg_rows ~ ....+) {
             return 403;
         }
@@ -58,9 +58,9 @@ server {
         }
 
         # Limits on rows/start (by number of chars) to prevent deep paging craziness
-        if ($arg_start ~ ....+) {
-            return 403;
-        }
+        # if ($arg_start ~ ....+) {
+        #    return 403;
+        # }
         if ($arg_rows ~ ....+) {
             return 403;
         }
@@ -127,7 +127,7 @@ server {
     location /hostname {
          return 200 '{{ default .Env.SOLR_HOST "solr.local" }}';
          add_header Content-Type text/plain;
-         
+
          include /etc/nginx/conf.d/cors;
     }
 
