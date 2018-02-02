@@ -1,0 +1,12 @@
+package org.datacite.bugsnag;
+
+import com.bugsnag.Bugsnag;
+
+
+public class BugsnagConfig {
+
+    public Bugsnag bugsnag() {
+        Bugsnag bugsnag = new Bugsnag("{{ .Env.BUGSNAG }}");
+        return bugsnag;
+    }
+}

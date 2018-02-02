@@ -6,6 +6,7 @@ dockerize -template /home/app/docker/solrcore.properties.tmpl:/home/app/solr_hom
 dockerize -template /home/app/docker/dataimport.properties.tmpl:/home/app/solr_home/collection1/conf/dataimport.properties
 dockerize -template /home/app/docker/db_check.tmpl:/usr/local/bin/db_check
 dockerize -template /home/app/docker/head.vm.tmpl:src/main/resources/velocity/ui/head.vm
+dockerize -template /home/app/docker/BugsnagConfig.tmpl:src/main/java/org/datacite/bugsnag/BugsnagConfig.java
 
 cp /home/app/src/main/resources/schema.xml /home/app/solr_home/collection1/conf/schema.xml
 dockerize -template /home/app/docker/solrconfig.xml.tmpl:/home/app/solr_home/collection1/conf/solrconfig.xml

@@ -9,6 +9,7 @@ services:
       SOLR_USER: admin
       SOLR_PASSWORD: secret
       LOG_LEVEL: DEBUG
+    env_file: .env
     image: datacite/search
     ports:
       - "8020:80"
