@@ -107,6 +107,7 @@
          any data added to them will be ignored outright.  -->
     <fieldtype name="ignored" stored="false" indexed="false" multiValued="true" class="solr.StrField" />
 
+    <fieldType name="random" class="solr.RandomSortField" indexed="true" />
  </types>
 
 
@@ -205,6 +206,7 @@
    <dynamicField name="*Type" type="lowercase" indexed="true" stored="true" multiValued="true"/>
    <dynamicField name="has_*" type="boolean" indexed="true" stored="true" />
    <dynamicField name="is_*" type="boolean" indexed="true" stored="true" />
+   <dynamicField name="random_*" type="random" />
 
    <!-- uncomment the following to ignore any fields that don't already match an existing
         field name or dynamic field, rather than reporting them as an error.
