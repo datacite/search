@@ -179,6 +179,7 @@
    <field name="created" type="date" indexed="true" stored="true"/>
    <field name="minted" type="date" indexed="true" stored="true"/>
    <field name="updated" type="date" indexed="true" stored="true"/>
+   <field name="checked" type="date" indexed="true" stored="true"/>
    <field name="uploaded" type="date" indexed="true" stored="true"/>
    <field name="xml" type="binary" indexed="false" stored="true"/>
    <field name="namespace" type="string" indexed="true" stored="true"/>

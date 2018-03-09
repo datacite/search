@@ -1,6 +1,6 @@
 #set($fieldsAll = $sort.sort($doc.getFieldNames()))
 #set($fieldsCustom = [
-  "created", "minted", "updated", "uploaded", "indexed",
+  "created", "minted", "updated", "uploaded", "indexed", "checked",
   "",
   "allocator_symbol", "allocator", "datacentre_symbol", "datacentre", "dataset_id", "prefix", "doi", "url",
   "",
