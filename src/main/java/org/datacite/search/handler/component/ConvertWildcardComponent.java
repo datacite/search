@@ -1,8 +1,6 @@
 package org.datacite.search.handler.component;
 
 import java.io.IOException;
-
-import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.search.Query;
 import org.apache.solr.handler.component.ResponseBuilder;
 import org.apache.solr.handler.component.SearchComponent;
@@ -29,7 +27,7 @@ public class ConvertWildcardComponent extends SearchComponent {
             Query query = qParser.parse();
             rb.setQueryString(query.toString());
             rb.setQuery(query);
-        } catch (ParseException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

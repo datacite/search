@@ -11,3 +11,4 @@ src/main/resources/log4j.xml
 .env.*
 !.env.example
 !.env.travis
+.vscode

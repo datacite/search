@@ -54,15 +54,15 @@ after_success:
       export SOLR_ACTIVE_ID=1;
     fi
 
-  - git clone "https://${TRAVIS_SECURE_TOKEN}@github.com/datacite/${TERRAFORM_REPO}.git";
-  - ./dockerize -template docker/_search.auto.tfvars.tmpl:${TERRAFORM_REPO}/_search.auto.tfvars;
-  - cd ${TERRAFORM_REPO};
+  - git clone "https://${TRAVIS_SECURE_TOKEN}@github.com/datacite/mastino.git";
+  - ./dockerize -template docker/_search.auto.tfvars.tmpl:mastino/stage/vpc/_search.auto.tfvars;
+  - cd mastino;
   - git remote;
   - git config user.email ${DOCKER_EMAIL};
   - git config user.name ${DOCKER_USERNAME};
-  - git add _search.auto.tfvars;
+  - git add stage/vpc/_search.auto.tfvars;
   - git commit -m "Adding search git variables for latest commit";
-  - git push "https://${TRAVIS_SECURE_TOKEN}@github.com/datacite/${TERRAFORM_REPO}.git" master;
+  - git push "https://${TRAVIS_SECURE_TOKEN}@github.com/datacite/master.git" master;
 
 notifications:
   slack: datacite:Wt8En0ALoTA6Kjc5EOKNDWxN
