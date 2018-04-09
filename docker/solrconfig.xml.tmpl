@@ -35,7 +35,7 @@
        that you fully re-index after changing this setting as it can
        affect both how text is indexed and queried.
     -->
-  <luceneMatchVersion>LUCENE_40</luceneMatchVersion>
+  <luceneMatchVersion>LUCENE_41</luceneMatchVersion>
 
   <!-- The DirectoryFactory to use for indexes.
 
@@ -1000,7 +1000,7 @@
       <str name="db.url">jdbc:mysql://{{ default .Env.MYSQL_HOST "mysql" }}:{{ default .Env.MYSQL_PORT "3306" }}/{{ default .Env.MYSQL_DATABASE "datacite" }}?useUnicode=true&amp;amp;characterEncoding=UTF8</str>
       <str name="db.user">{{ .Env.MYSQL_USER }}</str>
       <str name="db.password">{{ .Env.MYSQL_PASSWORD }}</str>
-      <str name="testprefix">{{ default .Env.TEST_PREFIX "10.5072" }}</str>
+      <str name="testprefix">{{ default .Env.TEST_PREFIX "(10.5072|10.2999)" }}</str>
     </lst>
   </requestHandler>
 

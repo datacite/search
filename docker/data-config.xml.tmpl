@@ -46,7 +46,7 @@
                       WHERE mt2.dataset = d.id)
              JOIN datacentre AS dc ON d.datacentre = dc.id
              JOIN allocator AS al ON dc.allocator = al.id
-             WHERE d.doi not like '${dataimporter.request.testprefix}/%'
+             WHERE d.doi NOT REGEXP '^${dataimporter.request.testprefix}/'
                AND d.minted IS NOT NULL
                AND ( '${dataimporter.request.clean}' != 'false'
                      OR GREATEST(d.updated,
