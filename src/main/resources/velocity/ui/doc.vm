@@ -23,7 +23,7 @@
     </span>
   </div>
   <div class="info">
-    <a class="doi" href="http://dx.doi.org/#esc_doi("#f('doi')")">doi:<span class="doi">#f("doi")</span></a>
+    <a class="doi" href="https://doi.org/#esc_doi("#f('doi')")">doi:<span class="doi">#f("doi")</span></a>
     #field("resourceTypeGeneral")
     #if_has_field("resourceType", ": #field('resourceType')")
   </div>
