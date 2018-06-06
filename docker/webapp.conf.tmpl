@@ -23,7 +23,7 @@ server {
         }
 
         # Limits on rows/start (by number of chars) to prevent deep paging craziness
-        if ($arg_start ~ ....+) {
+        if ($arg_start ~ .......+) {
             return 403;
         }
         if ($arg_rows ~ .....+) {
@@ -58,7 +58,7 @@ server {
         }
 
         # Limits on rows/start (by number of chars) to prevent deep paging craziness
-        if ($arg_start ~ ....+) {
+        if ($arg_start ~ ......+) {
             return 403;
         }
         if ($arg_rows ~ .....+) {
